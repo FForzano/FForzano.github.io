@@ -43,6 +43,24 @@
      status = 200
    ```
 
+### 📄 Deploy su GitHub Pages
+
+1. **Configurazione Repository**
+   - Vai su Settings → Pages nel tuo repository GitHub
+   - Seleziona "GitHub Actions" come source
+   - Il workflow in `.github/workflows/deploy.yml` gestirà il deploy automatico
+
+2. **Workflow Features**
+   - Build automatica ad ogni push su main/master
+   - Tests automatici prima del deploy
+   - Permissions configurate per GitHub Pages
+   - Deployment sicuro con artifact upload
+
+3. **Troubleshooting**
+   - Assicurati che GitHub Pages sia abilitato nel repository
+   - Verifica che le permissions siano configurate correttamente
+   - Il workflow usa le GitHub Actions ufficiali per maggiore sicurezza
+
 ### 🐳 Deploy con Docker
 
 1. **Build locale**
@@ -126,6 +144,24 @@
      to = "/index.html"
      status = 200
    ```
+
+### 📄 GitHub Pages Deploy
+
+1. **Repository Settings**
+   - Go to Settings → Pages in your GitHub repository
+   - Select "GitHub Actions" as the source
+   - The workflow in `.github/workflows/deploy.yml` will handle automatic deployment
+
+2. **Workflow Features**
+   - Automatic build on every push to main/master
+   - Automatic tests before deployment
+   - Permissions configured for GitHub Pages
+   - Secure deployment with artifact upload
+
+3. **Troubleshooting**
+   - Ensure GitHub Pages is enabled in the repository
+   - Check that permissions are configured correctly
+   - The workflow uses official GitHub Actions for added security
 
 ### 🐳 Docker Deploy
 
