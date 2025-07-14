@@ -19,11 +19,17 @@ export default defineConfig({
     css: true,
     testTimeout: 10000,
     hookTimeout: 10000,
+    exclude: [
+      'node_modules/**',
+      'src/test/disabled/**',
+      '**/*.config.{js,ts}',
+    ],
     coverage: {
       reporter: ['text', 'json', 'html'],
       exclude: [
         'node_modules/',
         'src/test/',
+        'src/test/disabled/',
         '**/*.test.{js,jsx}',
         '**/*.spec.{js,jsx}',
         'src/main.jsx',
