@@ -17,7 +17,7 @@ import {
   Link
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
-import { useStaggeredAnimation } from '../hooks/useOptimizedAnimation'
+import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
 import useSwipe from '../hooks/useSwipe'
 
 const Experience = () => {
@@ -34,7 +34,7 @@ const Experience = () => {
   })
 
   // Hook per animazioni ottimizzate
-  const { containerRef, visibleItems } = useStaggeredAnimation(experiences, 0.1)
+  const { containerRef, animatedItems } = useStaticAnimation(experiences)
 
   const nextSlide = () => swipeHandlers.nextSlide()
   const prevSlide = () => swipeHandlers.prevSlide()
@@ -66,14 +66,17 @@ const Experience = () => {
   }
 
   const ExperienceCard = ({ experience, index }) => {
-    const isVisible = visibleItems.has(index)
+    const isVisible = animatedItems.has(index)
     
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        className="card card-hover cursor-pointer h-full will-change-transform"
+      <div
+        className={`card card-hover cursor-pointer h-full transition-all duration-700 ease-out transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{
+          transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+          willChange: 'transform, opacity'
+        }}
         onClick={() => setSelectedExperience(experience)}
       >
         <div className="p-6 flex flex-col h-full">
@@ -127,7 +130,7 @@ const Experience = () => {
           <ExternalLink className="w-4 h-4 text-primary-600 dark:text-primary-400" />
         </div>
       </div>
-    </motion.div>
+    </div>
     )
   }
 
@@ -139,25 +142,19 @@ const Experience = () => {
         <div className="absolute bottom-1/5 right-1/5 w-2 h-2 bg-primary-400 rounded-full opacity-10"></div>
       </div>
       <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="section-title">
             {t('experience.title')}
           </h2>
           <p className="section-subtitle">
             {t('experience.subtitle')}
           </p>
-        </motion.div>
+        </div>
 
         {/* Experience Grid / Carousel */}
         
         {/* Desktop Grid */}
-        <div className="hidden md:block" ref={containerRef}>
+        <div className="hidden md:block experience-container" ref={containerRef}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {experiences.map((experience, index) => (
               <ExperienceCard key={experience.id} experience={experience} index={index} />

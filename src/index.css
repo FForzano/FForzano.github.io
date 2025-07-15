@@ -472,3 +472,38 @@ input:focus, textarea:focus, select:focus {
     transition: none !important;
   }
 }
+
+/* ==============================================
+   ANTI-FLICKERING ANIMATIONS
+   ============================================== */
+
+/* Base class for all section containers that prevent flickering */
+.research-container,
+.experience-container,
+.hobbies-container {
+  will-change: auto;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Card stabilization within anti-flickering containers */
+.research-container .card,
+.experience-container .card,
+.hobbies-container .card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Smooth transitions for cards in anti-flickering containers */
+.research-container .card.card-hover,
+.experience-container .card.card-hover,
+.hobbies-container .card.card-hover {
+  transition: transform 0.7s ease-out, opacity 0.7s ease-out;
+}
+
+/* Disable pointer events during animation to prevent flickering */
+.research-container .card.card-hover:not(.opacity-100),
+.experience-container .card.card-hover:not(.opacity-100),
+.hobbies-container .card.card-hover:not(.opacity-100) {
+  pointer-events: none;
+}

@@ -5,8 +5,6 @@ import {
   ExternalLink, 
   Calendar, 
   Users, 
-  Award,
-  BookOpen,
   GraduationCap,
   Microscope,
   X,
@@ -58,11 +56,12 @@ const Research = () => {
     
     return (
       <div
-        className={`card card-hover group h-full transition-all duration-600 transform ${
-          isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+        className={`card card-hover group h-full transition-all duration-700 ease-out transform ${
+          isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
         style={{
-          transitionDelay: `${index * 150}ms`
+          transitionDelay: isAnimated ? `${index * 100}ms` : '0ms',
+          willChange: 'transform, opacity'
         }}
       >
         <div className="p-6">
@@ -239,7 +238,7 @@ const Research = () => {
         </motion.div>
 
         {/* Publications */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" ref={containerRef}>
+        <div className="research-container grid grid-cols-1 lg:grid-cols-2 gap-8" ref={containerRef}>
           {publications.map((publication, index) => (
             <PublicationCard key={publication.id} publication={publication} index={index} />
           ))}

@@ -18,11 +18,15 @@ import {
   ChevronRight
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
+import { useNoFlickerAnimation } from '../hooks/useOptimizedAnimation'
 import useSwipe from '../hooks/useSwipe'
 
 const Hobbies = () => {
   const { t } = useTranslation()
   const [selectedHobby, setSelectedHobby] = useState(null)
+
+  // Hook per prevenire il flickering
+  const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
 
   // Hook per il carosello mobile
   const swipeHandlers = useSwipe(4, { // 4 hobbies
@@ -157,21 +161,18 @@ const Hobbies = () => {
   ]
 
   const HobbyCard = ({ hobby, index }) => (
-    <motion.div
+    <div
       key={hobby.key}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{ 
-        scale: 1.05,
-        rotateY: 5,
-        transition: { duration: 0.3 }
+      className={`group relative cursor-pointer h-full transition-all duration-700 ease-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{
+        transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+        willChange: 'transform, opacity'
       }}
-      className="group relative cursor-pointer h-full"
       onClick={() => setSelectedHobby(hobby)}
     >
-      <div className="relative overflow-hidden card card-hover h-full">
+      <div className="relative overflow-hidden card card-hover h-full hover:scale-105 transition-transform duration-300">
         {/* Gradient background */}
         <div className={`absolute inset-0 bg-gradient-to-br ${hobby.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
         
@@ -205,7 +206,7 @@ const Hobbies = () => {
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary-500/10 to-transparent rounded-full blur-xl group-hover:from-primary-500/20 transition-all duration-300" />
         <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-tr from-secondary-500/5 to-transparent rounded-full blur-xl group-hover:from-secondary-500/10 transition-all duration-300" />
       </div>
-    </motion.div>
+    </div>
   )
 
   const HobbyModal = ({ hobby, onClose }) => (
@@ -411,26 +412,20 @@ const Hobbies = () => {
         <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-primary-400 rounded-full opacity-10"></div>
       </div>
       
-      <div className="container-custom relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+      <div className="container-custom relative z-10" ref={sectionRef}>
+        <div className="text-center mb-16">
           <h2 className="section-title">
             {t('about.hobbiesTitle')}
           </h2>
           <p className="section-subtitle">
             {t('about.hobbiesSubtitle')}
           </p>
-        </motion.div>
+        </div>
 
         {/* Hobbies Grid / Carousel */}
         
         {/* Desktop Grid */}
-        <div className="hidden md:block">
+        <div className="hidden md:block hobbies-container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {hobbies.map((hobby, index) => (
               <HobbyCard key={hobby.key} hobby={hobby} index={index} />
@@ -487,13 +482,7 @@ const Hobbies = () => {
         </div>
 
         {/* Bottom decorative section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
+        <div className="mt-16 text-center">
           <div className="relative">
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="h-px bg-gradient-to-r from-transparent via-primary-500 to-transparent flex-1 max-w-32" />
@@ -504,7 +493,7 @@ const Hobbies = () => {
               "Come le onde del mare e le note di una melodia, ogni passione ha il suo ritmo e la sua armonia"
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Modal */}
