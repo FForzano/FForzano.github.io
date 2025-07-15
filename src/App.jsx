@@ -6,6 +6,7 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import Skills from './components/Skills'
 import Experience from './components/Experience'
 import Research from './components/Research'
 import Projects from './components/Projects'
@@ -15,6 +16,7 @@ import Hobbies from './components/Hobbies'
 import SectionIndicator from './components/SectionIndicator'
 import SectionTransition from './components/SectionTransition'
 import ScrollHint from './components/ScrollHint'
+import { startFPSMonitoring } from './utils/performance'
 
 const AppContent = () => {
   const [currentSection, setCurrentSection] = useState(0)
@@ -22,7 +24,14 @@ const AppContent = () => {
   const [showTransition, setShowTransition] = useState(false)
   const [transitionDirection, setTransitionDirection] = useState('down')
   
-  const sectionIds = ['home', 'about', 'experience', 'research', 'projects', 'hobbies', 'contact', 'footer']
+  const sectionIds = ['home', 'about', 'skills', 'experience', 'research', 'projects', 'hobbies', 'contact', 'footer']
+
+  // Start performance monitoring in development
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      startFPSMonitoring()
+    }
+  }, [])
 
   // Scroll to section function
   const goToSection = (index, direction = 'down') => {
@@ -200,6 +209,7 @@ const AppContent = () => {
           >
             <Hero />
             <About />
+            <Skills />
             <Experience />
             <Research />
             <Projects />

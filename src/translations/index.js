@@ -4,6 +4,7 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
+      skills: 'Competenze',
       experience: 'Esperienza',
       research: 'Ricerca',
       projects: 'Progetti',
@@ -356,6 +357,7 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
+      skills: 'Skills',
       experience: 'Experience',
       research: 'Research',
       projects: 'Projects',

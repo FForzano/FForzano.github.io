@@ -2,9 +2,13 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Code, Palette, Database, Globe, ArrowDown } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
+import { useNoFlickerAnimation } from '../hooks/useOptimizedAnimation'
 
 const About = () => {
   const { t } = useTranslation()
+  
+  // Hook per prevenire il flickering
+  const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   
   const features = [
     {
@@ -32,7 +36,7 @@ const About = () => {
   const education = t('about.education')
 
   return (
-    <section id="about" className="section-padding bg-gradient-to-br from-white via-neutral-50 to-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 min-h-screen section-container relative sailing-waves neural-network">
+    <section id="about" ref={sectionRef} className="section-padding bg-gradient-to-br from-white via-neutral-50 to-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 min-h-screen section-container relative sailing-waves neural-network about-container">
       {/* Enhanced decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-16 right-20 sail-pattern w-24 h-24 sm:w-32 sm:h-32 opacity-40 floating-element" style={{right: '10%', top: '10%'}}></div>
@@ -45,8 +49,7 @@ const About = () => {
       <div className="container-custom relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
@@ -62,8 +65,7 @@ const About = () => {
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6 lg:space-y-8"
           >
@@ -90,8 +92,7 @@ const About = () => {
           {/* Right Content - Features Grid */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
           >
@@ -99,8 +100,7 @@ const About = () => {
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 whileHover={{ scale: 1.02 }}
                 className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-lg transition-all duration-300"
@@ -122,8 +122,7 @@ const About = () => {
         {/* Education Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-12 sm:mt-16 lg:mt-20"
         >
@@ -136,8 +135,7 @@ const About = () => {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-primary-500"
               >

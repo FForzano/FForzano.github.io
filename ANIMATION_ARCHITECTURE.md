@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the anti-flickering animation system implemented in the portfolio to eliminate card flickering during scroll.
+This document describes the anti-flickering animation system implemented in the portfolio to eliminate card flickering during scroll and provide excellent accessibility support.
 
 ## Problem
 
@@ -15,14 +15,30 @@ The original implementation used Framer Motion's `whileInView` which caused card
 #### `useStaticAnimation(items)`
 - **Purpose**: Animate lists of items (publications, projects, experiences)
 - **Behavior**: Triggers once when container enters viewport, animates all items simultaneously
+- **Accessibility**: Respects `prefers-reduced-motion` preference
 - **Usage**: Research, Experience, Projects sections
 
 #### `useNoFlickerAnimation(targetRef)`
 - **Purpose**: Animate single sections or containers
 - **Behavior**: Triggers once when section enters viewport, sets visibility state
-- **Usage**: Hobbies, About sections
+- **Accessibility**: Respects `prefers-reduced-motion` preference
+- **Usage**: Hobbies, About, Skills, Contact sections
 
-### 2. Implementation Details
+### 2. Performance Monitoring
+
+#### Development Tools
+- **FPS Monitoring**: Tracks frame rate and warns when below 30 FPS
+- **Animation Budget**: Monitors if animations exceed 16ms budget
+- **Memory Usage**: Logs memory consumption for debugging
+- **Scroll Performance**: Optimized scroll handlers with throttling
+
+#### Accessibility Features
+- **Reduced Motion**: Automatically disables animations for users who prefer reduced motion
+- **Focus Management**: Utilities for keyboard navigation and focus trapping
+- **Screen Reader Support**: Announcement utilities for dynamic content
+- **High Contrast**: Detection and support for high contrast mode
+
+### 3. Implementation Details
 
 #### Viewport Detection
 - Uses `getBoundingClientRect()` instead of IntersectionObserver for better control
@@ -40,64 +56,49 @@ The original implementation used Framer Motion's `whileInView` which caused card
 - `pointer-events: none` during animations
 - `transform-style: preserve-3d` for smooth transitions
 
-### 3. Component Structure
+### 4. Component Structure
 
-#### CSS Classes
-```css
-.research-container,
-.experience-container,
-.hobbies-container {
-  will-change: auto;
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-```
-
-#### Animation Pattern
+All animated sections now use the pattern:
 ```jsx
-const { containerRef, animatedItems } = useStaticAnimation(items)
+const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
 
-// In render:
-<div
-  className={`transition-all duration-700 ease-out transform ${
-    animatedItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-  }`}
-  style={{
-    transitionDelay: animatedItems.has(index) ? `${index * 100}ms` : '0ms',
-    willChange: 'transform, opacity'
-  }}
->
+// Apply to section
+<section ref={sectionRef} className="section-container">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+    transition={{ duration: 0.8 }}
+  >
+    Content
+  </motion.div>
+</section>
 ```
 
-## Implementation Status
+### 5. Performance Benefits
 
-| Component | Hook Used | Status |
-|-----------|-----------|--------|
-| Research | `useStaticAnimation` | ✅ |
-| Experience | `useStaticAnimation` | ✅ |
-| Hobbies | `useNoFlickerAnimation` | ✅ |
-| Projects | `useStaticAnimation` | ✅ |
+- **Eliminated Flickering**: Cards no longer flicker during fast scrolling
+- **Improved Performance**: Reduced re-renders and optimized scroll handling
+- **Better Accessibility**: Respects user preferences for motion
+- **Development Tools**: Built-in performance monitoring and debugging
 
-## Performance Benefits
+### 6. Sections Updated
 
-1. **Reduced Re-renders**: One-time animation trigger
-2. **Better Performance**: CSS transitions instead of JS animations
-3. **Smoother Scrolling**: No interference with scroll events
-4. **Memory Efficiency**: Automatic cleanup of event listeners
+- ✅ Research (useStaticAnimation)
+- ✅ Experience (useStaticAnimation)
+- ✅ Projects (useStaticAnimation)
+- ✅ Hobbies (useNoFlickerAnimation)
+- ✅ About (useNoFlickerAnimation)
+- ✅ Skills (useNoFlickerAnimation)
+- ✅ Contact (useNoFlickerAnimation)
+- ✅ Footer (original implementation maintained)
 
-## Files Modified
+### 7. CSS Classes
 
-- `/src/hooks/useOptimizedAnimation.js` - Animation hooks
-- `/src/index.css` - Anti-flickering CSS
-- `/src/components/Research.jsx` - Research section
-- `/src/components/Experience.jsx` - Experience section  
-- `/src/components/Hobbies.jsx` - Hobbies section
-- `/src/components/Projects.jsx` - Projects section
-
-## Testing
-
-To verify the fix:
-1. Scroll rapidly up and down through sections
-2. Cards should animate only once when entering viewport
-3. No flickering or re-loading should occur
-4. Smooth transitions on all devices
+All sections include anti-flickering CSS classes:
+- `.research-container`
+- `.experience-container`
+- `.projects-container`
+- `.hobbies-container`
+- `.about-container`
+- `.skills-container`
+- `.contact-container`

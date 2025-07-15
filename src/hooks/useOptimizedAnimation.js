@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { prefersReducedMotion } from '../utils/accessibility'
 
 /**
  * Hook per animazioni statiche che previene il flickering
@@ -11,8 +12,18 @@ export const useStaticAnimation = (items) => {
   const containerRef = useRef(null)
   const timeoutRef = useRef(null)
   const isInitializedRef = useRef(false)
+  const reducedMotion = prefersReducedMotion()
 
   useEffect(() => {
+    // Se l'utente preferisce ridurre le animazioni, attiva tutto immediatamente
+    if (reducedMotion) {
+      const allItems = new Set(items.map((_, index) => index))
+      setAnimatedItems(allItems)
+      setHasTriggered(true)
+      isInitializedRef.current = true
+      return
+    }
+    
     // Se è già inizializzato, non fare nulla
     if (isInitializedRef.current) return
     
@@ -68,7 +79,7 @@ export const useStaticAnimation = (items) => {
       }
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [items.length])
+  }, [items.length, reducedMotion])
 
   return { containerRef, animatedItems, hasTriggered }
 }
@@ -84,10 +95,19 @@ export const useNoFlickerAnimation = (targetRef = null) => {
   const containerRef = useRef(null)
   const timeoutRef = useRef(null)
   const isInitializedRef = useRef(false)
+  const reducedMotion = prefersReducedMotion()
 
   const refToUse = targetRef || containerRef
 
   useEffect(() => {
+    // Se l'utente preferisce ridurre le animazioni, attiva tutto immediatamente
+    if (reducedMotion) {
+      setIsVisible(true)
+      setHasTriggered(true)
+      isInitializedRef.current = true
+      return
+    }
+    
     // Se è già inizializzato, non fare nulla
     if (isInitializedRef.current) return
     
@@ -140,7 +160,7 @@ export const useNoFlickerAnimation = (targetRef = null) => {
       }
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [refToUse])
+  }, [refToUse, reducedMotion])
 
   return { ref: containerRef, isVisible, hasTriggered }
 }

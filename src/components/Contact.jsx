@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
+import { useNoFlickerAnimation } from '../hooks/useOptimizedAnimation'
 
 const Contact = () => {
   const { t } = useTranslation()
+  
+  // Hook per prevenire il flickering
+  const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -83,12 +87,11 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-800 dark:via-neutral-900 dark:to-neutral-800 min-h-screen py-20 section-container relative quantum-pattern">
+    <section id="contact" ref={sectionRef} className="section-padding bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-800 dark:via-neutral-900 dark:to-neutral-800 min-h-screen py-20 section-container relative quantum-pattern contact-container">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
@@ -104,8 +107,7 @@ const Contact = () => {
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="text-2xl font-bold text-gradient mb-8 font-display">
@@ -118,8 +120,7 @@ const Contact = () => {
                   key={item.title}
                   href={item.href}
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
                   whileHover={{ scale: 1.02 }}
                   className="card card-hover flex items-center space-x-4 p-6 group"
@@ -138,8 +139,7 @@ const Contact = () => {
             {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <h4 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6 font-display">
@@ -167,8 +167,7 @@ const Contact = () => {
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="card p-8"
           >

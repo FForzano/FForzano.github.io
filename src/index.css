@@ -480,7 +480,10 @@ input:focus, textarea:focus, select:focus {
 /* Base class for all section containers that prevent flickering */
 .research-container,
 .experience-container,
-.hobbies-container {
+.hobbies-container,
+.about-container,
+.skills-container,
+.contact-container {
   will-change: auto;
   backface-visibility: hidden;
   perspective: 1000px;
@@ -489,7 +492,10 @@ input:focus, textarea:focus, select:focus {
 /* Card stabilization within anti-flickering containers */
 .research-container .card,
 .experience-container .card,
-.hobbies-container .card {
+.hobbies-container .card,
+.about-container .card,
+.skills-container .card,
+.contact-container .card {
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
@@ -497,13 +503,19 @@ input:focus, textarea:focus, select:focus {
 /* Smooth transitions for cards in anti-flickering containers */
 .research-container .card.card-hover,
 .experience-container .card.card-hover,
-.hobbies-container .card.card-hover {
+.hobbies-container .card.card-hover,
+.about-container .card.card-hover,
+.skills-container .card.card-hover,
+.contact-container .card.card-hover {
   transition: transform 0.7s ease-out, opacity 0.7s ease-out;
 }
 
 /* Disable pointer events during animation to prevent flickering */
 .research-container .card.card-hover:not(.opacity-100),
 .experience-container .card.card-hover:not(.opacity-100),
-.hobbies-container .card.card-hover:not(.opacity-100) {
+.hobbies-container .card.card-hover:not(.opacity-100),
+.about-container .card.card-hover:not(.opacity-100),
+.skills-container .card.card-hover:not(.opacity-100),
+.contact-container .card.card-hover:not(.opacity-100) {
   pointer-events: none;
 }

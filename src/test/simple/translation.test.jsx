@@ -7,8 +7,11 @@ describe('Translation System', () => {
     expect(translations.it.nav).toBeDefined()
     expect(translations.it.nav.home).toBe('Home')
     expect(translations.it.nav.about).toBe('About')
-    expect(translations.it.nav.skills).toBe('Skills')
+    expect(translations.it.nav.skills).toBe('Competenze')
+    expect(translations.it.nav.experience).toBe('Esperienza')
+    expect(translations.it.nav.research).toBe('Ricerca')
     expect(translations.it.nav.projects).toBe('Progetti')
+    expect(translations.it.nav.hobbies).toBe('Hobbies')
     expect(translations.it.nav.contact).toBe('Contatti')
   })
 
@@ -18,7 +21,10 @@ describe('Translation System', () => {
     expect(translations.en.nav.home).toBe('Home')
     expect(translations.en.nav.about).toBe('About')
     expect(translations.en.nav.skills).toBe('Skills')
+    expect(translations.en.nav.experience).toBe('Experience')
+    expect(translations.en.nav.research).toBe('Research')
     expect(translations.en.nav.projects).toBe('Projects')
+    expect(translations.en.nav.hobbies).toBe('Hobbies')
     expect(translations.en.nav.contact).toBe('Contact')
   })
 
