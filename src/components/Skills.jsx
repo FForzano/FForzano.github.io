@@ -40,7 +40,7 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="section-padding bg-gray-50">
+    <section id="skills" className="section-padding bg-gray-50 dark:bg-gray-800 min-h-screen py-20 section-container relative">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +49,10 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             {t('skills.title')}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             {t('skills.subtitle')}
           </p>
         </motion.div>
@@ -65,9 +65,9 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
                 {category.title}
               </h3>
               
@@ -84,15 +84,15 @@ const Skills = () => {
                     }}
                   >
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-700 font-medium">
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">
                         {skill.name}
                       </span>
-                      <span className="text-gray-500 text-sm">
+                      <span className="text-gray-500 dark:text-gray-400 text-sm">
                         {skill.level}%
                       </span>
                     </div>
                     
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
@@ -120,7 +120,7 @@ const Skills = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
             {t('skills.otherTech')}
           </h3>
           
@@ -136,7 +136,7 @@ const Skills = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
-                className="px-4 py-2 bg-white text-gray-700 rounded-full shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200"
+                className="px-4 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 dark:border-gray-600"
               >
                 {tech}
               </motion.span>

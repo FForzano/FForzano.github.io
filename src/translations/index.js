@@ -169,7 +169,11 @@ export const translations = {
     common: {
       loading: 'Caricamento...',
       error: 'Errore',
-      success: 'Successo'
+      success: 'Successo',
+      theme: {
+        toggleDark: 'Attiva tema scuro',
+        toggleLight: 'Attiva tema chiaro'
+      }
     }
   },
 
@@ -343,7 +347,11 @@ export const translations = {
     common: {
       loading: 'Loading...',
       error: 'Error',
-      success: 'Success'
+      success: 'Success',
+      theme: {
+        toggleDark: 'Switch to dark mode',
+        toggleLight: 'Switch to light mode'
+      }
     }
   }
 }

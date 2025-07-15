@@ -37,7 +37,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 section-container relative">
       <div className="container-custom">
         <motion.div
           variants={containerVariants}
@@ -51,24 +51,24 @@ const Hero = () => {
             className="mb-8"
           >
             <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-primary-500 to-primary-600 p-1">
-              <div className="w-full h-full rounded-full bg-gray-100 flex items-center justify-center">
-                <span className="text-4xl font-bold text-primary-600">F</span>
+              <div className="w-full h-full rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                <span className="text-4xl font-bold text-primary-600 dark:text-primary-400">F</span>
               </div>
             </div>
           </motion.div>
 
           {/* Main Content */}
           <motion.div variants={itemVariants} className="mb-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               {t('hero.greeting')}{' '}
               <span className="bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent">
                 Federico Forzano
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-2">
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-2">
               {t('hero.title')}
             </p>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
               {t('hero.description')}
             </p>
           </motion.div>
@@ -116,7 +116,7 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 text-gray-600 hover:text-primary-600"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label={label}
               >
                 <Icon size={20} />
@@ -132,7 +132,7 @@ const Hero = () => {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-gray-400"
+              className="text-gray-400 dark:text-gray-500"
             >
               <ArrowDown size={24} />
             </motion.div>

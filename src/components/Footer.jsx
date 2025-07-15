@@ -21,7 +21,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white">
       <div className="container-custom">
         {/* Main Footer Content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -38,10 +38,10 @@ const Footer = () => {
               </div>
               <span className="font-bold text-xl">Federico Forzano</span>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 dark:text-gray-500 mb-4">
               {t('footer.description')}
             </p>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 dark:text-gray-500 text-sm">
               {t('footer.availability')}
             </p>
           </motion.div>
@@ -60,7 +60,7 @@ const Footer = () => {
                   <motion.a
                     href={link.href}
                     whileHover={{ x: 5 }}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 block"
+                    className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors duration-200 block"
                   >
                     {link.name}
                   </motion.a>
@@ -77,7 +77,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="font-semibold text-lg mb-4">{t('footer.contacts')}</h3>
-            <div className="space-y-2 text-gray-400">
+            <div className="space-y-2 text-gray-400 dark:text-gray-500">
               <p>📧 f.forzano99@gmail.com</p>
               <p>📱 +39 328 177 2074</p>
               <p>📍 Ferrara, Italia</p>
@@ -99,7 +99,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary-600 transition-all duration-200"
+                    className="w-10 h-10 bg-gray-800 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-400 dark:text-gray-300 hover:text-white hover:bg-primary-600 dark:hover:bg-primary-500 transition-all duration-200"
                     aria-label={social.name}
                   >
                     {social.name.charAt(0)}
@@ -118,7 +118,7 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="border-t border-gray-800 py-6 flex flex-col md:flex-row justify-between items-center"
         >
-          <div className="flex items-center space-x-1 text-gray-400 mb-4 md:mb-0">
+          <div className="flex items-center space-x-1 text-gray-400 dark:text-gray-500 mb-4 md:mb-0">
             <span>&copy; {currentYear} Federico Forzano. {t('footer.madeWith')}</span>
             <motion.div
               animate={{ scale: [1, 1.2, 1] }}

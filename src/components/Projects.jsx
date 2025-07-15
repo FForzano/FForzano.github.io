@@ -88,7 +88,7 @@ const Projects = () => {
     : projects.filter(project => project.category === filter)
 
   return (
-    <section id="projects" className="section-padding bg-white">
+    <section id="projects" className="section-padding bg-white dark:bg-gray-900 min-h-screen py-20 section-container relative">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -97,10 +97,10 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             {t('projects.title')}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
             {t('projects.subtitle')}
           </p>
 
@@ -115,7 +115,7 @@ const Projects = () => {
                 className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
                   filter === category.id
                     ? 'bg-primary-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 {category.name}
@@ -138,11 +138,11 @@ const Projects = () => {
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <div className="w-full h-48 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+                <div className="w-full h-48 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900 dark:to-primary-800 flex items-center justify-center">
                   <span className="text-primary-600 font-semibold">
                     {project.title}
                   </span>
@@ -157,7 +157,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="p-3 bg-white rounded-full text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                      className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
                       aria-label={t('projects.demo')}
                     >
                       <ExternalLink size={20} />
@@ -168,7 +168,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="p-3 bg-white rounded-full text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                      className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
                       aria-label={t('projects.code')}
                     >
                       <Github size={20} />
@@ -188,10 +188,10 @@ const Projects = () => {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
                   {project.description}
                 </p>
 
@@ -200,7 +200,7 @@ const Projects = () => {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full"
                     >
                       {tech}
                     </span>
@@ -222,7 +222,7 @@ const Projects = () => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+                    className="flex items-center justify-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg transition-colors duration-200"
                   >
                     <Github size={16} />
                     {t('projects.code')}
@@ -241,7 +241,7 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             {t('projects.callToAction')}
           </p>
           <a
