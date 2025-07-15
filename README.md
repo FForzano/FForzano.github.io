@@ -12,6 +12,7 @@ Portfolio moderno e responsive di Federico Forzano, dottorando in Ingegneria pre
 - **Bilingue** - Supporto completo per italiano e inglese
 - **Design responsive** - Ottimizzato per tutti i dispositivi
 - **Animazioni fluide** - Utilizzando Framer Motion
+- **Navigazione circolare** - Sistema di navigazione unico con barchetta a vela animata
 - **Portfolio personalizzato** - Con progetti di ricerca e sviluppo
 - **CV dinamico** - Generazione automatica PDF dai contenuti del sito
 
@@ -25,6 +26,7 @@ Modern and responsive portfolio of Federico Forzano, PhD student in Engineering 
 - **Bilingual** - Full support for Italian and English
 - **Responsive design** - Optimized for all devices
 - **Smooth animations** - Using Framer Motion
+- **Circular navigation** - Unique navigation system with animated sailing boat
 - **Personalized portfolio** - With research and development projects
 - **Dynamic CV** - Automatic PDF generation from site content
 
@@ -98,6 +100,22 @@ Modern and responsive portfolio of Federico Forzano, PhD student in Engineering 
 
 ## 🎨 Personalizzazione
 
+### Sistema di Navigazione Circolare 🧭
+Il portfolio utilizza un sistema di navigazione unico con una barchetta a vela animata:
+
+- **Movimento realistico**: La barchetta si muove fisicamente lungo un percorso circolare
+- **Andature nautiche**: Cambia configurazione delle vele in base alla posizione (bolina, traverso, lasco, ecc.)
+- **Animazioni fluide**: Utilizzando `framer-motion` per transizioni naturali
+- **Indicatori di progresso**: Cerchio progressivo che mostra l'avanzamento
+- **Dettagli interattivi**: Scia, indicatori di velocità e direzione del vento
+
+**Componenti principali:**
+- `SimpleCircularNavigation.jsx` - Navigazione circolare ottimizzata
+- `SectionIndicator.jsx` - Contenitore per l'indicatore di sezione
+- `AdaptiveSailingBoat.jsx` - Barchetta con vele che si adattano alle andature nautiche
+
+**Documentazione completa:** [CIRCULAR_NAVIGATION.md](./CIRCULAR_NAVIGATION.md)
+
 ### Colori
 I colori principali sono configurati in `tailwind.config.js`. Puoi modificare la palette di colori:
 
@@ -115,9 +133,9 @@ colors: {
 I contenuti del portfolio si trovano nei seguenti componenti:
 - `src/components/Hero.jsx` - Sezione hero con informazioni principali
 - `src/components/About.jsx` - Sezione about
-- `src/components/Skills.jsx` - Competenze tecniche
 - `src/components/Projects.jsx` - Progetti del portfolio
 - `src/components/Contact.jsx` - Informazioni di contatto
+- `src/components/SectionIndicator.jsx` - Sistema di navigazione circolare
 
 ### Animazioni
 Le animazioni sono gestite con Framer Motion. Puoi personalizzarle modificando gli oggetti `variants` nei componenti.

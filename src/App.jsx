@@ -6,7 +6,6 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
-import Skills from './components/Skills'
 import Experience from './components/Experience'
 import Research from './components/Research'
 import Projects from './components/Projects'
@@ -24,7 +23,7 @@ const AppContent = () => {
   const [showTransition, setShowTransition] = useState(false)
   const [transitionDirection, setTransitionDirection] = useState('down')
   
-  const sectionIds = ['home', 'about', 'skills', 'experience', 'research', 'projects', 'hobbies', 'contact', 'footer']
+  const sectionIds = ['home', 'about', 'experience', 'research', 'projects', 'hobbies', 'contact', 'footer']
 
   // Start performance monitoring in development
   useEffect(() => {
@@ -209,7 +208,6 @@ const AppContent = () => {
           >
             <Hero />
             <About />
-            <Skills />
             <Experience />
             <Research />
             <Projects />

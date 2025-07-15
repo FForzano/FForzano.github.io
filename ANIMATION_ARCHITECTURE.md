@@ -88,9 +88,9 @@ const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
 - ✅ Projects (useStaticAnimation)
 - ✅ Hobbies (useNoFlickerAnimation)
 - ✅ About (useNoFlickerAnimation)
-- ✅ Skills (useNoFlickerAnimation)
 - ✅ Contact (useNoFlickerAnimation)
 - ✅ Footer (original implementation maintained)
+- ❌ Skills (removed - skills integrated into Experience section)
 
 ### 7. CSS Classes
 
@@ -100,5 +100,13 @@ All sections include anti-flickering CSS classes:
 - `.projects-container`
 - `.hobbies-container`
 - `.about-container`
-- `.skills-container`
 - `.contact-container`
+
+### 8. Navigation Enhancement
+
+Added custom sailing boat navigation indicators:
+- **SailingBoat Component**: Displays boats with different sail configurations based on progress
+- **8 Different Boat Orientations**: 0°, 45°, 90°, 135°, 180°, 225°, 270°, 315°
+- **SVG-based**: Organized SVG files in `/src/assets/svg/sailing/`
+- **Progress Mapping**: Each section corresponds to a specific boat heading
+- **Accessibility**: Proper ARIA labels and hover states

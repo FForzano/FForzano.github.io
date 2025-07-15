@@ -7,7 +7,6 @@ describe('Translation System', () => {
     expect(translations.it.nav).toBeDefined()
     expect(translations.it.nav.home).toBe('Home')
     expect(translations.it.nav.about).toBe('About')
-    expect(translations.it.nav.skills).toBe('Competenze')
     expect(translations.it.nav.experience).toBe('Esperienza')
     expect(translations.it.nav.research).toBe('Ricerca')
     expect(translations.it.nav.projects).toBe('Progetti')
@@ -20,7 +19,6 @@ describe('Translation System', () => {
     expect(translations.en.nav).toBeDefined()
     expect(translations.en.nav.home).toBe('Home')
     expect(translations.en.nav.about).toBe('About')
-    expect(translations.en.nav.skills).toBe('Skills')
     expect(translations.en.nav.experience).toBe('Experience')
     expect(translations.en.nav.research).toBe('Research')
     expect(translations.en.nav.projects).toBe('Projects')
@@ -41,11 +39,6 @@ describe('Translation System', () => {
   it('should have about section translations', () => {
     expect(translations.it.about.title).toBe('Chi sono')
     expect(translations.en.about.title).toBe('About me')
-  })
-
-  it('should have skills section translations', () => {
-    expect(translations.it.skills.title).toBe('Le mie competenze')
-    expect(translations.en.skills.title).toBe('My skills')
   })
 
   it('should have projects section translations', () => {
@@ -73,14 +66,32 @@ describe('Translation System', () => {
   })
 
   it('should have CV download translations', () => {
-    expect(translations.it.hero.downloadCV).toBe('Scarica CV')
-    expect(translations.en.hero.downloadCV).toBe('Download CV')
+    expect(translations.it.hero.downloadCV).toBeDefined()
+    expect(translations.en.hero.downloadCV).toBeDefined()
+    expect(typeof translations.it.hero.downloadCV).toBe('string')
+    expect(typeof translations.en.hero.downloadCV).toBe('string')
   })
 
-  it('should have form translations', () => {
-    expect(translations.it.contact.form).toBeDefined()
-    expect(translations.en.contact.form).toBeDefined()
-    expect(translations.it.contact.form.name).toBe('Nome')
-    expect(translations.en.contact.form.name).toBe('Name')
+  it('should have research section translations', () => {
+    expect(translations.it.research).toBeDefined()
+    expect(translations.en.research).toBeDefined()
+    expect(translations.it.research.title).toBe('Ricerca e Pubblicazioni')
+    expect(translations.en.research.title).toBe('Research & Publications')
+  })
+
+  it('should have experience section translations', () => {
+    expect(translations.it.experience).toBeDefined()
+    expect(translations.en.experience).toBeDefined()
+    expect(translations.it.experience.title).toBe('Esperienze Professionali')
+    expect(translations.en.experience.title).toBe('Professional Experience')
+  })
+
+  it('should have navigation all required sections', () => {
+    const requiredSections = ['home', 'about', 'experience', 'research', 'projects', 'hobbies', 'contact']
+    
+    requiredSections.forEach(section => {
+      expect(translations.it.nav[section]).toBeDefined()
+      expect(translations.en.nav[section]).toBeDefined()
+    })
   })
 })

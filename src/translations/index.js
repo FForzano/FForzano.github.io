@@ -4,7 +4,6 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
-      skills: 'Competenze',
       experience: 'Esperienza',
       research: 'Ricerca',
       projects: 'Progetti',
@@ -245,18 +244,6 @@ export const translations = {
       ]
     },
 
-    // Skills Section
-    skills: {
-      title: 'Le mie competenze',
-      subtitle: 'Competenze tecniche acquisite durante il percorso accademico e professionale, dalla ricerca quantistica allo sviluppo software e all\'amministrazione di sistemi.',
-      categories: {
-        programming: 'Linguaggi di Programmazione',
-        web: 'Tecnologie Web',
-        systems: 'Sistemi e DevOps'
-      },
-      otherTech: 'Altre tecnologie che conosco'
-    },
-
     // Projects Section
     projects: {
       title: 'I miei progetti',
@@ -357,7 +344,6 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
-      skills: 'Skills',
       experience: 'Experience',
       research: 'Research',
       projects: 'Projects',
@@ -596,18 +582,6 @@ export const translations = {
 }`
         }
       ]
-    },
-
-    // Skills Section
-    skills: {
-      title: 'My skills',
-      subtitle: 'Technical skills acquired during academic and professional journey, from quantum research to software development and system administration.',
-      categories: {
-        programming: 'Programming Languages',
-        web: 'Web Technologies',
-        systems: 'Systems and DevOps'
-      },
-      otherTech: 'Other technologies I know'
     },
 
     // Projects Section

@@ -1,23 +1,26 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import SimpleCircularNavigation from './SimpleCircularNavigation'
 
 const SectionIndicator = ({ currentSection, totalSections, onSectionClick }) => {
   return (
-    <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-3">
-      {Array.from({ length: totalSections }, (_, index) => (
-        <motion.button
-          key={index}
-          onClick={() => onSectionClick(index)}
-          className={`w-3 h-3 rounded-full border-2 transition-all duration-300 shadow-soft ${
-            currentSection === index
-              ? 'bg-primary-600 border-primary-600 scale-125 shadow-medium'
-              : 'bg-transparent border-neutral-400 dark:border-neutral-600 hover:border-primary-600 dark:hover:border-primary-400'
-          }`}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label={`Go to section ${index + 1}`}
+    <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40">
+      <motion.div
+        className="relative p-3 rounded-xl bg-white/60 dark:bg-neutral-800/60 backdrop-blur-lg border border-white/20 dark:border-neutral-700/20"
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+        }}
+      >
+        <SimpleCircularNavigation 
+          currentSection={currentSection}
+          totalSections={totalSections}
+          onSectionClick={onSectionClick}
+          size="md"
+          className="text-primary-600 dark:text-primary-400"
         />
-      ))}
+      </motion.div>
     </div>
   )
 }

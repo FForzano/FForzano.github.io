@@ -482,7 +482,6 @@ input:focus, textarea:focus, select:focus {
 .experience-container,
 .hobbies-container,
 .about-container,
-.skills-container,
 .contact-container {
   will-change: auto;
   backface-visibility: hidden;
@@ -494,7 +493,6 @@ input:focus, textarea:focus, select:focus {
 .experience-container .card,
 .hobbies-container .card,
 .about-container .card,
-.skills-container .card,
 .contact-container .card {
   transform-style: preserve-3d;
   backface-visibility: hidden;
@@ -505,7 +503,6 @@ input:focus, textarea:focus, select:focus {
 .experience-container .card.card-hover,
 .hobbies-container .card.card-hover,
 .about-container .card.card-hover,
-.skills-container .card.card-hover,
 .contact-container .card.card-hover {
   transition: transform 0.7s ease-out, opacity 0.7s ease-out;
 }
@@ -515,7 +512,6 @@ input:focus, textarea:focus, select:focus {
 .experience-container .card.card-hover:not(.opacity-100),
 .hobbies-container .card.card-hover:not(.opacity-100),
 .about-container .card.card-hover:not(.opacity-100),
-.skills-container .card.card-hover:not(.opacity-100),
 .contact-container .card.card-hover:not(.opacity-100) {
   pointer-events: none;
 }
