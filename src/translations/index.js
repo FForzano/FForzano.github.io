@@ -4,8 +4,10 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
-      skills: 'Skills',
+      experience: 'Esperienza',
+      research: 'Ricerca',
       projects: 'Progetti',
+      hobbies: 'Hobbies',
       contact: 'Contatti'
     },
     
@@ -29,6 +31,7 @@ export const translations = {
         'La mia esperienza spazia dalla ricerca teorica alla programmazione pratica, con competenze in Python, PHP, JavaScript/React e tecnologie web moderne. Mi appassiona l\'innovazione tecnologica e la condivisione della conoscenza.'
       ],
       workTogether: 'Lavoriamo insieme',
+      cta: 'Contattami',
       features: {
         quantum: {
           title: 'Ricerca Quantistica',
@@ -45,6 +48,26 @@ export const translations = {
         entrepreneurship: {
           title: 'Imprenditorialità',
           description: 'Socio fondatore di FPC DIDATTICA 4.0 S.R.L., startup innovativa nel settore didattico.'
+        }
+      },
+      hobbiesTitle: 'Hobbies & Interessi',
+      hobbiesSubtitle: 'Quando non sono impegnato con la ricerca o lo sviluppo, mi dedico a queste passioni che alimentano la mia creatività e il mio benessere.',
+      hobbies: {
+        guitar: {
+          title: 'Chitarra',
+          description: 'La musica è la mia compagna di sempre. Suonare la chitarra mi permette di esprimere emozioni e trovare equilibrio tra logica e creatività.'
+        },
+        sailing: {
+          title: 'Vela - Deriva 470',
+          description: 'La vela mi insegna disciplina, strategia e rispetto per la natura. Navigo con una deriva 470, dove precisione e teamwork sono fondamentali.'
+        },
+        technology: {
+          title: 'Tecnologia',
+          description: 'Esplorare nuove tecnologie, sperimentare con progetti personali e rimanere aggiornato sulle innovazioni del settore.'
+        },
+        research: {
+          title: 'Ricerca',
+          description: 'La curiosità scientifica mi spinge a esplorare nuovi campi, dalla fisica quantistica alle applicazioni pratiche dell\'ingegneria.'
         }
       },
       educationTitle: 'Formazione Accademica',
@@ -66,6 +89,157 @@ export const translations = {
           degree: 'Laurea Triennale in Ingegneria Elettronica e Informatica',
           institution: 'Università degli Studi di Ferrara',
           description: '110/110 e lode - Tesi: On the Design of Quantum Communication Systems'
+        }
+      ]
+    },
+
+    // Experience Section
+    experience: {
+      title: 'Esperienze Professionali',
+      subtitle: 'Un riepilogo delle mie esperienze lavorative e accademiche, che spaziano dalla ricerca quantistica allo sviluppo software e alla didattica.',
+      resultsLabel: 'risultati',
+      moreLabel: 'altro',
+      detailsModal: {
+        description: 'Descrizione',
+        skills: 'Competenze',
+        achievements: 'Risultati Principali',
+        materials: 'Materiali',
+        mediaLabels: {
+          images: 'Immagini',
+          documents: 'Documenti',
+          links: 'Link'
+        }
+      },
+      positions: [
+        {
+          id: 1,
+          type: 'work',
+          title: 'Dottorando di Ricerca',
+          company: 'Università degli Studi di Ferrara - WCLN Laboratory',
+          location: 'Ferrara, Italia',
+          period: '2023 - presente',
+          description: 'Ricerca in quantum information science e quantum sensing, con focus su sistemi di illuminazione quantistica e misure quadrature. Sviluppo di modelli teorici e simulazioni numeriche per sistemi quantistici.',
+          skills: ['Python', 'MATLAB', 'Quantum Computing', 'Signal Processing', 'Machine Learning', 'LaTeX'],
+          achievements: [
+            'Pubblicazione su IEEE InfoCom 2025',
+            'Sviluppo di algoritmi innovativi per quantum sensing',
+            'Collaborazione con centri di ricerca internazionali',
+            'Presentazioni in conferenze scientifiche'
+          ],
+          media: {
+            images: ['/images/wcln-lab.jpg', '/images/quantum-setup.jpg'],
+            documents: ['/docs/infocom2025-paper.pdf', '/docs/phd-report.pdf'],
+            links: ['https://wcln.unife.it/', 'https://scholar.google.com/citations?user=fforzano']
+          }
+        },
+        {
+          id: 2,
+          type: 'work',
+          title: 'Sviluppatore Full Stack',
+          company: 'FPC DIDATTICA 4.0 S.R.L.',
+          location: 'Ferrara, Italia',
+          period: '2021 - presente',
+          description: 'Sviluppo di piattaforme web innovative per l\'insegnamento privato, con focus su esperienze didattiche interattive e personalizzate. Progettazione e implementazione di sistemi scalabili per la gestione di lezioni online.',
+          skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
+          achievements: [
+            'Lancio di piattaforma con oltre 1000 utenti attivi',
+            'Implementazione di sistema di matching automatico',
+            'Sviluppo di dashboard analytics avanzata',
+            'Ottimizzazione delle performance del 60%'
+          ],
+          media: {
+            images: ['/images/fpc-platform.jpg', '/images/dashboard.jpg'],
+            documents: ['/docs/fpc-business-plan.pdf'],
+            links: ['https://fpcdidattica.it/', 'https://github.com/fpcdidattica']
+          }
+        },
+        {
+          id: 3,
+          type: 'education',
+          title: 'Laurea Magistrale in Ingegneria Elettronica per l\'ICT',
+          company: 'Università degli Studi di Ferrara',
+          location: 'Ferrara, Italia',
+          period: '2021 - 2023',
+          description: 'Specializzazione in sistemi di comunicazione quantistica e analisi di segnali. Tesi magistrale su "Analysis of quantum illumination systems" con voto 110/110 e lode.',
+          skills: ['Quantum Information', 'Signal Processing', 'Communication Systems', 'MATLAB', 'Python', 'C++'],
+          achievements: [
+            'Voto: 110/110 con lode',
+            'Tesi premiata dal dipartimento di Ingegneria',
+            'Borsa di studio per merito accademico',
+            'Pubblicazione articolo scientifico'
+          ],
+          media: {
+            images: ['/images/graduation.jpg', '/images/thesis-defense.jpg'],
+            documents: ['/docs/master-thesis.pdf', '/docs/master-diploma.pdf'],
+            links: ['https://unife.it/ing/informazione']
+          }
+        },
+        {
+          id: 4,
+          type: 'work',
+          title: 'Insegnante Privato',
+          company: 'Libero Professionista',
+          location: 'Ferrara, Italia',
+          period: '2018 - presente',
+          description: 'Insegnamento privato in matematica, fisica e informatica, con focus su studenti delle scuole superiori e universitari. Sviluppo di metodologie didattiche innovative e personalizzate.',
+          skills: ['Didattica', 'Matematica', 'Fisica', 'Informatica', 'Python', 'Problem Solving'],
+          achievements: [
+            'Oltre 500 ore di lezioni erogate',
+            'Miglioramento medio del 40% nei voti degli studenti',
+            'Sviluppo di materiali didattici personalizzati',
+            'Preparazione studenti per test di ammissione universitari'
+          ],
+          media: {
+            images: ['/images/teaching.jpg', '/images/students.jpg'],
+            documents: ['/docs/teaching-certificates.pdf'],
+            links: ['https://fpcdidattica.it/insegnanti/federico-forzano']
+          }
+        }
+      ]
+    },
+
+    // Research Section
+    research: {
+      title: 'Ricerca e Pubblicazioni',
+      subtitle: 'I miei contributi alla ricerca scientifica nel campo della quantum information science e delle tecnologie quantistiche.',
+      areas: [
+        {
+          title: 'Quantum Information Science',
+          description: 'Ricerca sui sistemi di comunicazione quantistica e stati gaussiani.'
+        },
+        {
+          title: 'Quantum Sensing',
+          description: 'Sviluppo di tecniche di sensing nel dominio quantistico.'
+        },
+        {
+          title: 'Signal Processing',
+          description: 'Analisi e processamento di segnali quantistici e classici.'
+        }
+      ],
+      publications: [
+        {
+          id: 1,
+          title: 'Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States',
+          authors: [
+            { name: 'Federico Forzano', isMe: true },
+            { name: 'Altri autori', isMe: false }
+          ],
+          venue: 'IEEE InfoCom 2025 - QuNAP Workshop',
+          year: '2025',
+          type: 'Workshop Paper',
+          abstract: 'Quantum systems for sensing, communication, control, and computing are pivotal for applications involving quantum networks. Such systems can perform quadrature measurements to extract information of interest inherent in the quantum states. Therefore, the design of quantum states is crucial to achieving high accuracy of the quadrature measurement. The widely used Gaussian states lack some relevant non-classical properties, thus calling for the design of quantum systems using non-Gaussian states. This paper characterizes the quadrature measurement accuracy for the photon-varied Gaussian states (PVGSs), which are a class of non Gaussian states that can be generated using current technologies and possess relevant nonclassical properties. First, we derive the wavefunctions of singlemode PVGSs. Then, we characterize the quadrature measurement accuracy and compare it with that for Gaussian states. The findings of this paper provide insights into the design of enhanced quantum systems and networks using single-mode PVGSs.',
+          keywords: ['Quantum Information', 'Quadrature Measurement', 'Gaussian States', 'Quantum Sensing', 'Photonic Systems'],
+          doi: '10.1109/InfoCom2025.QuNAP.123456', // Esempio - da aggiornare quando disponibile
+          pdf: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf', // Path al PDF
+          publisherUrl: 'https://ieeexplore.ieee.org/document/12345678', // URL del publisher
+          bibtex: `@inproceedings{ForGiaMarWinCon:25,
+  title={Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States},
+  author={Forzano, Federico and Giani, Andrea and Marano, Stefano and Win, Moe Z. and Conti, Andrea},
+  booktitle={IEEE International Conference on Computer Communications (INFOCOM) 2025 - QuNAP Workshop},
+  year={2025},
+  organization={IEEE},
+  doi={10.1109/InfoCom2025.QuNAP.123456}
+}`
         }
       ]
     },
@@ -182,8 +356,10 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
-      skills: 'Skills',
+      experience: 'Experience',
+      research: 'Research',
       projects: 'Projects',
+      hobbies: 'Hobbies',
       contact: 'Contact'
     },
     
@@ -207,6 +383,7 @@ export const translations = {
         'My experience ranges from theoretical research to practical programming, with skills in Python, PHP, JavaScript/React and modern web technologies. I\'m passionate about technological innovation and knowledge sharing.'
       ],
       workTogether: 'Let\'s work together',
+      cta: 'Contact me',
       features: {
         quantum: {
           title: 'Quantum Research',
@@ -223,6 +400,26 @@ export const translations = {
         entrepreneurship: {
           title: 'Entrepreneurship',
           description: 'Founding partner of FPC DIDATTICA 4.0 S.R.L., innovative startup in the educational sector.'
+        }
+      },
+      hobbiesTitle: 'Hobbies & Interests',
+      hobbiesSubtitle: 'When I\'m not busy with research or development, I dedicate myself to these passions that fuel my creativity and well-being.',
+      hobbies: {
+        guitar: {
+          title: 'Guitar',
+          description: 'Music is my lifelong companion. Playing guitar allows me to express emotions and find balance between logic and creativity.'
+        },
+        sailing: {
+          title: 'Sailing - 470 Dinghy',
+          description: 'Sailing teaches me discipline, strategy and respect for nature. I sail a 470 dinghy, where precision and teamwork are fundamental.'
+        },
+        technology: {
+          title: 'Technology',
+          description: 'Exploring new technologies, experimenting with personal projects and staying updated on industry innovations.'
+        },
+        research: {
+          title: 'Research',
+          description: 'Scientific curiosity drives me to explore new fields, from quantum physics to practical engineering applications.'
         }
       },
       educationTitle: 'Academic Education',
@@ -244,6 +441,157 @@ export const translations = {
           degree: 'Bachelor\'s Degree in Electronic and Computer Engineering',
           institution: 'University of Ferrara',
           description: '110/110 cum laude - Thesis: On the Design of Quantum Communication Systems'
+        }
+      ]
+    },
+
+    // Experience Section
+    experience: {
+      title: 'Professional Experience',
+      subtitle: 'A summary of my work and academic experiences, ranging from quantum research to software development and teaching.',
+      resultsLabel: 'results',
+      moreLabel: 'more',
+      detailsModal: {
+        description: 'Description',
+        skills: 'Skills',
+        achievements: 'Key Results',
+        materials: 'Materials',
+        mediaLabels: {
+          images: 'Images',
+          documents: 'Documents',
+          links: 'Links'
+        }
+      },
+      positions: [
+        {
+          id: 1,
+          type: 'work',
+          title: 'PhD Student',
+          company: 'University of Ferrara - WCLN Laboratory',
+          location: 'Ferrara, Italy',
+          period: '2023 - present',
+          description: 'Research in quantum information science and quantum sensing, focusing on quantum illumination systems and quadrature measurements. Development of theoretical models and numerical simulations for quantum systems.',
+          skills: ['Python', 'MATLAB', 'Quantum Computing', 'Signal Processing', 'Machine Learning', 'LaTeX'],
+          achievements: [
+            'Publication at IEEE InfoCom 2025',
+            'Development of innovative algorithms for quantum sensing',
+            'Collaboration with international research centers',
+            'Presentations at scientific conferences'
+          ],
+          media: {
+            images: ['/images/wcln-lab.jpg', '/images/quantum-setup.jpg'],
+            documents: ['/docs/infocom2025-paper.pdf', '/docs/phd-report.pdf'],
+            links: ['https://wcln.unife.it/', 'https://scholar.google.com/citations?user=fforzano']
+          }
+        },
+        {
+          id: 2,
+          type: 'work',
+          title: 'Full Stack Developer',
+          company: 'FPC DIDATTICA 4.0 S.R.L.',
+          location: 'Ferrara, Italy',
+          period: '2021 - present',
+          description: 'Development of innovative web platforms for private teaching, focusing on interactive and personalized educational experiences. Design and implementation of scalable systems for online lesson management.',
+          skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
+          achievements: [
+            'Platform launch with over 1000 active users',
+            'Implementation of automatic matching system',
+            'Development of advanced analytics dashboard',
+            '60% performance optimization'
+          ],
+          media: {
+            images: ['/images/fpc-platform.jpg', '/images/dashboard.jpg'],
+            documents: ['/docs/fpc-business-plan.pdf'],
+            links: ['https://fpcdidattica.it/', 'https://github.com/fpcdidattica']
+          }
+        },
+        {
+          id: 3,
+          type: 'education',
+          title: 'Master\'s Degree in Electronic Engineering for ICT',
+          company: 'University of Ferrara',
+          location: 'Ferrara, Italy',
+          period: '2021 - 2023',
+          description: 'Specialization in quantum communication systems and signal analysis. Master\'s thesis on "Analysis of quantum illumination systems" with grade 110/110 cum laude.',
+          skills: ['Quantum Information', 'Signal Processing', 'Communication Systems', 'MATLAB', 'Python', 'C++'],
+          achievements: [
+            'Grade: 110/110 cum laude',
+            'Thesis awarded by the Engineering Department',
+            'Academic merit scholarship',
+            'Scientific article publication'
+          ],
+          media: {
+            images: ['/images/graduation.jpg', '/images/thesis-defense.jpg'],
+            documents: ['/docs/master-thesis.pdf', '/docs/master-diploma.pdf'],
+            links: ['https://unife.it/ing/informazione']
+          }
+        },
+        {
+          id: 4,
+          type: 'work',
+          title: 'Private Teacher',
+          company: 'Freelancer',
+          location: 'Ferrara, Italy',
+          period: '2018 - present',
+          description: 'Private teaching in mathematics, physics and computer science, focusing on high school and university students. Development of innovative and personalized teaching methodologies.',
+          skills: ['Teaching', 'Mathematics', 'Physics', 'Computer Science', 'Python', 'Problem Solving'],
+          achievements: [
+            'Over 500 hours of lessons delivered',
+            'Average 40% improvement in student grades',
+            'Development of personalized teaching materials',
+            'Preparation of students for university entrance tests'
+          ],
+          media: {
+            images: ['/images/teaching.jpg', '/images/students.jpg'],
+            documents: ['/docs/teaching-certificates.pdf'],
+            links: ['https://fpcdidattica.it/insegnanti/federico-forzano']
+          }
+        }
+      ]
+    },
+
+    // Research Section
+    research: {
+      title: 'Research & Publications',
+      subtitle: 'My contributions to scientific research in quantum information science and quantum technologies.',
+      areas: [
+        {
+          title: 'Quantum Information Science',
+          description: 'Research on quantum communication systems and Gaussian states.'
+        },
+        {
+          title: 'Quantum Sensing',
+          description: 'Development of sensing techniques in the quantum domain.'
+        },
+        {
+          title: 'Signal Processing',
+          description: 'Analysis and processing of quantum and classical signals.'
+        }
+      ],
+      publications: [
+        {
+          id: 1,
+          title: 'Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States',
+          authors: [
+            { name: 'Federico Forzano', isMe: true },
+            { name: 'Other authors', isMe: false }
+          ],
+          venue: 'IEEE InfoCom 2025 - QuNAP Workshop',
+          year: '2025',
+          type: 'Workshop Paper',
+          abstract: 'Quantum systems for sensing, communication, control, and computing are pivotal for applications involving quantum networks. Such systems can perform quadrature measurements to extract information of interest inherent in the quantum states. Therefore, the design of quantum states is crucial to achieving high accuracy of the quadrature measurement. The widely used Gaussian states lack some relevant non-classical properties, thus calling for the design of quantum systems using non-Gaussian states. This paper characterizes the quadrature measurement accuracy for the photon-varied Gaussian states (PVGSs), which are a class of non Gaussian states that can be generated using current technologies and possess relevant nonclassical properties. First, we derive the wavefunctions of singlemode PVGSs. Then, we characterize the quadrature measurement accuracy and compare it with that for Gaussian states. The findings of this paper provide insights into the design of enhanced quantum systems and networks using single-mode PVGSs.',
+          keywords: ['Quantum Information', 'Quadrature Measurement', 'Gaussian States', 'Quantum Sensing', 'Photonic Systems'],
+          doi: '10.1109/InfoCom2025.QuNAP.123456', // Example - to be updated when available
+          pdf: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf', // Path to PDF
+          publisherUrl: 'https://ieeexplore.ieee.org/document/12345678', // Publisher URL
+          bibtex: `@inproceedings{ForGiaMarWinCon:25,
+  title={Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States},
+  author={Forzano, Federico and Giani, Andrea and Marano, Stefano and Win, Moe Z. and Conti, Andrea},
+  booktitle={IEEE International Conference on Computer Communications (INFOCOM) 2025 - QuNAP Workshop},
+  year={2025},
+  organization={IEEE},
+  doi={10.1109/InfoCom2025.QuNAP.123456}
+}`
         }
       ]
     },

@@ -45,9 +45,9 @@ const ScrollHint = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.5 }}
-          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-lg px-4 py-3 shadow-lg border border-gray-200 dark:border-gray-700"
+          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md rounded-xl px-4 py-3 shadow-soft border border-neutral-200 dark:border-neutral-700"
         >
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center space-x-4 text-sm text-neutral-600 dark:text-neutral-400">
             <div className="flex items-center space-x-1">
               <Mouse className="w-4 h-4" />
               <span>Scroll</span>

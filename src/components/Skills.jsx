@@ -40,19 +40,27 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="section-padding bg-gray-50 dark:bg-gray-800 min-h-screen py-20 section-container relative">
-      <div className="container-custom">
+    <section id="skills" className="section-padding bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-800 dark:via-neutral-900 dark:to-neutral-800 min-h-screen py-20 section-container relative music-strings tech-grid">
+      {/* Enhanced decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 music-notes opacity-25 floating-element" style={{left: '8%', top: '15%'}}></div>
+        <div className="absolute bottom-20 right-16 sail-pattern w-20 h-20 opacity-20 floating-element" style={{right: '12%', bottom: '20%'}}></div>
+        <div className="absolute top-1/3 left-1/2 w-2 h-2 bg-secondary-400 rounded-full opacity-20 animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-accent-400 rounded-full opacity-30 animate-pulse-slow"></div>
+      </div>
+      
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="section-title">
             {t('skills.title')}
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="section-subtitle">
             {t('skills.subtitle')}
           </p>
         </motion.div>
@@ -65,9 +73,9 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="card card-hover p-8 border-2 border-transparent hover:border-primary-200 dark:hover:border-primary-800"
             >
-              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
+              <h3 className="text-2xl font-bold text-gradient mb-8 text-center font-display">
                 {category.title}
               </h3>
               

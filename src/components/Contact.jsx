@@ -83,19 +83,19 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-800 min-h-screen py-20 section-container relative">
+    <section id="contact" className="section-padding bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-800 dark:via-neutral-900 dark:to-neutral-800 min-h-screen py-20 section-container relative quantum-pattern">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="section-title">
             {t('contact.title')}
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="section-subtitle">
             {t('contact.subtitle')}
           </p>
         </motion.div>
@@ -108,8 +108,8 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-              Informazioni di contatto
+            <h3 className="text-2xl font-bold text-gradient mb-8 font-display">
+              {t('contact.info')}
             </h3>
 
             <div className="space-y-6 mb-8">
@@ -122,14 +122,14 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group"
+                  className="card card-hover flex items-center space-x-4 p-6 group"
                 >
-                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors duration-300">
-                    <item.icon className="w-6 h-6 text-primary-600" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-xl flex items-center justify-center group-hover:from-primary-200 group-hover:to-secondary-200 dark:group-hover:from-primary-800/50 dark:group-hover:to-secondary-800/50 transition-all duration-300">
+                    <item.icon className="w-7 h-7 text-gradient" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100">{item.title}</h4>
-                    <p className="text-gray-600 dark:text-gray-400">{item.value}</p>
+                    <h4 className="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">{item.title}</h4>
+                    <p className="text-neutral-600 dark:text-neutral-400">{item.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -142,8 +142,8 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                Seguimi sui social
+              <h4 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6 font-display">
+                {t('contact.followMe')}
               </h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social) => (
@@ -154,10 +154,10 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`p-3 bg-white dark:bg-gray-700 rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-gray-600 dark:text-gray-300 ${social.color}`}
+                    className={`p-4 card rounded-full shadow-soft hover:shadow-medium transition-all duration-300 text-neutral-600 dark:text-neutral-300 ${social.color}`}
                     aria-label={social.name}
                   >
-                    <social.icon size={20} />
+                    <social.icon size={24} />
                   </motion.a>
                 ))}
               </div>
@@ -170,17 +170,17 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8"
+            className="card p-8"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              Invia un messaggio
+            <h3 className="text-2xl font-bold text-gradient mb-8 font-display">
+              {t('contact.sendMessage')}
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Nome *
+                  <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                    {t('contact.form.name')}{t('contact.form.required')}
                   </label>
                   <input
                     type="text"
@@ -189,13 +189,13 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Il tuo nome"
+                    className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-neutral-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 backdrop-blur-sm"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email *
+                  <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                    {t('contact.form.email')}{t('contact.form.required')}
                   </label>
                   <input
                     type="email"
@@ -204,15 +204,15 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
-                    placeholder="la-tua-email@example.com"
+                    className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-neutral-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 backdrop-blur-sm"
+                    placeholder={t('contact.form.emailPlaceholder')}
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Oggetto *
+                <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                  {t('contact.form.subject')}{t('contact.form.required')}
                 </label>
                 <input
                   type="text"
@@ -221,14 +221,14 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
-                  placeholder="Oggetto del messaggio"
+                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-neutral-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 backdrop-blur-sm"
+                  placeholder={t('contact.form.subjectPlaceholder')}
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Messaggio *
+                <label htmlFor="message" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                  {t('contact.form.message')}{t('contact.form.required')}
                 </label>
                 <textarea
                   id="message"
@@ -237,8 +237,8 @@ const Contact = () => {
                   onChange={handleInputChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 resize-vertical"
-                  placeholder="Scrivi qui il tuo messaggio..."
+                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-neutral-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 resize-vertical backdrop-blur-sm"
+                  placeholder={t('contact.form.messagePlaceholder')}
                 />
               </div>
 
@@ -247,23 +247,12 @@ const Contact = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-lg transition-all duration-200 ${
-                  isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-primary-600 hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2'
-                } text-white`}
+                className={`w-full btn-primary flex items-center justify-center gap-3 text-lg ${
+                  isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Invio in corso...
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    Invia messaggio
-                  </>
-                )}
+                <Send size={20} className={isSubmitting ? 'animate-spin' : ''} />
+                {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
               </motion.button>
             </form>
           </motion.div>

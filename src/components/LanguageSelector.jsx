@@ -11,11 +11,11 @@ const LanguageSelector = ({ className = '' }) => {
       onClick={toggleLanguage}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className={`flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 ${className}`}
+      className={`flex items-center space-x-2 px-3 py-2 rounded-xl bg-white/50 dark:bg-neutral-800/50 backdrop-blur-sm border border-neutral-200 dark:border-neutral-700 hover:bg-white/70 dark:hover:bg-neutral-800/70 transition-all duration-200 shadow-soft ${className}`}
       aria-label="Toggle language"
     >
-      <Globe size={16} className="text-gray-600 dark:text-gray-400" />
-      <span className="text-sm font-medium text-gray-700 dark:text-gray-300 uppercase">
+      <Globe size={16} className="text-neutral-600 dark:text-neutral-400" />
+      <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 uppercase">
         {language}
       </span>
     </motion.button>

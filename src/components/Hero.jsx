@@ -37,72 +37,88 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16 section-container relative">
-      <div className="container-custom">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 section-container relative music-strings quantum-pattern">
+      {/* Enhanced decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Floating music notes */}
+        <div className="absolute top-20 left-10 music-notes opacity-40 floating-element" style={{left: '8%', top: '15%'}}></div>
+        <div className="absolute top-40 right-16 music-notes opacity-30 floating-element" style={{right: '12%', top: '25%'}}></div>
+        <div className="absolute bottom-32 left-20 music-notes opacity-35 floating-element" style={{left: '15%', bottom: '20%'}}></div>
+        <div className="absolute top-60 right-10 music-notes opacity-25 floating-element" style={{right: '8%', top: '45%'}}></div>
+        
+        {/* Quantum pattern overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-secondary-500/5 opacity-30"></div>
+      </div>
+      
+      <div className="container-custom relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="text-center"
         >
-          {/* Profile Image */}
+          {/* Enhanced Profile Image */}
           <motion.div
             variants={itemVariants}
-            className="mb-8"
+            className="mb-6 sm:mb-8 lg:mb-10"
           >
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-primary-500 to-primary-600 p-1">
-              <div className="w-full h-full rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <span className="text-4xl font-bold text-primary-600 dark:text-primary-400">F</span>
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-secondary-400 animate-pulse-slow"></div>
+              <div className="absolute inset-1 sm:inset-2 rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 shadow-glow">
+                <div className="w-full h-full rounded-full bg-white dark:bg-neutral-800 flex items-center justify-center border-2 sm:border-4 border-white dark:border-neutral-700">
+                  <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gradient font-display">F</span>
+                </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Main Content */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              {t('hero.greeting')}{' '}
-              <span className="bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent">
+          {/* Enhanced Main Content */}
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8 lg:mb-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-3 sm:mb-4 md:mb-6 font-display px-2 sm:px-4 md:px-0">
+              <span className="text-neutral-800 dark:text-neutral-200 block sm:inline">{t('hero.greeting')}</span>
+              <br className="hidden sm:block" />
+              <span className="text-gradient animate-gradient bg-[length:200%_200%] block sm:inline">
                 Federico Forzano
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-2">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-neutral-600 dark:text-neutral-300 mb-3 sm:mb-4 font-medium px-2 sm:px-4 md:px-0">
               {t('hero.title')}
             </p>
-            <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto leading-relaxed px-4 sm:px-6 md:px-0">
               {t('hero.description')}
             </p>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* Enhanced CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 px-4 sm:px-0"
           >
             <motion.a
               href="#projects"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary flex items-center gap-2"
+              className="btn-primary flex items-center gap-2 sm:gap-3 text-base sm:text-lg shadow-large w-full sm:w-auto justify-center"
             >
-              {t('hero.viewProjects')}
-              <ArrowDown size={16} />
+              <span className="whitespace-nowrap">{t('hero.viewProjects')}</span>
+              <ArrowDown size={18} className="animate-bounce-subtle flex-shrink-0" />
             </motion.a>
             <motion.button
               onClick={onDownloadCV}
               disabled={isGenerating}
-              whileHover={{ scale: isGenerating ? 1 : 1.05 }}
+              whileHover={{ scale: isGenerating ? 1 : 1.05, y: isGenerating ? 0 : -2 }}
               whileTap={{ scale: isGenerating ? 1 : 0.95 }}
-              className={`btn-secondary flex items-center gap-2 ${isGenerating ? 'opacity-75 cursor-not-allowed' : ''}`}
+              className={`btn-secondary flex items-center gap-2 sm:gap-3 text-base sm:text-lg w-full sm:w-auto justify-center ${isGenerating ? 'opacity-75 cursor-not-allowed' : ''}`}
             >
-              <Download size={16} className={isGenerating ? 'animate-spin' : ''} />
-              {isGenerating ? (t('common.loading') || 'Generazione...') : t('hero.downloadCV')}
+              <Download size={18} className={`flex-shrink-0 ${isGenerating ? 'animate-spin' : ''}`} />
+              <span className="whitespace-nowrap">{isGenerating ? (t('common.loading') || 'Generazione...') : t('hero.downloadCV')}</span>
             </motion.button>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Enhanced Social Links */}
           <motion.div
             variants={itemVariants}
-            className="flex justify-center space-x-6"
+            className="flex justify-center space-x-4 sm:space-x-6 lg:space-x-8 mb-12 sm:mb-16 lg:mb-20"
           >
             {[
               { icon: Github, href: 'https://github.com/FForzano', label: 'GitHub' },
@@ -114,27 +130,28 @@ const Hero = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400"
+                whileHover={{ scale: 1.2, y: -4 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-3 sm:p-4 card rounded-full shadow-soft hover:shadow-glow transition-all duration-300 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 group flex-shrink-0"
                 aria-label={label}
               >
-                <Icon size={20} />
+                <Icon size={20} className="sm:size-6 transition-transform duration-300 group-hover:scale-110" />
               </motion.a>
             ))}
           </motion.div>
 
-          {/* Scroll Indicator */}
+          {/* Enhanced Scroll Indicator */}
           <motion.div
             variants={itemVariants}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block"
           >
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-gray-400 dark:text-gray-500"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-neutral-400 dark:text-neutral-500 flex flex-col items-center gap-2"
             >
-              <ArrowDown size={24} />
+              <span className="text-xs sm:text-sm font-medium">Scroll down</span>
+              <ArrowDown size={20} className="sm:size-6 animate-pulse" />
             </motion.div>
           </motion.div>
         </motion.div>

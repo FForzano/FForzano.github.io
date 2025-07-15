@@ -15,8 +15,8 @@ const SectionTransition = ({ isVisible, direction = 'down' }) => {
       {/* Gradient overlay */}
       <div className={`absolute inset-0 ${
         direction === 'down' 
-          ? 'bg-gradient-to-b from-transparent via-white/30 to-white/90 dark:via-gray-900/30 dark:to-gray-900/90' 
-          : 'bg-gradient-to-t from-transparent via-white/30 to-white/90 dark:via-gray-900/30 dark:to-gray-900/90'
+          ? 'bg-gradient-to-b from-transparent via-white/30 to-white/90 dark:via-neutral-900/30 dark:to-neutral-900/90' 
+          : 'bg-gradient-to-t from-transparent via-white/30 to-white/90 dark:via-neutral-900/30 dark:to-neutral-900/90'
       }`} />
       
       {/* Animated indicator */}

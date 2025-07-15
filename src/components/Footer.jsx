@@ -15,33 +15,36 @@ const Footer = () => {
   const quickLinks = [
     { name: t('nav.home'), href: '#home' },
     { name: t('nav.about'), href: '#about' },
-    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.experience'), href: '#experience' },
+    { name: t('nav.research'), href: '#research' },
     { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.hobbies'), href: '#hobbies' },
     { name: t('nav.contact'), href: '#contact' }
   ]
 
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white">
+    <footer className="bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 text-white">
       <div className="container-custom">
         {/* Main Footer Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="py-12 sm:py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
+            className="md:col-span-2 lg:col-span-1"
           >
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">F</span>
+            <div className="flex items-center space-x-3 mb-4 sm:mb-6">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-glow">
+                <span className="text-white font-bold text-base sm:text-lg font-display">F</span>
               </div>
-              <span className="font-bold text-xl">Federico Forzano</span>
+              <span className="font-bold text-xl sm:text-2xl font-display">Federico Forzano</span>
             </div>
-            <p className="text-gray-400 dark:text-gray-500 mb-4">
+            <p className="text-neutral-300 dark:text-neutral-400 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
               {t('footer.description')}
             </p>
-            <p className="text-gray-400 dark:text-gray-500 text-sm">
+            <p className="text-neutral-400 dark:text-neutral-500 text-xs sm:text-sm">
               {t('footer.availability')}
             </p>
           </motion.div>
@@ -53,14 +56,14 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="font-semibold text-lg mb-4">{t('footer.quickLinks')}</h3>
-            <ul className="space-y-2">
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">{t('footer.quickLinks')}</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <motion.a
                     href={link.href}
                     whileHover={{ x: 5 }}
-                    className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors duration-200 block"
+                    className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors duration-200 block text-sm sm:text-base"
                   >
                     {link.name}
                   </motion.a>
@@ -76,7 +79,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="font-semibold text-lg mb-4">{t('footer.contacts')}</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">{t('footer.contacts')}</h3>
             <div className="space-y-2 text-gray-400 dark:text-gray-500">
               <p>📧 f.forzano99@gmail.com</p>
               <p>📱 +39 328 177 2074</p>
@@ -90,7 +93,6 @@ const Footer = () => {
                 {[
                   { name: 'GitHub', href: 'https://github.com/FForzano' },
                   { name: 'LinkedIn', href: 'https://linkedin.com/in/federico-forzano' },
-                  { name: 'Twitter', href: 'https://twitter.com/federico_forzano' }
                 ].map((social) => (
                   <motion.a
                     key={social.name}
@@ -119,14 +121,7 @@ const Footer = () => {
           className="border-t border-gray-800 py-6 flex flex-col md:flex-row justify-between items-center"
         >
           <div className="flex items-center space-x-1 text-gray-400 dark:text-gray-500 mb-4 md:mb-0">
-            <span>&copy; {currentYear} Federico Forzano. {t('footer.madeWith')}</span>
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <Heart size={16} className="text-red-500 fill-current" />
-            </motion.div>
-            <span>{t('footer.and')} React</span>
+            <span>&copy; {currentYear} Federico Forzano. {t('footer.madeWith')} React JS {t('footer.and')} Tailwind CSS</span>
           </div>
 
           {/* Back to Top Button */}

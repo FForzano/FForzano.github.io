@@ -6,10 +6,12 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import Experience from './components/Experience'
+import Research from './components/Research'
 import Projects from './components/Projects'
-import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Hobbies from './components/Hobbies'
 import SectionIndicator from './components/SectionIndicator'
 import SectionTransition from './components/SectionTransition'
 import ScrollHint from './components/ScrollHint'
@@ -20,7 +22,7 @@ const AppContent = () => {
   const [showTransition, setShowTransition] = useState(false)
   const [transitionDirection, setTransitionDirection] = useState('down')
   
-  const sectionIds = ['home', 'about', 'skills', 'projects', 'contact', 'footer']
+  const sectionIds = ['home', 'about', 'experience', 'research', 'projects', 'hobbies', 'contact', 'footer']
 
   // Scroll to section function
   const goToSection = (index, direction = 'down') => {
@@ -170,7 +172,7 @@ const AppContent = () => {
   }, [isScrolling, sectionIds, currentSection])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 text-neutral-900 dark:text-neutral-100 transition-all duration-500">
       <Navbar />
       
       {/* Section Indicator */}
@@ -194,12 +196,16 @@ const AppContent = () => {
           <motion.main
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.8 }}
           >
             <Hero />
             <About />
-            <Skills />
+            <Experience />
+            <Research />
             <Projects />
+            <section id="hobbies" className="section-container relative">
+              <Hobbies />
+            </section>
             <Contact />
           </motion.main>
         } />
