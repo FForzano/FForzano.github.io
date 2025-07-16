@@ -323,6 +323,17 @@ const AdaptiveSailingBoat = ({ size, sailOrientation, isActive }) => {
         opacity={typeof config.elements.jib === 'string' ? (0.4 + (config.tension || 0) * 0.15) : (config.elements.jib.opacity || 0.5)}
       />
       
+      {/* Spinnaker - solo se presente nella configurazione */}
+      {config.elements.spinnaker && config.elements.spinnaker.path && (
+        <path 
+          d={config.elements.spinnaker.path}
+          fill={config.elements.spinnaker.fill || "currentColor"}
+          stroke={config.elements.spinnaker.stroke || "none"}
+          strokeWidth={config.elements.spinnaker.strokeWidth || 0}
+          opacity={config.elements.spinnaker.opacity || 0.7}
+        />
+      )}
+      
       {/* Indicatore di vento dinamico */}
       <path 
         d={config.elements.wind}
