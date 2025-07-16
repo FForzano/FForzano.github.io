@@ -54,10 +54,12 @@ describe('Project Structure Tests', () => {
     
     const expectedDocs = [
       'README.md',
-      'TESTING.md',
-      'INTERNATIONALIZATION.md',
-      'CV_GENERATION.md',
-      'DOCKER.md'
+      'docs/README.md',
+      'docs/TESTING_GUIDE.md',
+      'docs/INTERNATIONALIZATION.md',
+      'docs/CV_GENERATION.md',
+      'docs/DOCKER.md',
+      'docs/GUIDA_COMPLETA_BARCHETTA.md'
     ]
     
     expectedDocs.forEach(doc => {

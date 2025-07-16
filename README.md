@@ -105,16 +105,18 @@ Il portfolio utilizza un sistema di navigazione unico con una barchetta a vela a
 
 - **Movimento realistico**: La barchetta si muove fisicamente lungo un percorso circolare
 - **Andature nautiche**: Cambia configurazione delle vele in base alla posizione (bolina, traverso, lasco, ecc.)
-- **Animazioni fluide**: Utilizzando `framer-motion` per transizioni naturali
+- **Animazioni modulari**: Sistema completamente personalizzabile per ogni elemento della barca
 - **Indicatori di progresso**: Cerchio progressivo che mostra l'avanzamento
 - **Dettagli interattivi**: Scia, indicatori di velocità e direzione del vento
 
 **Componenti principali:**
 - `SimpleCircularNavigation.jsx` - Navigazione circolare ottimizzata
 - `SectionIndicator.jsx` - Contenitore per l'indicatore di sezione
-- `AdaptiveSailingBoat.jsx` - Barchetta con vele che si adattano alle andature nautiche
+- `boat-designs/` - Configurazioni modulari per ogni andatura nautica
 
-**Documentazione completa:** [CIRCULAR_NAVIGATION.md](./CIRCULAR_NAVIGATION.md)
+**📖 Guida completa alla personalizzazione:** [docs/GUIDA_COMPLETA_BARCHETTA.md](./docs/GUIDA_COMPLETA_BARCHETTA.md)
+
+**📚 Documentazione completa:** [docs/](./docs/)
 
 ### Colori
 I colori principali sono configurati in `tailwind.config.js`. Puoi modificare la palette di colori:
@@ -140,15 +142,31 @@ I contenuti del portfolio si trovano nei seguenti componenti:
 ### Animazioni
 Le animazioni sono gestite con Framer Motion. Puoi personalizzarle modificando gli oggetti `variants` nei componenti.
 
-## � Documentazione / Documentation
+## 📚 Documentazione
 
-- **[CV_GENERATION.md](./CV_GENERATION.md)** - Sistema di generazione CV dinamico / Dynamic CV generation system
-- **[INTERNATIONALIZATION.md](./INTERNATIONALIZATION.md)** - Guida al sistema i18n / i18n system guide  
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Guida completa al deploy / Complete deployment guide
-- **[TESTING.md](./TESTING.md)** - Checklist di testing / Testing checklist
-- **[DOCKER.md](./DOCKER.md)** - Configurazione Docker / Docker configuration
+La documentazione completa del progetto è organizzata nella directory [docs/](./docs/) e include:
 
-## �📁 Struttura del progetto
+### 📖 Guide Principali
+- **[GUIDA_COMPLETA_BARCHETTA.md](./docs/GUIDA_COMPLETA_BARCHETTA.md)** - Guida completa alla personalizzazione della barchetta
+- **[ANIMAZIONI_MODULARI_COMPLETATE.md](./docs/ANIMAZIONI_MODULARI_COMPLETATE.md)** - Riepilogo del sistema di animazioni modulari
+
+### 🛠️ Setup e Deployment
+- **[DEPLOYMENT.md](./docs/DEPLOYMENT.md)** - Guida completa al deployment
+- **[DOCKER.md](./docs/DOCKER.md)** - Containerizzazione con Docker
+- **[GITHUB_SETUP.md](./docs/GITHUB_SETUP.md)** - Configurazione GitHub
+
+### 💻 Sviluppo e Features
+- **[CV_GENERATION.md](./docs/CV_GENERATION.md)** - Sistema di generazione CV
+- **[INTERNATIONALIZATION.md](./docs/INTERNATIONALIZATION.md)** - Sistema di internazionalizzazione
+- **[PROJECT_COMPLETE.md](./docs/PROJECT_COMPLETE.md)** - Panoramica completa del progetto
+
+### 🧪 Testing e Qualità
+- **[TESTING.md](./docs/TESTING.md)** - Configurazione testing
+- **[TESTING_FINAL.md](./docs/TESTING_FINAL.md)** - Testing finale e validazione
+
+**📑 Indice completo:** [docs/README.md](./docs/README.md)
+
+## 📁 Struttura del progetto
 
 ```
 portfolio/
