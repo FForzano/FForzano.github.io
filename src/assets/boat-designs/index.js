@@ -28,37 +28,19 @@ export const BOAT_CONFIGURATIONS = {
   225: {
     ...LascoLargo,
     name: "Lasco largo (opposto)",
-    description: "Navigazione di lasco largo, vele lascate (lato opposto)",
-    elements: {
-      ...LascoLargo.elements,
-      mainSail: "M12 4 L12 16 L2 11 L2 11 Z",
-      jib: "M12 4 L12 12 L20 8 L20 6 Z",
-      wind: "M12 2 L7 7 M9 5 L7 7 L9 9"
-    }
+    description: "Navigazione di lasco largo, vele lascate (lato opposto)"
   },
   
   270: {
     ...Traverso,
     name: "Traverso (opposto)",
-    description: "Navigazione al traverso, vele semi-lascare (lato opposto)",
-    elements: {
-      ...Traverso.elements,
-      mainSail: "M12 4 L12 16 L4 13 L4 9 Z",
-      jib: "M12 4 L12 12 L18 9 L18 6 Z",
-      wind: "M12 2 L6 2 M8 1 L6 2 L8 3"
-    }
+    description: "Navigazione al traverso, vele semi-lascare (lato opposto)"
   },
   
   315: {
     ...Bolina,
     name: "Bolina (opposto)",
-    description: "Navigazione di bolina, vele semi-cazzate (lato opposto)",
-    elements: {
-      ...Bolina.elements,
-      mainSail: "M12 4 L12 16 L6 14 L6 7 Z",
-      jib: "M12 4 L12 12 L17 10 L17 6 Z",
-      wind: "M12 2 L9 0 M11 1 L9 0 L7 1"
-    }
+    description: "Navigazione di bolina, vele semi-cazzate (lato opposto)"
   }
 }
 

@@ -216,8 +216,12 @@ const SimpleCircularNavigation = ({
           top: useTransform(y, (yVal) => container / 2 + yVal - boat / 2),
           width: boat,
           height: boat,
-          // Rotazione radiale: la barchetta punta verso l'esterno del cerchio
-          transform: useTransform(angle, (a) => `rotate(${a}deg)`),
+          // Rotazione radiale + specchiamento per angoli > 180°
+          transform: useTransform(angle, (a) => {
+            const normalizedAngle = ((a % 360) + 360) % 360
+            const shouldMirror = normalizedAngle > 180
+            return `rotate(${a}deg) ${shouldMirror ? 'scaleX(-1)' : ''}`
+          }),
           transformOrigin: 'center center'
         }}
       >
