@@ -14,9 +14,9 @@ const SimpleCircularNavigation = ({
   
   // Dimensioni basate sulla size
   const dimensions = {
-    sm: { radius: 28, boat: 16, container: 74 },
-    md: { radius: 36, boat: 20, container: 88 },
-    lg: { radius: 44, boat: 24, container: 104 }
+    sm: { radius: 28, boat: 18, container: 74 },
+    md: { radius: 36, boat: 24, container: 88 },
+    lg: { radius: 44, boat: 28, container: 104 }
   }
   
   const { radius, boat, container } = dimensions[size]
@@ -222,7 +222,9 @@ const SimpleCircularNavigation = ({
             const shouldMirror = normalizedAngle > 180
             return `rotate(${a}deg) ${shouldMirror ? 'scaleX(-1)' : ''}`
           }),
-          transformOrigin: 'center center'
+          transformOrigin: 'center center',
+          // Sottile alone per migliorare la visibilità
+          filter: 'drop-shadow(0 0 2px rgba(59, 130, 246, 0.3))'
         }}
       >
         <AdaptiveSailingBoat 

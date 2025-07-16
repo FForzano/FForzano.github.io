@@ -25,15 +25,16 @@ export const Traverso = {
         path: "M 12.188534,8.3722177 C 13.8988,10.995139 16.411539,15.522825 16.420702,21.679296",
         fill: "none",
         stroke: "currentColor",
-        strokeWidth: 1,
-        opacity: 0.7
+        strokeWidth: 1.2,
+        opacity: 0.85
+
     },
     jib: {
         path: "M 12.266001,0.00292326 C 14.275377,1.7118156 15.182246,3.6460021 15.436943,7.1527484",
         fill: "none",
         stroke: "currentColor",
-        strokeWidth: 1,
-        opacity: 0.7
+        strokeWidth: 1.2,
+        opacity: 0.85
     },
     wind: {
         path: ""
