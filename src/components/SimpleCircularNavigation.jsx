@@ -312,9 +312,11 @@ const AdaptiveSailingBoat = ({ size, sailOrientation, isActive }) => {
       
       {/* Scafo - usa animazioni modulari */}
       <motion.path 
-        d={config.elements.hull}
-        fill="currentColor" 
-        opacity="0.95"
+        d={typeof config.elements.hull === 'string' ? config.elements.hull : config.elements.hull.path}
+        fill={typeof config.elements.hull === 'string' ? "currentColor" : config.elements.hull.fill}
+        stroke={typeof config.elements.hull === 'string' ? "none" : config.elements.hull.stroke}
+        strokeWidth={typeof config.elements.hull === 'string' ? 0 : config.elements.hull.strokeWidth}
+        opacity={typeof config.elements.hull === 'string' ? "0.95" : config.elements.hull.opacity}
         {...getAnimationProps('hull')}
       />
       
@@ -326,6 +328,7 @@ const AdaptiveSailingBoat = ({ size, sailOrientation, isActive }) => {
         y2={config.elements.mast.y2}
         stroke="currentColor" 
         strokeWidth={config.elements.mast.strokeWidth}
+        strokeLinecap={config.elements.mast.strokeLinecap || "butt"}
         opacity="0.9"
         {...getAnimationProps('mast')}
       />

@@ -3,12 +3,18 @@ export const BolinaStretta = {
   description: "Navigazione contro vento, vele molto cazzate",
   tension: 0.9,
   elements: {
-    hull: "M12 20 L10 16 L14 16 Z",
-    mast: { x1: 12, y1: 16, x2: 12, y2: 4, strokeWidth: 1.5 },
-    mainSail: "M12 4 L12 16 L16 15 L16 6 Z",
-    jib: "M12 4 L12 12 L8 11 L8 6 Z",
-    wind: "M12 2 L12 0 M10 1 L12 0 L14 1",
-    wake: "M12 18 Q10 19 8 18 Q10 17 12 18 Q14 17 16 18 Q14 19 12 18"
+    hull: { 
+      path: "M 9,17 19,17 c 0.8,1.2 1.2,2.5 1.2,4 -0.02,6.2 -6.5,14.2 -9.4,18.6 C 10.3,35.2 7.1,25.1 6.9,19.2 6.85,17.6 7.6,16.3 9,17 Z", 
+      fill: "none", 
+      stroke: "currentColor", 
+      strokeWidth: 1.5, 
+      opacity: 0.9 
+    },
+    mast: { x1: 12, y1: 12, x2: 12, y2: 14, strokeWidth: 3, strokeLinecap: "round" }, // Linea più lunga per tondino visibile
+    mainSail: "", //"M12 4 L12 16 L16 15 L16 6 Z",
+    jib: "", // "M12 4 L12 12 L8 11 L8 6 Z",
+    wind: "", // "M12 2 L12 0 M10 1 L12 0 L14 1",
+    wake: "" // "M12 18 Q10 19 8 18 Q10 17 12 18 Q14 17 16 18 Q14 19 12 18"
   },
   animations: {
     // Animazione della scia - più leggera per andature lente
