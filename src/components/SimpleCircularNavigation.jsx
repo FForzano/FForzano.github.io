@@ -139,29 +139,32 @@ const SimpleCircularNavigation = ({
       {/* Indicatori delle sezioni esterni - Tutti i punti a 45° */}
       {allSectionMarks.map(({ angle, isActive, isClickable, index }) => {
         const indicatorRadius = radius + 16
-        const indicatorX = container / 2 + Math.cos((angle - 90) * Math.PI / 180) * indicatorRadius
-        const indicatorY = container / 2 + Math.sin((angle - 90) * Math.PI / 180) * indicatorRadius
+        const centerX = container / 2 + Math.cos((angle - 90) * Math.PI / 180) * indicatorRadius
+        const centerY = container / 2 + Math.sin((angle - 90) * Math.PI / 180) * indicatorRadius
+        
+        // Dimensioni area cliccabile - aumentata per migliore UX
+        const clickableSize = 40
         
         return (
           <motion.button
             key={`section-${index}`}
             onClick={isClickable ? () => onSectionClick(index) : undefined}
-            className={`absolute group flex items-center justify-center ${isClickable ? 'cursor-pointer' : 'cursor-default'}`}
+            className={`absolute group flex items-center justify-center rounded-full z-20 ${isClickable ? 'cursor-pointer' : 'cursor-default'}`}
             style={{
-              left: indicatorX - 12,
-              top: indicatorY - 12,
-              width: 24,
-              height: 24,
+              left: centerX - clickableSize / 2,     // Centra perfettamente l'area cliccabile
+              top: centerY - clickableSize / 2,      // Centra perfettamente l'area cliccabile
+              width: clickableSize,
+              height: clickableSize,
             }}
-            whileHover={isClickable ? { scale: 1.3 } : {}}
-            whileTap={isClickable ? { scale: 0.8 } : {}}
+            whileHover={isClickable ? { scale: 1.15 } : {}}
+            whileTap={isClickable ? { scale: 0.9 } : {}}
             aria-label={isClickable ? `Go to section ${index + 1} (${angle}°)` : `Position ${angle}°`}
             title={isClickable ? `Section ${index + 1}` : `${angle}°`}
             disabled={!isClickable}
           >
-            {/* Punto principale - tutti visibili ma solo alcuni clickabili */}
+            {/* Punto principale - perfettamente centrato nell'area cliccabile */}
             <motion.div
-              className={`absolute rounded-full transition-all duration-300 ${
+              className={`rounded-full transition-all duration-300 pointer-events-none ${
                 isActive
                   ? 'bg-primary-500 shadow-sm'
                   : isClickable
@@ -171,14 +174,10 @@ const SimpleCircularNavigation = ({
               style={{
                 width: isActive ? 8 : 6,
                 height: isActive ? 8 : 6,
-                left: isActive ? 8 : 9,
-                top: isActive ? 8 : 9,
               }}
               animate={{
                 width: isActive ? 8 : 6,
                 height: isActive ? 8 : 6,
-                left: isActive ? 8 : 9,
-                top: isActive ? 8 : 9,
               }}
               transition={{ duration: 0.3 }}
             />
@@ -186,9 +185,9 @@ const SimpleCircularNavigation = ({
             {/* Alone sottile per l'indicatore attivo */}
             {isActive && (
               <motion.div
-                className="absolute rounded-full bg-primary-400/20"
+                className="absolute rounded-full bg-primary-400/20 pointer-events-none"
                 animate={{
-                  scale: [1, 1.8, 1],
+                  scale: [1, 2, 1],
                   opacity: [0.6, 0.1, 0.6],
                 }}
                 transition={{
@@ -197,10 +196,10 @@ const SimpleCircularNavigation = ({
                   ease: "easeInOut",
                 }}
                 style={{
-                  width: 24,
-                  height: 24,
-                  left: 0,
-                  top: 0,
+                  width: 32,
+                  height: 32,
+                  left: (clickableSize - 32) / 2,  // Centra l'alone di 32px nell'area cliccabile
+                  top: (clickableSize - 32) / 2,   // Centra l'alone di 32px nell'area cliccabile
                 }}
               />
             )}
@@ -235,9 +234,9 @@ const SimpleCircularNavigation = ({
       </motion.div>
       
       {/* Centro di navigazione - Indicatore angolo corrente */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <motion.div
-          className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs border border-white/20 dark:border-neutral-600/20"
+          className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs border border-white/20 dark:border-neutral-600/20 pointer-events-none"
           key={currentAngle}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
