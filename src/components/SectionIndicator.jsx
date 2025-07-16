@@ -37,9 +37,9 @@ const SectionIndicator = ({ currentSection, totalSections, onSectionClick }) => 
   }
 
   return (
-    <div className="fixed right-6 top-16 md:top-1/2 md:transform md:-translate-y-1/2 z-40">
+    <div className="fixed right-2 md:right-2 top-16 md:top-1/2 md:transform md:-translate-y-1/2 z-40">
       <motion.div
-        className="relative p-3 rounded-xl bg-white/60 dark:bg-neutral-800/60 backdrop-blur-lg border border-white/20 dark:border-neutral-700/20"
+        className="relative p-5 rounded-xl bg-white/60 dark:bg-neutral-800/60 backdrop-blur-lg border border-white/20 dark:border-neutral-700/20"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
         animate={{

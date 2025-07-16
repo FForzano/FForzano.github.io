@@ -213,7 +213,8 @@ const SimpleCircularNavigation = ({
         onMouseLeave={() => {}} // Mantiene l'interazione attiva
       >
         {allSectionMarks.map(({ angle, isActive, isClickable, index }) => {
-          const indicatorRadius = radius + 16
+          // Maggiore distanza tra puntini e cerchio per non far toccare la barchetta
+          const indicatorRadius = radius + Math.max(18, radius * 0.5)
           const centerX = container / 2 + Math.cos((angle - 90) * Math.PI / 180) * indicatorRadius
           const centerY = container / 2 + Math.sin((angle - 90) * Math.PI / 180) * indicatorRadius
           
@@ -291,7 +292,7 @@ const SimpleCircularNavigation = ({
       
       {/* Barchetta animata */}
       <motion.div
-        className="absolute z-10 pointer-events-none"
+        className="absolute z-20 pointer-events-none"
         style={{
           left: useTransform(x, (xVal) => container / 2 + xVal - boat / 2),
           top: useTransform(y, (yVal) => container / 2 + yVal - boat / 2),
