@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { getBoatConfiguration } from '../assets/boat-designs'
 
@@ -11,15 +11,36 @@ const SimpleCircularNavigation = ({
   className = '' 
 }) => {
   const prevSectionRef = useRef(currentSection)
+  const [showIndicator, setShowIndicator] = useState(true)
+  const indicatorTimeoutRef = useRef(null)
   
-  // Dimensioni basate sulla size
+  // Dimensioni basate sulla size e responsive
   const dimensions = {
-    sm: { radius: 28, boat: 18, container: 74 },
-    md: { radius: 36, boat: 24, container: 88 },
-    lg: { radius: 44, boat: 28, container: 104 }
+    sm: { 
+      radius: 28, 
+      boat: 18, 
+      container: 74,
+      // Versioni mobile più compatte
+      mobile: { radius: 24, boat: 16, container: 64 }
+    },
+    md: { 
+      radius: 36, 
+      boat: 24, 
+      container: 88,
+      mobile: { radius: 30, boat: 20, container: 76 }
+    },
+    lg: { 
+      radius: 44, 
+      boat: 28, 
+      container: 104,
+      mobile: { radius: 36, boat: 24, container: 88 }
+    }
   }
   
-  const { radius, boat, container } = dimensions[size]
+  // Detecta se siamo su mobile (puoi anche usare un hook personalizzato)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+  const currentDimensions = isMobile ? dimensions[size].mobile : dimensions[size]
+  const { radius, boat, container } = currentDimensions
   
   // Calcola gli angoli per le sezioni (sempre 8 posizioni a 45°)
   const allAngles = [0, 45, 90, 135, 180, 225, 270, 315]
@@ -54,7 +75,26 @@ const SimpleCircularNavigation = ({
   useEffect(() => {
     motionProgress.set(progress)
     prevSectionRef.current = currentSection
-  }, [currentSection, progress, motionProgress])
+    
+    // Mostra l'indicatore quando cambia sezione
+    setShowIndicator(true)
+    
+    // Nascondi l'indicatore dopo 3 secondi su mobile
+    if (isMobile) {
+      if (indicatorTimeoutRef.current) {
+        clearTimeout(indicatorTimeoutRef.current)
+      }
+      indicatorTimeoutRef.current = setTimeout(() => {
+        setShowIndicator(false)
+      }, 3000)
+    }
+    
+    return () => {
+      if (indicatorTimeoutRef.current) {
+        clearTimeout(indicatorTimeoutRef.current)
+      }
+    }
+  }, [currentSection, progress, motionProgress, isMobile])
   
   // Calcola gli indicatori per tutte le posizioni a 45°
   const allSectionMarks = allAngles.map((angle, index) => ({
@@ -234,19 +274,41 @@ const SimpleCircularNavigation = ({
       </motion.div>
       
       {/* Centro di navigazione - Indicatore angolo corrente */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-        <motion.div
-          className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs border border-white/20 dark:border-neutral-600/20 pointer-events-none"
-          key={currentAngle}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <span className="text-primary-600 dark:text-primary-400 font-mono text-xs font-medium">
-            {currentAngle}°
-          </span>
-        </motion.div>
-      </div>
+      {showIndicator && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+          <motion.div
+            className="bg-white/70 dark:bg-neutral-800/70 backdrop-blur-sm px-1.5 py-0.5 rounded-full text-xs border border-white/20 dark:border-neutral-600/20 pointer-events-none
+                       hidden sm:block md:px-2 md:py-1" // Nascosto su mobile, visibile da sm in su
+            key={currentAngle}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="text-primary-600 dark:text-primary-400 font-mono text-xs font-medium">
+              {currentAngle}°
+            </span>
+          </motion.div>
+        </div>
+      )}
+      
+      {/* Indicatore mobile compatto - Solo su schermi piccoli */}
+      {showIndicator && (
+        <div className="absolute top-2 right-2 z-10 pointer-events-none sm:hidden">
+          <motion.div
+            className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs border border-white/20 dark:border-neutral-600/20"
+            key={currentAngle}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="text-primary-600 dark:text-primary-400 font-mono text-xs font-medium">
+              {currentAngle}°
+            </span>
+          </motion.div>
+        </div>
+      )}
     </div>
   )
 }
