@@ -30,7 +30,7 @@ describe('Project Structure Tests', () => {
       'Contact.jsx',
       'Footer.jsx',
       'LanguageSelector.jsx',
-      'CVDownloadManager.jsx'
+      'StaticPDFDownload.jsx'
     ]
     
     expectedComponents.forEach(component => {
@@ -77,12 +77,16 @@ describe('Project Structure Tests', () => {
     expect(fs.existsSync(path.join(testPath, 'utils.js'))).toBe(true)
   })
 
-  it('should have CV fallback file', async () => {
+  it('should have CV static files directory', async () => {
     const fs = await import('fs')
     const path = await import('path')
     
-    const cvFallbackPath = path.resolve(process.cwd(), 'public/cv-fallback.html')
-    expect(fs.existsSync(cvFallbackPath)).toBe(true)
+    const cvDirectoryPath = path.resolve(process.cwd(), 'public/cv')
+    expect(fs.existsSync(cvDirectoryPath)).toBe(true)
+    
+    // Verifica che esistano i file README per le istruzioni
+    const readmePath = path.resolve(process.cwd(), 'public/cv/README.md')
+    expect(fs.existsSync(readmePath)).toBe(true)
   })
 
   it('should have environment configuration', async () => {
