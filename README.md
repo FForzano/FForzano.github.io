@@ -40,7 +40,7 @@ Modern and responsive portfolio of Federico Forzano, PhD student in Engineering 
 - **Framer Motion** - Libreria per animazioni / Animation library
 - **React Router** - Routing per Single Page Application / SPA Routing
 - **Lucide React** - Icone moderne e personalizzabili / Modern customizable icons
-- **jsPDF & @react-pdf/renderer** - Generazione CV dinamica / Dynamic CV generation
+- **Static PDF Downloads** - Sistema di download CV statico / Static CV download system
 - **Docker** - Containerizzazione per sviluppo / Development containerization
 - **i18n** - Sistema di internazionalizzazione / Internationalization system
 

@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event'
 import { renderWithLanguage } from '../utils'
 import Hero from '../../components/Hero'
 
-// Mock per CVDownloadManager
-vi.mock('../../components/CVDownloadManager', () => ({
+// Mock per StaticPDFDownload
+vi.mock('../../components/StaticPDFDownload', () => ({
   default: () => ({
     handleDownloadCV: vi.fn(),
     isGenerating: false,
@@ -115,21 +115,5 @@ describe('Hero Component', () => {
     expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
     expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer')
     expect(emailLink).toHaveAttribute('rel', 'noopener noreferrer')
-  })
-
-  it('should display loading state when CV is generating', () => {
-    // Mock CVDownloadManager con stato loading
-    vi.doMock('../../components/CVDownloadManager', () => ({
-      default: () => ({
-        handleDownloadCV: vi.fn(),
-        isGenerating: true,
-      }),
-    }))
-    
-    renderWithLanguage(<Hero />)
-    
-    const downloadButton = screen.getByRole('button', { name: /generazione/i })
-    expect(downloadButton).toBeDisabled()
-    expect(downloadButton).toHaveClass('opacity-75', 'cursor-not-allowed')
   })
 })

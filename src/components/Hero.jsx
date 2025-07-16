@@ -2,15 +2,15 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
-import CVDownloadManager from './CVDownloadManager'
+import StaticPDFDownload from './StaticPDFDownload'
 
 const Hero = () => {
   const { t } = useTranslation()
-  const { handleDownloadCV, isGenerating } = CVDownloadManager()
+  const { handleDownloadCV, isGenerating } = StaticPDFDownload()
   
   const onDownloadCV = (e) => {
     e.preventDefault()
-    handleDownloadCV(true) // true per versione avanzata
+    handleDownloadCV()
   }
   
   const containerVariants = {
@@ -105,13 +105,12 @@ const Hero = () => {
             </motion.a>
             <motion.button
               onClick={onDownloadCV}
-              disabled={isGenerating}
-              whileHover={{ scale: isGenerating ? 1 : 1.05, y: isGenerating ? 0 : -2 }}
-              whileTap={{ scale: isGenerating ? 1 : 0.95 }}
-              className={`btn-secondary flex items-center gap-2 sm:gap-3 text-base sm:text-lg w-full sm:w-auto justify-center ${isGenerating ? 'opacity-75 cursor-not-allowed' : ''}`}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-secondary flex items-center gap-2 sm:gap-3 text-base sm:text-lg w-full sm:w-auto justify-center"
             >
-              <Download size={18} className={`flex-shrink-0 ${isGenerating ? 'animate-spin' : ''}`} />
-              <span className="whitespace-nowrap">{isGenerating ? (t('common.loading') || 'Generazione...') : t('hero.downloadCV')}</span>
+              <Download size={18} className="flex-shrink-0" />
+              <span className="whitespace-nowrap">{t('hero.downloadCV')}</span>
             </motion.button>
           </motion.div>
 
