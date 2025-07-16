@@ -12,7 +12,9 @@ const SimpleCircularNavigation = ({
 }) => {
   const prevSectionRef = useRef(currentSection)
   const [showIndicator, setShowIndicator] = useState(true)
+  const [isActivelyNavigating, setIsActivelyNavigating] = useState(false)
   const indicatorTimeoutRef = useRef(null)
+  const navigationTimeoutRef = useRef(null)
   
   // Dimensioni basate sulla size e responsive
   const dimensions = {
@@ -79,6 +81,9 @@ const SimpleCircularNavigation = ({
     // Mostra l'indicatore quando cambia sezione
     setShowIndicator(true)
     
+    // Indica che siamo attivamente navigando
+    setIsActivelyNavigating(true)
+    
     // Nascondi l'indicatore dopo 3 secondi su mobile
     if (isMobile) {
       if (indicatorTimeoutRef.current) {
@@ -89,9 +94,20 @@ const SimpleCircularNavigation = ({
       }, 3000)
     }
     
+    // Nascondi lo stato di navigazione attiva dopo 2 secondi
+    if (navigationTimeoutRef.current) {
+      clearTimeout(navigationTimeoutRef.current)
+    }
+    navigationTimeoutRef.current = setTimeout(() => {
+      setIsActivelyNavigating(false)
+    }, 2000)
+    
     return () => {
       if (indicatorTimeoutRef.current) {
         clearTimeout(indicatorTimeoutRef.current)
+      }
+      if (navigationTimeoutRef.current) {
+        clearTimeout(navigationTimeoutRef.current)
       }
     }
   }, [currentSection, progress, motionProgress, isMobile])
@@ -109,6 +125,17 @@ const SimpleCircularNavigation = ({
   const cardinalAngles = []
 
   const circumference = 2 * Math.PI * radius
+  
+  // Handler per riattivare la navigazione quando si interagisce con i puntini
+  const handleIndicatorInteraction = () => {
+    setIsActivelyNavigating(true)
+    if (navigationTimeoutRef.current) {
+      clearTimeout(navigationTimeoutRef.current)
+    }
+    navigationTimeoutRef.current = setTimeout(() => {
+      setIsActivelyNavigating(false)
+    }, 2000)
+  }
   
   return (
     <div className={`relative ${className}`} style={{ width: container, height: container }}>
@@ -177,31 +204,45 @@ const SimpleCircularNavigation = ({
       </svg>
       
       {/* Indicatori delle sezioni esterni - Tutti i punti a 45° */}
-      {allSectionMarks.map(({ angle, isActive, isClickable, index }) => {
-        const indicatorRadius = radius + 16
-        const centerX = container / 2 + Math.cos((angle - 90) * Math.PI / 180) * indicatorRadius
-        const centerY = container / 2 + Math.sin((angle - 90) * Math.PI / 180) * indicatorRadius
-        
-        // Dimensioni area cliccabile - aumentata per migliore UX
-        const clickableSize = 40
-        
-        return (
-          <motion.button
-            key={`section-${index}`}
-            onClick={isClickable ? () => onSectionClick(index) : undefined}
-            className={`absolute group flex items-center justify-center rounded-full z-20 ${isClickable ? 'cursor-pointer' : 'cursor-default'}`}
-            style={{
-              left: centerX - clickableSize / 2,     // Centra perfettamente l'area cliccabile
-              top: centerY - clickableSize / 2,      // Centra perfettamente l'area cliccabile
-              width: clickableSize,
-              height: clickableSize,
-            }}
-            whileHover={isClickable ? { scale: 1.15 } : {}}
-            whileTap={isClickable ? { scale: 0.9 } : {}}
-            aria-label={isClickable ? `Go to section ${index + 1} (${angle}°)` : `Position ${angle}°`}
-            title={isClickable ? `Section ${index + 1}` : `${angle}°`}
-            disabled={!isClickable}
-          >
+      <motion.div
+        className="absolute inset-0 transition-opacity duration-700"
+        animate={{
+          opacity: isActivelyNavigating ? 1 : 0.3
+        }}
+        onMouseEnter={handleIndicatorInteraction}
+        onMouseLeave={() => {}} // Mantiene l'interazione attiva
+      >
+        {allSectionMarks.map(({ angle, isActive, isClickable, index }) => {
+          const indicatorRadius = radius + 16
+          const centerX = container / 2 + Math.cos((angle - 90) * Math.PI / 180) * indicatorRadius
+          const centerY = container / 2 + Math.sin((angle - 90) * Math.PI / 180) * indicatorRadius
+          
+          // Dimensioni area cliccabile - aumentata per migliore UX
+          const clickableSize = 40
+          
+          return (
+            <motion.button
+              key={`section-${index}`}
+              onClick={isClickable ? () => {
+                onSectionClick(index)
+                handleIndicatorInteraction()
+              } : undefined}
+              className={`absolute group flex items-center justify-center rounded-full z-20 ${
+                isClickable ? 'cursor-pointer' : 'cursor-default'
+              }`}
+              style={{
+                left: centerX - clickableSize / 2,     // Centra perfettamente l'area cliccabile
+                top: centerY - clickableSize / 2,      // Centra perfettamente l'area cliccabile
+                width: clickableSize,
+                height: clickableSize,
+              }}
+              whileHover={isClickable ? { scale: 1.15 } : {}}
+              whileTap={isClickable ? { scale: 0.9 } : {}}
+              aria-label={isClickable ? `Go to section ${index + 1} (${angle}°)` : `Position ${angle}°`}
+              title={isClickable ? `Section ${index + 1}` : `${angle}°`}
+              disabled={!isClickable}
+              onMouseEnter={handleIndicatorInteraction}
+            >
             {/* Punto principale - perfettamente centrato nell'area cliccabile */}
             <motion.div
               className={`rounded-full transition-all duration-300 pointer-events-none ${
@@ -246,6 +287,7 @@ const SimpleCircularNavigation = ({
           </motion.button>
         )
       })}
+      </motion.div>
       
       {/* Barchetta animata */}
       <motion.div
@@ -294,13 +336,13 @@ const SimpleCircularNavigation = ({
       
       {/* Indicatore mobile compatto - Solo su schermi piccoli */}
       {showIndicator && (
-        <div className="absolute top-2 right-2 z-10 pointer-events-none sm:hidden">
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none sm:hidden">
           <motion.div
             className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs border border-white/20 dark:border-neutral-600/20"
             key={currentAngle}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
           >
             <span className="text-primary-600 dark:text-primary-400 font-mono text-xs font-medium">
