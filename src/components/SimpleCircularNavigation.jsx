@@ -65,8 +65,9 @@ const SimpleCircularNavigation = ({
   }))
   
   // Punti cardinali di riferimento
-  const cardinalAngles = [0, 90, 180, 270]
-  
+//   const cardinalAngles = [0, 90, 180, 270]
+  const cardinalAngles = []
+
   const circumference = 2 * Math.PI * radius
   
   return (
@@ -86,7 +87,7 @@ const SimpleCircularNavigation = ({
           fill="none"
           stroke="currentColor"
           strokeWidth="0.5"
-          opacity="0.2"
+          opacity="0.08"
         />
         
         {/* Cerchio di glow sottile */}
@@ -97,7 +98,7 @@ const SimpleCircularNavigation = ({
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          opacity="0.05"
+          opacity="0.02"
           filter="blur(2px)"
         />
         
@@ -113,7 +114,7 @@ const SimpleCircularNavigation = ({
               cy={pointY}
               r="0.8"
               fill="currentColor"
-              opacity="0.25"
+              opacity="0.12"
             />
           )
         })}
@@ -137,7 +138,7 @@ const SimpleCircularNavigation = ({
       
       {/* Indicatori delle sezioni esterni - Tutti i punti a 45° */}
       {allSectionMarks.map(({ angle, isActive, isClickable, index }) => {
-        const indicatorRadius = radius + 8
+        const indicatorRadius = radius + 16
         const indicatorX = container / 2 + Math.cos((angle - 90) * Math.PI / 180) * indicatorRadius
         const indicatorY = container / 2 + Math.sin((angle - 90) * Math.PI / 180) * indicatorRadius
         
@@ -215,7 +216,9 @@ const SimpleCircularNavigation = ({
           top: useTransform(y, (yVal) => container / 2 + yVal - boat / 2),
           width: boat,
           height: boat,
-          // Rimuoviamo la rotazione - la barca guarda sempre in basso
+          // Rotazione radiale: la barchetta punta verso l'esterno del cerchio
+          transform: useTransform(angle, (a) => `rotate(${a}deg)`),
+          transformOrigin: 'center center'
         }}
       >
         <AdaptiveSailingBoat 
@@ -253,121 +256,82 @@ const AdaptiveSailingBoat = ({ size, sailOrientation, isActive }) => {
   const currentOrientation = useTransform(sailOrientation, (o) => o)
   const config = getBoatConfiguration(currentOrientation.get())
   
-  // Helper per convertire le configurazioni di animazione in props per framer-motion
-  const getAnimationProps = (elementName) => {
-    const animConfig = config.animations?.[elementName]
-    if (!animConfig) return {}
-    
-    const state = isActive ? 'active' : 'idle'
-    const animate = {}
-    const transition = {
-      duration: animConfig.duration || 3,
-      repeat: animConfig.repeat || (isActive ? Infinity : 0),
-      ease: animConfig.ease || "easeInOut"
-    }
-    
-    // Gestisci le diverse proprietà animabili
-    if (animConfig.opacity) {
-      if (typeof animConfig.opacity === 'object') {
-        if (animConfig.opacity[state]) {
-          animate.opacity = animConfig.opacity[state]
-        } else if (animConfig.opacity.base !== undefined) {
-          const base = animConfig.opacity.base
-          const variation = animConfig.opacity.variation || 0
-          animate.opacity = isActive ? [base, base + variation, base] : base
-        }
-      } else {
-        animate.opacity = animConfig.opacity
-      }
-    }
-    
-    if (animConfig.scale) {
-      if (typeof animConfig.scale === 'object') {
-        if (animConfig.scale[state]) {
-          animate.scale = animConfig.scale[state]
-        }
-      } else {
-        animate.scale = animConfig.scale
-      }
-    }
-    
-    return { animate, transition }
-  }
+  // Detect dark mode
+  const isDarkMode = document.documentElement.classList.contains('dark')
   
   return (
-    <motion.svg 
+    <svg 
       width={size} 
       height={size} 
       viewBox="0 0 24 24" 
       className="text-current"
-      {...getAnimationProps('hull')}
     >
-      {/* Scia leggera - usa animazioni modulari */}
-      <motion.path 
+      {/* Scia leggera */}
+      <path 
         d={config.elements.wake}
         fill="currentColor" 
         opacity="0.1"
-        {...getAnimationProps('wake')}
       />
       
-      {/* Scafo - usa animazioni modulari */}
-      <motion.path 
+      {/* Scafo */}
+      <path 
         d={typeof config.elements.hull === 'string' ? config.elements.hull : config.elements.hull.path}
-        fill={typeof config.elements.hull === 'string' ? "currentColor" : config.elements.hull.fill}
+        fill={typeof config.elements.hull === 'string' ? "currentColor" : (isDarkMode && config.elements.hull.darkFill ? config.elements.hull.darkFill : config.elements.hull.fill)}
         stroke={typeof config.elements.hull === 'string' ? "none" : config.elements.hull.stroke}
         strokeWidth={typeof config.elements.hull === 'string' ? 0 : config.elements.hull.strokeWidth}
         opacity={typeof config.elements.hull === 'string' ? "0.95" : config.elements.hull.opacity}
-        {...getAnimationProps('hull')}
       />
       
-      {/* Albero - usa animazioni modulari */}
-      <motion.line 
-        x1={config.elements.mast.x1}
-        y1={config.elements.mast.y1}
-        x2={config.elements.mast.x2}
-        y2={config.elements.mast.y2}
-        stroke="currentColor" 
-        strokeWidth={config.elements.mast.strokeWidth}
-        strokeLinecap={config.elements.mast.strokeLinecap || "butt"}
-        opacity="0.9"
-        {...getAnimationProps('mast')}
+      {/* Albero - supporta sia line che path */}
+      {config.elements.mast.path ? (
+        <path 
+          d={config.elements.mast.path}
+          fill={config.elements.mast.fill || "none"}
+          stroke={config.elements.mast.stroke || "currentColor"}
+          strokeWidth={config.elements.mast.strokeWidth || 1.5}
+          strokeLinecap={config.elements.mast.strokeLinecap || "butt"}
+          opacity={config.elements.mast.opacity || 0.9}
+        />
+      ) : (
+        <line 
+          x1={config.elements.mast.x1}
+          y1={config.elements.mast.y1}
+          x2={config.elements.mast.x2}
+          y2={config.elements.mast.y2}
+          stroke={config.elements.mast.stroke || "currentColor"}
+          strokeWidth={config.elements.mast.strokeWidth || 1.5}
+          strokeLinecap={config.elements.mast.strokeLinecap || "butt"}
+          opacity={config.elements.mast.opacity || 0.9}
+        />
+      )}
+      
+      {/* Vela principale dinamica - supporta sia string che object */}
+      <path 
+        d={typeof config.elements.mainSail === 'string' ? config.elements.mainSail : config.elements.mainSail.path}
+        fill={typeof config.elements.mainSail === 'string' ? "currentColor" : (config.elements.mainSail.fill || "currentColor")}
+        stroke={typeof config.elements.mainSail === 'string' ? "none" : (config.elements.mainSail.stroke || "none")}
+        strokeWidth={typeof config.elements.mainSail === 'string' ? 0 : (config.elements.mainSail.strokeWidth || 0)}
+        opacity={typeof config.elements.mainSail === 'string' ? (0.5 + (config.tension || 0) * 0.2) : (config.elements.mainSail.opacity || 0.6)}
       />
       
-      {/* Vela principale dinamica - usa animazioni modulari */}
-      <motion.path 
-        d={config.elements.mainSail}
-        fill="currentColor" 
-        opacity={0.5 + (config.tension || 0) * 0.2}
-        {...getAnimationProps('mainSail')}
+      {/* Fiocco dinamico - supporta sia string che object */}
+      <path 
+        d={typeof config.elements.jib === 'string' ? config.elements.jib : config.elements.jib.path}
+        fill={typeof config.elements.jib === 'string' ? "currentColor" : (config.elements.jib.fill || "currentColor")}
+        stroke={typeof config.elements.jib === 'string' ? "none" : (config.elements.jib.stroke || "none")}
+        strokeWidth={typeof config.elements.jib === 'string' ? 0 : (config.elements.jib.strokeWidth || 0)}
+        opacity={typeof config.elements.jib === 'string' ? (0.4 + (config.tension || 0) * 0.15) : (config.elements.jib.opacity || 0.5)}
       />
       
-      {/* Fiocco dinamico - usa animazioni modulari */}
-      <motion.path 
-        d={config.elements.jib}
-        fill="currentColor" 
-        opacity={0.4 + (config.tension || 0) * 0.15}
-        {...getAnimationProps('jib')}
-      />
-      
-      {/* Indicatore di vento dinamico - usa animazioni modulari */}
-      <motion.path 
+      {/* Indicatore di vento dinamico */}
+      <path 
         d={config.elements.wind}
         stroke="currentColor" 
         strokeWidth="0.6" 
         fill="none"
         opacity="0.5"
-        {...getAnimationProps('wind')}
       />
-      
-      {/* Punto di riferimento */}
-      <circle 
-        cx="12" 
-        cy="12" 
-        r="0.5" 
-        fill="currentColor" 
-        opacity="0.3"
-      />
-    </motion.svg>
+    </svg>
   )
 }
 

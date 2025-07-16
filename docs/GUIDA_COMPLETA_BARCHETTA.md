@@ -11,7 +11,7 @@ Questo documento fornisce una guida completa per personalizzare le immagini dell
 ```
 src/assets/boat-designs/
 ├── index.js              # Mapping centrale e funzioni helper
-├── bolina-stretta.js     # 0° - Bolina stretta (contro vento)
+├── prua-al-vento.js     # 0° - Prua a vento (contro vento)
 ├── bolina.js             # 45° - Bolina normale
 ├── traverso.js           # 90° - Traverso (vento al lato)
 ├── lasco-largo.js        # 135° - Lasco largo
@@ -21,7 +21,7 @@ src/assets/boat-designs/
 ### Angoli di Navigazione
 
 Il sistema supporta 8 angoli di navigazione a 45° di distanza:
-- **0°** - Bolina stretta (contro vento)
+- **0°** - Prua a vento (contro vento)
 - **45°** - Bolina normale
 - **90°** - Traverso
 - **135°** - Lasco largo
@@ -140,7 +140,7 @@ tension: 0.8 // Range: 0.0 - 1.0
 ```
 - **0.0**: Vele molto lasche (vento in poppa)
 - **0.5**: Vele moderate (traverso)
-- **1.0**: Vele molto tese (bolina stretta)
+- **1.0**: Vele molto tese (prua a vento)
 
 Influisce sull'opacità base delle vele nel rendering.
 
@@ -191,7 +191,7 @@ ease: "easeInOut"             // Tipo di easing
 
 ### Configurazione per Andatura
 
-#### Bolina Stretta (0°) - Contro Vento
+#### Prua a Vento (0°) - Contro Vento
 ```javascript
 // Animazioni contenute, durate lunghe
 wake: {
@@ -335,7 +335,7 @@ animations: {
 4. Decidi le caratteristiche delle animazioni
 
 ### Step 2: Implementazione
-1. **Apri il file specifico** per l'andatura (es. `src/assets/boat-designs/bolina.js`)
+1. **Apri il file specifico** per l'andatura (es. `src/assets/boat-designs/prua-al-vento.js`)
 2. **Modifica gli elementi SVG** nell'oggetto `elements`
 3. **Configura le animazioni** nell'oggetto `animations`
 4. **Salva il file** - le modifiche sono caricate automaticamente

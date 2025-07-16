@@ -1,99 +1,45 @@
+import { hullPath, mastPath } from './common-components'
+
 export const Bolina = {
   name: "Bolina",
   description: "Navigazione di bolina, vele semi-cazzate",
   tension: 0.8,
   elements: {
-    hull: "M12 20 L10 16 L14 16 Z",
-    mast: { x1: 12, y1: 16, x2: 12, y2: 4, strokeWidth: 1.5 },
-    mainSail: "M12 4 L12 16 L18 14 L18 7 Z",
-    jib: "M12 4 L12 12 L7 10 L7 6 Z",
-    wind: "M12 2 L15 0 M13 1 L15 0 L17 1",
-    wake: "M12 18 Q10 19 8 18 Q10 17 12 18 Q14 17 16 18 Q14 19 12 18"
-  },
-  animations: {
-    // Animazione della scia - moderata per andatura media
-    wake: {
-      opacity: {
-        idle: [0.04, 0.12, 0.04],
-        active: [0.06, 0.18, 0.06]
-      },
-      scale: {
-        idle: 1,
-        active: [1, 1.07, 1]
-      },
-      duration: 2.8,
-      repeat: Infinity,
-      ease: "easeInOut"
+    hull: { 
+      path: hullPath, 
+      fill: "rgba(255, 255, 255, 0.6)", // white/60 for light mode
+      stroke: "currentColor", 
+      strokeWidth: 1.5, 
+      opacity: 1,
+      darkFill: "rgba(38, 38, 38, 0.6)" // neutral-800/60 for dark mode
     },
-    // Animazione vela principale - semi-tesa
+    mast: { 
+      path: mastPath,
+      fill: "currentColor", 
+      stroke: "currentColor", 
+      strokeWidth: 0, 
+      strokeLinecap: "round",
+      opacity: 0.9 
+    },
     mainSail: {
-      opacity: {
-        base: 0.6,
-        variation: 0.15
-      },
-      scale: {
-        idle: 1,
-        active: [1, 1.04, 1]
-      },
-      duration: 4.0,
-      repeat: Infinity,
-      ease: "easeInOut"
+        path: "m 12.188534,8.3722177 c 1.92524,3.2513063 2.652041,8.0931853 2.198184,13.9685363",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: 1,
+        opacity: 0.7
     },
-    // Animazione fiocco - movimento moderato
     jib: {
-      opacity: {
-        base: 0.5,
-        variation: 0.15
-      },
-      scale: {
-        idle: 1,
-        active: [1, 1.05, 1]
-      },
-      duration: 3.8,
-      repeat: Infinity,
-      ease: "easeInOut"
+        path: "M 12.266001,0.00292326 C 13.597383,2.7536124 14.247776,4.9103109 14.122135,7.5571614",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: 1,
+        opacity: 0.7
     },
-    // Animazione indicatore vento - moderatamente attivo
     wind: {
-      opacity: {
-        idle: [0.5, 0.75, 0.5],
-        active: [0.6, 0.85, 0.6]
-      },
-      scale: {
-        idle: 1,
-        active: [1, 1.15, 1]
-      },
-      duration: 2.2,
-      repeat: Infinity,
-      ease: "easeInOut"
+        path: ""
     },
-    // Animazione dello scafo - leggero movimento
-    hull: {
-      scale: {
-        idle: 1,
-        active: [1, 1.015, 1]
-      },
-      opacity: {
-        base: 0.95,
-        variation: 0.025
-      },
-      duration: 4.5,
-      repeat: Infinity,
-      ease: "easeInOut"
-    },
-    // Animazione dell'albero - stabile
-    mast: {
-      opacity: {
-        base: 0.9,
-        variation: 0.03
-      },
-      scale: {
-        idle: 1,
-        active: [1, 1.007, 1]
-      },
-      duration: 5.5,
-      repeat: Infinity,
-      ease: "easeInOut"
+    wake: {
+        path: ""
     }
-  }
+    },
 }

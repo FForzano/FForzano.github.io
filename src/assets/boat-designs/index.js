@@ -4,7 +4,7 @@
 // Importa tutte le configurazioni delle barchette da file separati
 // Ogni file contiene la configurazione SVG per una specifica andatura
 
-import { BolinaStretta } from './bolina-stretta.js'
+import { PruaAlVento } from './prua-al-vento.js'
 import { Bolina } from './bolina.js'
 import { Traverso } from './traverso.js'
 import { LascoLargo } from './lasco-largo.js'
@@ -18,7 +18,7 @@ import { FilDiRuota } from './fil-di-ruota.js'
 
 export const BOAT_CONFIGURATIONS = {
   // Andature principali
-  0: BolinaStretta,      // Bolina stretta - Contro vento
+  0: PruaAlVento,      // Prua a vento - Contro vento
   45: Bolina,            // Bolina normale
   90: Traverso,          // Traverso - Vento al lato
   135: LascoLargo,       // Lasco largo

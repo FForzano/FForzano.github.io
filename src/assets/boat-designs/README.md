@@ -8,7 +8,7 @@ Questa cartella contiene le configurazioni modulari per le barchette del sistema
 boat-designs/
 ├── README.md             # Questo file
 ├── index.js              # Mapping centrale e funzioni helper
-├── bolina-stretta.js     # 0° - Bolina stretta (contro vento)
+├── prua-al-vento.js     # 0° - Prua a vento (contro vento)
 ├── bolina.js             # 45° - Bolina normale
 ├── traverso.js           # 90° - Traverso (vento al lato)
 ├── lasco-largo.js        # 135° - Lasco largo
