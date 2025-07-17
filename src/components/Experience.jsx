@@ -31,6 +31,9 @@ const Experience = () => {
     preventDefaultTouchmoveEvent: false,
     trackMouse: true,
     trackTouch: true,
+    // Abilita swipe verticale
+    onSwipedUp: () => {},
+    onSwipedDown: () => {},
   })
 
   // Hook per animazioni ottimizzate
@@ -163,7 +166,7 @@ const Experience = () => {
         </div>
 
         {/* Mobile Carousel */}
-        <div className="block md:hidden">
+        <div className="block md:hidden" style={{overflow: 'visible'}}>
           <div className="carousel-container" {...swipeHandlers.handlers}>
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}

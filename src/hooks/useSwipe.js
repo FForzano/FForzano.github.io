@@ -18,8 +18,8 @@ const useSwipe = (itemsCount, options = {}) => {
   } = options
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
+  const [touchStart, setTouchStart] = useState({ x: null, y: null })
+  const [touchEnd, setTouchEnd] = useState({ x: null, y: null })
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState(0)
   const elementRef = useRef(null)
@@ -35,18 +35,30 @@ const useSwipe = (itemsCount, options = {}) => {
 
   const onTouchStart = (e) => {
     if (!trackTouch) return
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
+    setTouchEnd({ x: null, y: null })
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    })
     setIsDragging(true)
     onSwipeStart(e)
   }
 
   const onTouchMove = (e) => {
     if (!trackTouch || !isDragging) return
-    const currentTouch = e.targetTouches[0].clientX
-    if (touchStart !== null) {
-      const diff = currentTouch - touchStart
-      setDragOffset(diff)
+    const currentTouch = {
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    }
+    if (touchStart.x !== null && touchStart.y !== null) {
+      const diffX = currentTouch.x - touchStart.x
+      const diffY = currentTouch.y - touchStart.y
+      // Scegli la direzione dominante
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        setDragOffset(diffX)
+      } else {
+        setDragOffset(diffY)
+      }
     }
     if (preventDefaultTouchmoveEvent) {
       e.preventDefault()
@@ -54,17 +66,22 @@ const useSwipe = (itemsCount, options = {}) => {
   }
 
   const onTouchEnd = (e) => {
-    if (!trackTouch || !touchStart || !isDragging) return
-    
-    const currentTouch = e.changedTouches[0].clientX
+    if (!trackTouch || !touchStart.x || !isDragging) return
+    const currentTouch = {
+      x: e.changedTouches[0].clientX,
+      y: e.changedTouches[0].clientY
+    }
     setTouchEnd(currentTouch)
     setIsDragging(false)
     setDragOffset(0)
-    
-    const distance = touchStart - currentTouch
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-    
+    const distanceX = touchStart.x - currentTouch.x
+    const distanceY = touchStart.y - currentTouch.y
+    // Swipe orizzontale
+    const isLeftSwipe = distanceX > minSwipeDistance
+    const isRightSwipe = distanceX < -minSwipeDistance
+    // Swipe verticale
+    const isUpSwipe = distanceY > minSwipeDistance
+    const isDownSwipe = distanceY < -minSwipeDistance
     if (isLeftSwipe && currentIndex < itemsCount - 1) {
       setCurrentIndex(prev => prev + 1)
       onSwipedLeft()
@@ -73,7 +90,13 @@ const useSwipe = (itemsCount, options = {}) => {
       setCurrentIndex(prev => prev - 1)
       onSwipedRight()
       onSwiped('right')
-    } else if (Math.abs(distance) < delta) {
+    } else if (isUpSwipe) {
+      onSwipedUp()
+      onSwiped('up')
+    } else if (isDownSwipe) {
+      onSwipedDown()
+      onSwiped('down')
+    } else if (Math.abs(distanceX) < delta && Math.abs(distanceY) < delta) {
       onTap()
     }
   }

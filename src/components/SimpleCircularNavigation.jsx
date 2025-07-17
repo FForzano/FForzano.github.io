@@ -67,11 +67,8 @@ const SimpleCircularNavigation = ({
   const x = useTransform(angle, (a) => Math.cos((a - 90) * Math.PI / 180) * radius)
   const y = useTransform(angle, (a) => Math.sin((a - 90) * Math.PI / 180) * radius)
   
-  // Orientamento delle vele basato sull'angolo corrente
-  const sailOrientation = useTransform(angle, (a) => {
-    const normalizedAngle = ((a % 360) + 360) % 360
-    return Math.round(normalizedAngle / 45) * 45
-  })
+  // Orientamento delle vele basato sull'angolo corrente (valore target, non animato)
+  const sailOrientationTarget = Math.round(currentAngle / 45) * 45
   
   // Aggiorna la progress quando cambia la sezione
   useEffect(() => {
@@ -311,7 +308,7 @@ const SimpleCircularNavigation = ({
       >
         <AdaptiveSailingBoat 
           size={boat}
-          sailOrientation={sailOrientation}
+          sailOrientation={sailOrientationTarget}
           isActive={true}
         />
       </motion.div>
@@ -363,8 +360,8 @@ const SimpleCircularNavigation = ({
 // importate da file separati in src/assets/boat-designs/
 
 const AdaptiveSailingBoat = ({ size, sailOrientation, isActive }) => {
-  const currentOrientation = useTransform(sailOrientation, (o) => o)
-  const config = getBoatConfiguration(currentOrientation.get())
+  // sailOrientation ora è un valore numerico statico
+  const config = getBoatConfiguration(sailOrientation)
   
   // Detect dark mode
   const isDarkMode = document.documentElement.classList.contains('dark')
