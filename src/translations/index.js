@@ -15,7 +15,10 @@ export const translations = {
     hero: {
       greeting: 'Ciao, sono',
       title: 'Dottorando in Scienze dell\'Ingegneria e Co-fondatore di FPC DIDATTICA 4.0 S.R.L.',
-      description: 'Dottorando presso il Quantum Information Laboratory (QI Lab) dell\'Università di Ferrara con focus sul sensing e sulle comunicazioni quantistiche. Co-fondatore di FPC DIDATTICA 4.0 S.R.L., startup nata con l\'obiettivo di promuovere lezioni private di alta qualità e in regola.',
+      descriptions: [
+        'Dottorando presso il Quantum Information Laboratory (QI Lab) dell\'Università di Ferrara con focus sul sensing e sulle comunicazioni quantistiche.', 
+        'Co-fondatore di FPC DIDATTICA 4.0 S.R.L., startup nata con l\'obiettivo di promuovere lezioni private di alta qualità e in regola.'
+      ],
       viewProjects: 'Vedi i miei progetti',
       downloadCV: 'Scarica CV'
     },
@@ -365,7 +368,10 @@ export const translations = {
     hero: {
       greeting: 'Hi, I\'m',
       title: 'PhD Student in Engineering and Co-founder of FPC DIDATTICA 4.0 S.R.L.',
-      description: 'PhD student at the Quantum Information Laboratory (QI Lab) of the University of Ferrara focusing on quantum sensing and communication. Co-founder of FPC DIDATTICA 4.0 S.R.L., a startup aimed at promoting high-quality and legitimate private lessons.',
+      descriptions: [
+        'PhD student at the Quantum Information Laboratory (QI Lab) of the University of Ferrara focusing on quantum sensing and communication.',
+        'Co-founder of FPC DIDATTICA 4.0 S.R.L., a startup aimed at promoting high-quality and legitimate private lessons.'
+      ],
       viewProjects: 'View my projects',
       downloadCV: 'Download CV'
     },
@@ -455,7 +461,7 @@ export const translations = {
 
     // Experience Section
     experience: {
-      title: 'Professional Experience',
+      title: 'Experience',
       subtitle: 'A summary of my work and academic experiences, ranging from quantum research to software development and teaching.',
       resultsLabel: 'results',
       moreLabel: 'more',

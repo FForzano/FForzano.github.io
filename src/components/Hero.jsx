@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, Download, GraduationCap } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import StaticPDFDownload from './StaticPDFDownload'
+import ReactMarkdown from 'react-markdown'
 
 const Hero = () => {
   const { t } = useTranslation()
@@ -85,7 +86,12 @@ const Hero = () => {
               {t('hero.title')}
             </p>
             <p className="text-base sm:text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto leading-relaxed px-4 sm:px-6 md:px-0">
-              {t('hero.description')}
+              {Array.isArray(t('hero.descriptions'))
+                ? t('hero.descriptions').map((desc, idx) => (
+                    <ReactMarkdown key={idx}>{desc}</ReactMarkdown>
+                  ))
+                : <ReactMarkdown>{t('hero.description')}</ReactMarkdown>
+              }
             </p>
           </motion.div>
 
