@@ -22,6 +22,21 @@ export const translations = {
 
     // About Section
     about: {
+      featuresTitle: 'Competenze principali',
+      timeline: [
+        {
+          years: '2023-oggi',
+          title: 'Dottorato di Ricerca in Ingegneria, Università di Ferrara'
+        },
+        {
+          years: '2021-2023',
+          title: 'Laurea Magistrale in Ingegneria Elettronica per l’ICT, Università di Ferrara'
+        },
+        {
+          years: '2018-2021',
+          title: 'Laurea Triennale in Ingegneria Elettronica e Informatica, Università di Ferrara'
+        }
+      ],
       title: 'Chi sono',
       subtitle: '**Mi chiamo Federico Forzano**\n\nDottorando presso l\'Università di Ferrara (dal 2023) e co-fondatore di *FPC DIDATTICA 4.0 S.R.L.*',
       journeyTitle: 'Il mio percorso',
