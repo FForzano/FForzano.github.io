@@ -118,45 +118,6 @@ const About = () => {
             ))}
           </motion.div>
         </div>
-
-        {/* Education Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 sm:mt-16 lg:mt-20"
-        >
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 sm:mb-8 text-center">
-            {t('about.educationTitle')}
-          </h3>
-          
-          <div className="space-y-4 sm:space-y-6">
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-primary-500"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 sm:mb-3">
-                  <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1 sm:mb-0">
-                    {edu.degree}
-                  </h4>
-                  <span className="text-xs sm:text-sm text-primary-600 font-medium">
-                    {edu.period}
-                  </span>
-                </div>
-                <p className="text-gray-700 dark:text-gray-300 font-medium mb-2">
-                  {edu.institution}
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {edu.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   )
