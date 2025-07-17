@@ -31,8 +31,8 @@ describe('Translation Utilities', () => {
     const titleIt = getTranslation('it', 'hero.title')
     const titleEn = getTranslation('en', 'hero.title')
     
-    expect(titleIt).toBe('Dottorando in Ingegneria & Developer')
-    expect(titleEn).toBe('PhD Student in Engineering & Developer')
+    expect(titleIt).toBe("Dottorando in Scienze dell'Ingegneria e Co-fondatore di FPC DIDATTICA 4.0 S.R.L.")
+    expect(titleEn).toBe('PhD Student in Engineering and Co-founder of FPC DIDATTICA 4.0 S.R.L.')
   })
 
   it('should handle array translations', () => {

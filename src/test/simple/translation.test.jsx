@@ -28,11 +28,11 @@ describe('Translation System', () => {
 
   it('should have hero section translations', () => {
     // Italian
-    expect(translations.it.hero.title).toBe('Dottorando in Ingegneria & Developer')
+    expect(translations.it.hero.title).toBe("Dottorando in Scienze dell'Ingegneria e Co-fondatore di FPC DIDATTICA 4.0 S.R.L.")
     expect(translations.it.hero.greeting).toBe('Ciao, sono')
     
     // English
-    expect(translations.en.hero.title).toBe('PhD Student in Engineering & Developer')
+    expect(translations.en.hero.title).toBe('PhD Student in Engineering and Co-founder of FPC DIDATTICA 4.0 S.R.L.')
     expect(translations.en.hero.greeting).toBe('Hi, I\'m')
   })
 
