@@ -3,7 +3,7 @@ export const translations = {
     // Navigation
     nav: {
       home: 'Home',
-      about: 'About',
+      about: 'Chi sono',
       experience: 'Esperienza',
       research: 'Ricerca',
       projects: 'Progetti',
@@ -15,7 +15,7 @@ export const translations = {
     hero: {
       greeting: 'Ciao, sono',
       title: 'Dottorando in Scienze dell\'Ingegneria e Co-fondatore di FPC DIDATTICA 4.0 S.R.L.',
-      description: 'Dottorando presso il Quantum Information Laboratory (QI Lab) dell\'Università di Ferrara con focus sul sensing e sulle comunicazioni quantistiche. Co-fondatore di FPC DIDATTICA 4.0 S.R.L., una startup nata con l\'obiettivo di promuovere lezioni private di alta qualità e in regola.',
+      description: 'Dottorando presso il Quantum Information Laboratory (QI Lab) dell\'Università di Ferrara con focus sul sensing e sulle comunicazioni quantistiche. Co-fondatore di FPC DIDATTICA 4.0 S.R.L., startup nata con l\'obiettivo di promuovere lezioni private di alta qualità e in regola.',
       viewProjects: 'Vedi i miei progetti',
       downloadCV: 'Scarica CV'
     },
@@ -23,18 +23,18 @@ export const translations = {
     // About Section
     about: {
       title: 'Chi sono',
-      subtitle: 'Sono Federico Forzano, dottorando presso l\'Università di Ferrara nel dipartimento di ingegneria, specializzato in quantum information science e sensing nel dominio quantistico. Combino la ricerca accademica con la passione per lo sviluppo software e la didattica.',
+      subtitle: '**Mi chiamo Federico Forzano**\n\nDottorando presso l\'Università di Ferrara (dal 2023) e co-fondatore di *FPC DIDATTICA 4.0 S.R.L.*',
       journeyTitle: 'Il mio percorso',
       journeyText: [
-        'Ho conseguito la Laurea Magistrale in Ingegneria Elettronica per l\'ICT con 110/110 e lode presso l\'Università di Ferrara, specializzandomi in sistemi di comunicazione quantistica e analisi di segnali.',
-        'Attualmente sono dottorando nel Wireless Communication and Localization Networks (WCLN) Laboratory, dove mi occupo di quantum information science e sensing quantistico. Parallelamente, sono socio fondatore di FPC DIDATTICA 4.0 S.R.L. e ho esperienza pluriennale nell\'insegnamento.',
-        'La mia esperienza spazia dalla ricerca teorica alla programmazione pratica, con competenze in Python, PHP, JavaScript/React e tecnologie web moderne. Mi appassiona l\'innovazione tecnologica e la condivisione della conoscenza.'
+        'Attualmente sono dottorando nel [Quantum Information Laboratory (QI Lab)](https://wcln.unife.it) dell\'[Università degli studi di Ferrara](https://unife.it), dove mi occupo di quantum information science con particolare interesse per il sensing quantistico. Parallelamente, sono socio fondatore di FPC DIDATTICA 4.0 S.R.L. e ho esperienza pluriennale nell\'insegnamento.',
+        'Ho conseguito la Laurea Magistrale in Ingegneria Elettronica per l\'ICT con 110/110 e lode presso l\'Università di Ferrara con tesi intitolata *Analysis of quantum illumination systems*.',
+        'Al di fuori del lavoro, mi appassiona suonare la chitarra e andare a vela.'
       ],
       workTogether: 'Lavoriamo insieme',
       cta: 'Contattami',
       features: {
         quantum: {
-          title: 'Ricerca Quantistica',
+          title: 'Ricerca',
           description: 'Specializzato in quantum information science e sensing nel dominio quantistico presso WCLN Lab.'
         },
         development: {

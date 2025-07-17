@@ -1,6 +1,7 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import { motion } from 'framer-motion'
-import { Code, Palette, Database, Globe, ArrowDown } from 'lucide-react'
+import { Atom, Palette, Database, Globe, ArrowDown } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useNoFlickerAnimation } from '../hooks/useOptimizedAnimation'
 
@@ -11,26 +12,26 @@ const About = () => {
   const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   
   const features = [
-    {
-      icon: Code,
-      title: t('about.features.quantum.title'),
-      description: t('about.features.quantum.description')
-    },
-    {
-      icon: Database,
-      title: t('about.features.development.title'),
-      description: t('about.features.development.description')
-    },
-    {
-      icon: Palette,
-      title: t('about.features.teaching.title'),
-      description: t('about.features.teaching.description')
-    },
-    {
-      icon: Globe,
-      title: t('about.features.entrepreneurship.title'),
-      description: t('about.features.entrepreneurship.description')
-    }
+    // {
+    //   icon: Atom,
+    //   title: t('about.features.quantum.title'),
+    //   description: t('about.features.quantum.description')
+    // },
+    // {
+    //   icon: Database,
+    //   title: t('about.features.development.title'),
+    //   description: t('about.features.development.description')
+    // },
+    // {
+    //   icon: Palette,
+    //   title: t('about.features.teaching.title'),
+    //   description: t('about.features.teaching.description')
+    // },
+    // {
+    //   icon: Globe,
+    //   title: t('about.features.entrepreneurship.title'),
+    //   description: t('about.features.entrepreneurship.description')
+    // }
   ]
 
   const education = t('about.education')
@@ -56,9 +57,9 @@ const About = () => {
           <h2 className="section-title">
             {t('about.title')}
           </h2>
-          <p className="section-subtitle">
-            {t('about.subtitle')}
-          </p>
+          <div className="section-subtitle">
+            <ReactMarkdown>{t('about.subtitle')}</ReactMarkdown>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
@@ -74,7 +75,7 @@ const About = () => {
             </h3>
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
               {t('about.journeyText').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
+                <ReactMarkdown key={index}>{paragraph}</ReactMarkdown>
               ))}
             </div>
 
