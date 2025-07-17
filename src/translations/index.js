@@ -22,6 +22,7 @@ export const translations = {
 
     // About Section
     about: {
+      journeyTitle: 'Percorso accademico',
       featuresTitle: 'Competenze principali',
       timeline: [
         {
@@ -39,12 +40,6 @@ export const translations = {
       ],
       title: 'Chi sono',
       subtitle: '**Mi chiamo Federico Forzano**\n\nDottorando presso l\'Università di Ferrara (dal 2023) e co-fondatore di *FPC DIDATTICA 4.0 S.R.L.*',
-      journeyTitle: 'Il mio percorso',
-      journeyText: [
-        'Attualmente sono dottorando nel [Quantum Information Laboratory (QI Lab)](https://wcln.unife.it) dell\'[Università degli studi di Ferrara](https://unife.it), dove mi occupo di quantum information science con particolare interesse per il sensing quantistico. Parallelamente, sono socio fondatore di FPC DIDATTICA 4.0 S.R.L. e ho esperienza pluriennale nell\'insegnamento.',
-        'Ho conseguito la Laurea Magistrale in Ingegneria Elettronica per l\'ICT con 110/110 e lode presso l\'Università di Ferrara con tesi intitolata *Analysis of quantum illumination systems*.',
-        'Al di fuori del lavoro, mi appassiona suonare la chitarra e andare a vela.'
-      ],
       workTogether: 'Lavoriamo insieme',
       cta: 'Contattami',
       features: {
@@ -377,19 +372,29 @@ export const translations = {
 
     // About Section
     about: {
-      title: 'About me',
-      subtitle: 'I\'m Federico Forzano, PhD student at the University of Ferrara in the engineering department, specialized in quantum information science and quantum domain sensing. I combine academic research with passion for software development and education.',
-      journeyTitle: 'My journey',
-      journeyText: [
-        'I obtained my Master\'s Degree in Electronic Engineering for ICT with 110/110 cum laude at the University of Ferrara, specializing in quantum communication systems and signal analysis.',
-        'I\'m currently a PhD student at the Wireless Communication and Localization Networks (WCLN) Laboratory, where I work on quantum information science and quantum sensing. At the same time, I\'m a founding partner of FPC DIDATTICA 4.0 S.R.L. and have several years of teaching experience.',
-        'My experience ranges from theoretical research to practical programming, with skills in Python, PHP, JavaScript/React and modern web technologies. I\'m passionate about technological innovation and knowledge sharing.'
+      journeyTitle: 'Academic Journey',
+      featuresTitle: 'Main skills',
+      timeline: [
+        {
+          years: '2023-now',
+          title: 'PhD in Engineering, University of Ferrara'
+        },
+        {
+          years: '2021-2023',
+          title: 'Master’s Degree in Electronic Engineering for ICT, University of Ferrara'
+        },
+        {
+          years: '2018-2021',
+          title: 'Bachelor’s Degree in Electronic and Computer Engineering, University of Ferrara'
+        }
       ],
+      title: 'About me',
+      subtitle: '**My name is Federico Forzano**\n\nPhD student at the University of Ferrara (since 2023) and co-founder of *FPC DIDATTICA 4.0 S.R.L.*',
       workTogether: 'Let\'s work together',
       cta: 'Contact me',
       features: {
         quantum: {
-          title: 'Quantum Research',
+          title: 'Research',
           description: 'Specialized in quantum information science and quantum domain sensing at WCLN Lab.'
         },
         development: {
@@ -435,13 +440,13 @@ export const translations = {
         },
         {
           period: '2021 - 2023',
-          degree: 'Master\'s Degree in Electronic Engineering for ICT',
+          degree: 'Master’s Degree in Electronic Engineering for ICT',
           institution: 'University of Ferrara',
           description: '110/110 cum laude - Thesis: Analysis of quantum illumination systems'
         },
         {
           period: '2018 - 2021',
-          degree: 'Bachelor\'s Degree in Electronic and Computer Engineering',
+          degree: 'Bachelor’s Degree in Electronic and Computer Engineering',
           institution: 'University of Ferrara',
           description: '110/110 cum laude - Thesis: On the Design of Quantum Communication Systems'
         }

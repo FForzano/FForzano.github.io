@@ -6,7 +6,7 @@ describe('Translation System', () => {
     expect(translations.it).toBeDefined()
     expect(translations.it.nav).toBeDefined()
     expect(translations.it.nav.home).toBe('Home')
-    expect(translations.it.nav.about).toBe('About')
+    expect(translations.it.nav.about).toBe('Chi sono')
     expect(translations.it.nav.experience).toBe('Esperienza')
     expect(translations.it.nav.research).toBe('Ricerca')
     expect(translations.it.nav.projects).toBe('Progetti')
