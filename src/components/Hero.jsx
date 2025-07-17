@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Mail, Download, GraduationCap } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import StaticPDFDownload from './StaticPDFDownload'
 
@@ -122,7 +122,7 @@ const Hero = () => {
             {[
               { icon: Github, href: 'https://github.com/FForzano', label: 'GitHub' },
               { icon: Linkedin, href: 'https://linkedin.com/in/federico-forzano', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:f.forzano99@gmail.com', label: 'Email' },
+              { icon: Mail, href: 'mailto:f.forzano99@gmail.com', label: 'Email personale' },
             ].map(({ icon: Icon, href, label }) => (
               <motion.a
                 key={label}

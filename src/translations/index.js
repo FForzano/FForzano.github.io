@@ -14,8 +14,8 @@ export const translations = {
     // Hero Section
     hero: {
       greeting: 'Ciao, sono',
-      title: 'Dottorando in Ingegneria & Developer',
-      description: 'Ricercatore specializzato in quantum information science e sviluppatore con esperienza in tecnologie web moderne. Appassionato di innovazione tecnologica e didattica.',
+      title: 'Dottorando in Scienze dell\'Ingegneria e Co-fondatore di FPC DIDATTICA 4.0 S.R.L.',
+      description: 'Dottorando presso il Quantum Information Laboratory (QI Lab) dell\'Università di Ferrara con focus sul sensing e sulle comunicazioni quantistiche. Co-fondatore di FPC DIDATTICA 4.0 S.R.L., una startup nata con l\'obiettivo di promuovere lezioni private di alta qualità e in regola.',
       viewProjects: 'Vedi i miei progetti',
       downloadCV: 'Scarica CV'
     },
@@ -354,8 +354,8 @@ export const translations = {
     // Hero Section
     hero: {
       greeting: 'Hi, I\'m',
-      title: 'PhD Student in Engineering & Developer',
-      description: 'Researcher specialized in quantum information science and developer with experience in modern web technologies. Passionate about technological innovation and education.',
+      title: 'PhD Student in Engineering and Co-founder of FPC DIDATTICA 4.0 S.R.L.',
+      description: 'PhD student at the Quantum Information Laboratory (QI Lab) of the University of Ferrara focusing on quantum sensing and communication. Co-founder of FPC DIDATTICA 4.0 S.R.L., a startup aimed at promoting high-quality and legitimate private lessons.',
       viewProjects: 'View my projects',
       downloadCV: 'Download CV'
     },
