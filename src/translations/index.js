@@ -336,6 +336,7 @@ export const translations = {
       followMe: 'Seguimi',
       madeWith: 'Realizzato con',
       and: 'e',
+      vibeCodingDisclaimer: 'Questo sito web è un esperimento nell\'utilizzo di GitHub Copilot Agent. La maggior parte del codice è stata generata dall\'IA e successivamente revisionata e corretta dall\'autore.',
       backToTop: 'Torna su',
       university: 'Università degli Studi di Ferrara'
     },
@@ -689,6 +690,7 @@ export const translations = {
       followMe: 'Follow me',
       madeWith: 'Made with',
       and: 'and',
+      vibeCodingDisclaimer: 'This website is an experiment in using GitHub Copilot Agent. Most of the code was AI-generated and subsequently refactored and reviewed by the author.',
       backToTop: 'Back to top',
       university: 'University of Ferrara'
     },

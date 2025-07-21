@@ -118,10 +118,10 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="border-t border-gray-800 py-6 flex flex-col md:flex-row justify-between items-center"
+          className="border-t border-gray-800 py-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-0 text-center md:text-left"
         >
           <div className="flex items-center space-x-1 text-gray-400 dark:text-gray-500 mb-4 md:mb-0">
-            <span>&copy; {currentYear} Federico Forzano. {t('footer.madeWith')} React JS {t('footer.and')} Tailwind CSS</span>
+            <span className="block text-sm md:text-base leading-snug">&copy; {currentYear} Federico Forzano. {t('footer.madeWith')} <span className="font-semibold text-primary-500">React JS</span> {t('footer.and')} <span className="font-semibold text-primary-500">Tailwind CSS</span>. {t('footer.vibeCodingDisclaimer')}</span>
           </div>
 
           {/* Back to Top Button */}
@@ -129,7 +129,7 @@ const Footer = () => {
             onClick={scrollToTop}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+            className="flex items-center space-x-2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 shadow-md md:ml-4"
             aria-label={t('footer.backToTop')}
           >
             <ArrowUp size={16} />
