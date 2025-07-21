@@ -2,16 +2,14 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, Download, GraduationCap } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
-import StaticPDFDownload from './StaticPDFDownload'
 import ReactMarkdown from 'react-markdown'
 
 const Hero = () => {
-  const { t } = useTranslation()
-  const { handleDownloadCV, isGenerating } = StaticPDFDownload()
-  
-  const onDownloadCV = (e) => {
-    e.preventDefault()
-    handleDownloadCV()
+  const { t, lang } = useTranslation()
+  // CV links per language
+  const cvLinks = {
+    it: "https://github.com/FForzano/curriculum-vitae/releases/download/2025-v1/Federico_Forzano_CV_IT.pdf",
+    en: "https://github.com/FForzano/curriculum-vitae/releases/download/2025-v1/Federico_Forzano_CV_EN.pdf"
   }
   
   const containerVariants = {
@@ -109,15 +107,17 @@ const Hero = () => {
               <span className="whitespace-nowrap">{t('hero.viewProjects')}</span>
               <ArrowDown size={18} className="animate-bounce-subtle flex-shrink-0" />
             </motion.a>
-            <motion.button
-              onClick={onDownloadCV}
+            <motion.a
+              href={cvLinks[lang] || cvLinks.en}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="btn-secondary flex items-center gap-2 sm:gap-3 text-base sm:text-lg w-full sm:w-auto justify-center"
             >
               <Download size={18} className="flex-shrink-0" />
               <span className="whitespace-nowrap">{t('hero.downloadCV')}</span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Enhanced Social Links */}
