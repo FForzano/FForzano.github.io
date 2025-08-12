@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import '../modal.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Calendar, 
@@ -19,10 +20,36 @@ import {
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
 import useSwipe from '../hooks/useSwipe'
+import ReactMarkdown from 'react-markdown'
 
 const Experience = () => {
   const { t } = useTranslation()
   const [selectedExperience, setSelectedExperience] = useState(null)
+  // Track scroll position for modal
+  const scrollPositionRef = React.useRef(0)
+  useEffect(() => {
+    if (selectedExperience) {
+      // Save scroll position and block scroll
+      scrollPositionRef.current = window.scrollY
+      document.body.classList.add('modal-open');
+      document.body.style.top = `-${scrollPositionRef.current}px`;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      // Restore scroll position and unblock scroll
+      document.body.classList.remove('modal-open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
+    }
+    return () => {
+      document.body.classList.remove('modal-open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [selectedExperience]);
 
   // Hook per il carosello mobile
   const experiences = t('experience.positions')
@@ -107,9 +134,9 @@ const Experience = () => {
           <p className="text-primary-600 dark:text-primary-400 font-medium mb-3">
             {experience.company}
           </p>
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-3 flex-1">
-            {experience.description}
-          </p>
+          <div className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-3 flex-1">
+            <ReactMarkdown>{experience.shortDescription}</ReactMarkdown>
+          </div>
 
         {/* Skills */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -268,9 +295,9 @@ const Experience = () => {
                   <h4 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-3">
                     {t('experience.detailsModal.description')}
                   </h4>
-                  <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    {selectedExperience.description}
-                  </p>
+                  <div className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <ReactMarkdown>{selectedExperience.longDescription}</ReactMarkdown>
+                  </div>
                 </div>
 
                 {/* Skills */}
@@ -294,12 +321,37 @@ const Experience = () => {
                   </h4>
                   <ul className="space-y-2">
                     {selectedExperience.achievements.map((achievement, i) => (
-                      <li key={i} className="flex items-start">
-                        <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
-                        <span className="text-neutral-600 dark:text-neutral-400">
-                          {achievement}
-                        </span>
-                      </li>
+                      typeof achievement === 'string' ? (
+                        <li key={i} className="flex items-start">
+                          <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+                          <span className="text-neutral-600 dark:text-neutral-400">{achievement}</span>
+                        </li>
+                      ) : (
+                        <li key={i} className="flex flex-col items-start">
+                          <div className="flex items-start">
+                            <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+                            <span className="text-neutral-600 dark:text-neutral-400 font-medium">{achievement.main}</span>
+                          </div>
+                          <ul className="ml-7 mt-1 space-y-1">
+                            {achievement.sub && achievement.sub.map((sub, j) =>
+                              typeof sub === 'object' ? (
+                                <li key={j} className="flex items-center justify-between pl-2 py-2 px-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-primary-200 dark:border-primary-700 shadow-sm">
+                                  <span className="text-neutral-700 dark:text-neutral-300 font-medium text-base"><ReactMarkdown>{sub.reference}</ReactMarkdown></span>
+                                  {sub.pdf && (
+                                    <a href={sub.pdf} target="_blank" rel="noopener noreferrer" className="ml-3">
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+                                      </svg>
+                                    </a>
+                                  )}
+                                </li>
+                              ) : (
+                                <li key={j} className="text-neutral-600 dark:text-neutral-400">{sub}</li>
+                              )
+                            )}
+                          </ul>
+                        </li>
+                      )
                     ))}
                   </ul>
                 </div>

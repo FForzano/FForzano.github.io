@@ -109,7 +109,7 @@ export const translations = {
     // Experience Section
     experience: {
       title: 'Esperienze Professionali',
-      subtitle: 'Un riepilogo delle mie esperienze lavorative e accademiche, che spaziano dalla ricerca quantistica allo sviluppo software e alla didattica.',
+      subtitle: 'Un riepilogo delle mie esperienze lavorative e accademiche, che spaziano dalla ricerca nell\'ambito delle quantum information science allo sviluppo software e alla didattica.',
       resultsLabel: 'risultati',
       moreLabel: 'altro',
       detailsModal: {
@@ -126,18 +126,40 @@ export const translations = {
       positions: [
         {
           id: 1,
-          type: 'work',
-          title: 'Dottorando di Ricerca',
-          company: 'Università degli Studi di Ferrara - WCLN Laboratory',
+          type: 'education',
+          title: 'Dottorato di Ricerca',
+          company: 'Università degli Studi di Ferrara - QI Laboratory',
           location: 'Ferrara, Italia',
           period: '2023 - presente',
-          description: 'Ricerca in quantum information science e quantum sensing, con focus su sistemi di illuminazione quantistica e misure quadrature. Sviluppo di modelli teorici e simulazioni numeriche per sistemi quantistici.',
-          skills: ['Python', 'MATLAB', 'Quantum Computing', 'Signal Processing', 'Machine Learning', 'LaTeX'],
+          shortDescription: 'Dottorando presso QI Lab, Università di Ferrara. Focus su quantum sensing e sistemi quantistici.',
+          longDescription: `Dal 2023, sto svolgendo un dottorato di ricerca presso il [Quantum Information Laboratory (QI Lab)](https://wcln.unife.it) dell'Università degli studi di Ferrara. 
+          Il focus dei miei studi sono le quantum information science e in particolare, il quantum sensing. 
+          Le mie attività prevedono lo studio teorico di sistemi di sensing quantistico, usando stati non Gaussiani della radiazione elettromagnetico.`,
+          skills: ['Python', 'MATLAB', 'Signal Processing', 'LaTeX'],
           achievements: [
-            'Pubblicazione su IEEE InfoCom 2025',
-            'Sviluppo di algoritmi innovativi per quantum sensing',
-            'Collaborazione con centri di ricerca internazionali',
-            'Presentazioni in conferenze scientifiche'
+            {
+              main: 'Redazione di articoli scientifici',
+              sub: [
+                {
+                  reference: 'F. Forzano, A. Giani, S. Marano, M. Z. Win, A. Conti, "Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States," InfoCom, London, UK, May 2025.',
+                  pdf: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf'
+                }
+              ]
+            },
+            {
+              main: 'Correlatore e tutor di tesi di laurea',
+              sub: [
+                {
+                  reference: 'A. Balotta, "Development of educational experiences for communication networks," B.S. Thesis, Dept. Eng., Univ. Ferrara, Ferrara, Italy, 2024. Supervisor: Prof. A. Conti; Co-supervisor: F. Forzano.',
+                  // pdf: '/docs/master-thesis.pdf'
+                },
+                {
+                  reference: 'A. Calò, "EEG signal denoising for brain-computer interfaces," B.S. Thesis, Dept. Eng., Univ. Ferrara, Ferrara, Italy, 2024. Supervisor: Prof. A. Conti; Co-supervisor: F. Forzano.',
+                }
+              ]
+            },
+            "Laboratori didattici sugli strumenti di gestione di rete, per studenti di informatica e ingegneria elettronica e informatica, nell'ambito del corso di 'Reti di Telecomunicazioni e Internet' dell\'Università di Ferrara.",
+            "Tutor didattico per l'insegnamento di 'Probabilità, Statistica e Segnali'"
           ],
           media: {
             images: ['/images/wcln-lab.jpg', '/images/quantum-setup.jpg'],
@@ -152,7 +174,8 @@ export const translations = {
           company: 'FPC DIDATTICA 4.0 S.R.L.',
           location: 'Ferrara, Italia',
           period: '2021 - presente',
-          description: 'Sviluppo di piattaforme web innovative per l\'insegnamento privato, con focus su esperienze didattiche interattive e personalizzate. Progettazione e implementazione di sistemi scalabili per la gestione di lezioni online.',
+          shortDescription: 'Sviluppo piattaforme web per didattica privata e gestione lezioni online.',
+          longDescription: 'Sviluppo di piattaforme web innovative per l\'insegnamento privato, con focus su esperienze didattiche interattive e personalizzate. Progettazione e implementazione di sistemi scalabili per la gestione di lezioni online.',
           skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
           achievements: [
             'Lancio di piattaforma con oltre 1000 utenti attivi',
@@ -173,7 +196,8 @@ export const translations = {
           company: 'Università degli Studi di Ferrara',
           location: 'Ferrara, Italia',
           period: '2021 - 2023',
-          description: 'Specializzazione in sistemi di comunicazione quantistica e analisi di segnali. Tesi magistrale su "Analysis of quantum illumination systems" con voto 110/110 e lode.',
+          shortDescription: 'Specializzazione in comunicazione quantistica e analisi segnali. Tesi su quantum illumination.',
+          longDescription: 'Specializzazione in sistemi di comunicazione quantistica e analisi di segnali. Tesi magistrale su "Analysis of quantum illumination systems" con voto 110/110 e lode.',
           skills: ['Quantum Information', 'Signal Processing', 'Communication Systems', 'MATLAB', 'Python', 'C++'],
           achievements: [
             'Voto: 110/110 con lode',
@@ -194,7 +218,8 @@ export const translations = {
           company: 'Libero Professionista',
           location: 'Ferrara, Italia',
           period: '2018 - presente',
-          description: 'Insegnamento privato in matematica, fisica e informatica, con focus su studenti delle scuole superiori e universitari. Sviluppo di metodologie didattiche innovative e personalizzate.',
+          shortDescription: 'Insegnamento privato in matematica, fisica, informatica. Focus su studenti superiori e universitari.',
+          longDescription: 'Insegnamento privato in matematica, fisica e informatica, con focus su studenti delle scuole superiori e universitari. Sviluppo di metodologie didattiche innovative e personalizzate.',
           skills: ['Didattica', 'Matematica', 'Fisica', 'Informatica', 'Python', 'Problem Solving'],
           achievements: [
             'Oltre 500 ore di lezioni erogate',
@@ -485,7 +510,8 @@ export const translations = {
           company: 'University of Ferrara - WCLN Laboratory',
           location: 'Ferrara, Italy',
           period: '2023 - present',
-          description: 'Research in quantum information science and quantum sensing, focusing on quantum illumination systems and quadrature measurements. Development of theoretical models and numerical simulations for quantum systems.',
+          shortDescription: 'PhD student at QI Lab, University of Ferrara. Focus on quantum sensing and quantum systems.',
+          longDescription: 'Research in quantum information science and quantum sensing, focusing on quantum illumination systems and quadrature measurements. Development of theoretical models and numerical simulations for quantum systems.',
           skills: ['Python', 'MATLAB', 'Quantum Computing', 'Signal Processing', 'Machine Learning', 'LaTeX'],
           achievements: [
             'Publication at IEEE InfoCom 2025',
@@ -506,7 +532,8 @@ export const translations = {
           company: 'FPC DIDATTICA 4.0 S.R.L.',
           location: 'Ferrara, Italy',
           period: '2021 - present',
-          description: 'Development of innovative web platforms for private teaching, focusing on interactive and personalized educational experiences. Design and implementation of scalable systems for online lesson management.',
+          shortDescription: 'Developing web platforms for private teaching and online lesson management.',
+          longDescription: 'Development of innovative web platforms for private teaching, focusing on interactive and personalized educational experiences. Design and implementation of scalable systems for online lesson management.',
           skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
           achievements: [
             'Platform launch with over 1000 active users',
@@ -527,7 +554,8 @@ export const translations = {
           company: 'University of Ferrara',
           location: 'Ferrara, Italy',
           period: '2021 - 2023',
-          description: 'Specialization in quantum communication systems and signal analysis. Master\'s thesis on "Analysis of quantum illumination systems" with grade 110/110 cum laude.',
+          shortDescription: 'Specialization in quantum communication and signal analysis. Thesis on quantum illumination.',
+          longDescription: 'Specialization in quantum communication systems and signal analysis. Master\'s thesis on "Analysis of quantum illumination systems" with grade 110/110 cum laude.',
           skills: ['Quantum Information', 'Signal Processing', 'Communication Systems', 'MATLAB', 'Python', 'C++'],
           achievements: [
             'Grade: 110/110 cum laude',
@@ -548,7 +576,8 @@ export const translations = {
           company: 'Freelancer',
           location: 'Ferrara, Italy',
           period: '2018 - present',
-          description: 'Private teaching in mathematics, physics and computer science, focusing on high school and university students. Development of innovative and personalized teaching methodologies.',
+          shortDescription: 'Private teaching in math, physics, computer science. Focus on high school and university students.',
+          longDescription: 'Private teaching in mathematics, physics and computer science, focusing on high school and university students. Development of innovative and personalized teaching methodologies.',
           skills: ['Teaching', 'Mathematics', 'Physics', 'Computer Science', 'Python', 'Problem Solving'],
           achievements: [
             'Over 500 hours of lessons delivered',
