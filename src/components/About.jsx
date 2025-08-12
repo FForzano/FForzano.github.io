@@ -126,7 +126,7 @@ const About = () => {
                     {feature.title}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    {feature.description}
+                    <ReactMarkdown>{feature.description}</ReactMarkdown>
                   </p>
                 </motion.div>
               ))}

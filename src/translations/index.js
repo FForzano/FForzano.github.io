@@ -34,7 +34,7 @@ export const translations = {
         },
         {
           years: '2021-2023',
-          title: 'Laurea Magistrale in Ingegneria Elettronica per l’ICT, Università di Ferrara'
+          title: 'Laurea Magistrale in Ingegneria Elettronica per l\'ICT, Università di Ferrara'
         },
         {
           years: '2018-2021',
@@ -52,15 +52,15 @@ export const translations = {
         },
         development: {
           title: 'Sviluppo Software',
-          description: 'Esperienza in Python, PHP, JavaScript/React e tecnologie web per applicazioni moderne.'
+          description: 'Esperienza in molteplici linguaggi, tra cui: Python (calcolo numerico e simbolico, machine learning e sviluppo web), PHP (Yii2 per web development), JavaScript/React e MATLAB.'
         },
         teaching: {
           title: 'Didattica e Formazione',
-          description: 'Esperienza pluriennale nell\'insegnamento privato e laboratori didattici universitari.'
+          description: 'Esperienza pluriennale nell\'insegnamento privato in collaborazione con *Formando PerCorsi di Giovanni Govoni*, in laboratori didattici e in tutorati universitari.'
         },
         entrepreneurship: {
           title: 'Imprenditorialità',
-          description: 'Socio fondatore di FPC DIDATTICA 4.0 S.R.L., startup innovativa nel settore didattico.'
+          description: 'Socio fondatore di *FPC DIDATTICA 4.0 S.R.L.*, startup nata con l\'obiettivo di promuovere lezioni private di alta qualità e in regola.'
         }
       },
       hobbiesTitle: 'Hobbies & Interessi',
@@ -161,21 +161,27 @@ export const translations = {
             "Laboratori didattici sugli strumenti di gestione di rete, per studenti di informatica e ingegneria elettronica e informatica, nell'ambito del corso di 'Reti di Telecomunicazioni e Internet' dell\'Università di Ferrara.",
             "Tutor didattico per l'insegnamento di 'Probabilità, Statistica e Segnali'"
           ],
-          media: {
-            images: ['/images/wcln-lab.jpg', '/images/quantum-setup.jpg'],
-            documents: ['/docs/infocom2025-paper.pdf', '/docs/phd-report.pdf'],
-            links: ['https://wcln.unife.it/', 'https://scholar.google.com/citations?user=fforzano']
-          }
+            media: {
+              images: [
+              ],
+              documents: [
+                { src: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf', label: 'Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States' },
+              ],
+              links: [
+                { url: 'https://wcln.unife.it/', label: 'Sito WCLN Lab' },
+                { url: 'https://qilab.unife.it/', label: 'Sito QI Lab' }
+              ]
+            }
         },
         {
           id: 2,
           type: 'work',
-          title: 'Sviluppatore Full Stack',
+          title: 'Sviluppatore Web',
           company: 'FPC DIDATTICA 4.0 S.R.L.',
           location: 'Ferrara, Italia',
           period: '2021 - presente',
-          shortDescription: 'Sviluppo piattaforme web per didattica privata e gestione lezioni online.',
-          longDescription: 'Sviluppo di piattaforme web innovative per l\'insegnamento privato, con focus su esperienze didattiche interattive e personalizzate. Progettazione e implementazione di sistemi scalabili per la gestione di lezioni online.',
+          shortDescription: 'Sviluppo piattaforma web per didattica privata e gestione lezioni online.',
+          longDescription: 'All\'interno di FPC DIDATTICA 4.0 S.R.L., mi occupo dello sviluppo del backend di una piattaforma web per la didattica privata e la gestione delle lezioni online. Utilizzo tecnologie moderne per garantire un\'esperienza utente fluida e interattiva.',
           skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
           achievements: [
             'Lancio di piattaforma con oltre 1000 utenti attivi',
@@ -183,11 +189,19 @@ export const translations = {
             'Sviluppo di dashboard analytics avanzata',
             'Ottimizzazione delle performance del 60%'
           ],
-          media: {
-            images: ['/images/fpc-platform.jpg', '/images/dashboard.jpg'],
-            documents: ['/docs/fpc-business-plan.pdf'],
-            links: ['https://fpcdidattica.it/', 'https://github.com/fpcdidattica']
-          }
+            media: {
+              images: [
+                { src: '/images/fpc-platform.jpg', alt: 'Piattaforma FPC DIDATTICA' },
+                { src: '/images/dashboard.jpg', alt: 'Dashboard Analytics' }
+              ],
+              documents: [
+                { src: '/docs/fpc-business-plan.pdf', label: 'Business Plan FPC' }
+              ],
+              links: [
+                { url: 'https://fpcdidattica.it/', label: 'Sito FPC DIDATTICA' },
+                { url: 'https://github.com/fpcdidattica', label: 'GitHub FPC DIDATTICA' }
+              ]
+            }
         },
         {
           id: 3,
@@ -205,11 +219,19 @@ export const translations = {
             'Borsa di studio per merito accademico',
             'Pubblicazione articolo scientifico'
           ],
-          media: {
-            images: ['/images/graduation.jpg', '/images/thesis-defense.jpg'],
-            documents: ['/docs/master-thesis.pdf', '/docs/master-diploma.pdf'],
-            links: ['https://unife.it/ing/informazione']
-          }
+            media: {
+              images: [
+                { src: '/images/graduation.jpg', alt: 'Cerimonia di Laurea' },
+                { src: '/images/thesis-defense.jpg', alt: 'Discussione Tesi' }
+              ],
+              documents: [
+                { src: '/docs/master-thesis.pdf', label: 'Tesi Magistrale' },
+                { src: '/docs/master-diploma.pdf', label: 'Diploma Magistrale' }
+              ],
+              links: [
+                { url: 'https://unife.it/ing/informazione', label: 'Dipartimento Ingegneria Unife' }
+              ]
+            }
         },
         {
           id: 4,
@@ -227,11 +249,18 @@ export const translations = {
             'Sviluppo di materiali didattici personalizzati',
             'Preparazione studenti per test di ammissione universitari'
           ],
-          media: {
-            images: ['/images/teaching.jpg', '/images/students.jpg'],
-            documents: ['/docs/teaching-certificates.pdf'],
-            links: ['https://fpcdidattica.it/insegnanti/federico-forzano']
-          }
+            media: {
+              images: [
+                { src: '/images/teaching.jpg', alt: 'Lezione privata' },
+                { src: '/images/students.jpg', alt: 'Studenti' }
+              ],
+              documents: [
+                { src: '/docs/teaching-certificates.pdf', label: 'Certificati Didattici' }
+              ],
+              links: [
+                { url: 'https://fpcdidattica.it/insegnanti/federico-forzano', label: 'Profilo Insegnante FPC' }
+              ]
+            }
         }
       ]
     },
@@ -260,7 +289,10 @@ export const translations = {
           title: 'Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States',
           authors: [
             { name: 'Federico Forzano', isMe: true },
-            { name: 'Altri autori', isMe: false }
+            { name: 'Andrea Giani', isMe: false },
+            { name: 'Stefano Marano', isMe: false },
+            { name: 'Moe Z. Win', isMe: false },
+            { name: 'Andrea Conti', isMe: false }
           ],
           venue: 'IEEE InfoCom 2025 - QuNAP Workshop',
           year: '2025',
@@ -519,11 +551,20 @@ export const translations = {
             'Collaboration with international research centers',
             'Presentations at scientific conferences'
           ],
-          media: {
-            images: ['/images/wcln-lab.jpg', '/images/quantum-setup.jpg'],
-            documents: ['/docs/infocom2025-paper.pdf', '/docs/phd-report.pdf'],
-            links: ['https://wcln.unife.it/', 'https://scholar.google.com/citations?user=fforzano']
-          }
+            media: {
+              images: [
+                { src: '/images/wcln-lab.jpg', alt: 'WCLN Laboratory' },
+                { src: '/images/quantum-setup.jpg', alt: 'Quantum Setup' }
+              ],
+              documents: [
+                { src: '/docs/infocom2025-paper.pdf', label: 'InfoCom 2025 Paper' },
+                { src: '/docs/phd-report.pdf', label: 'PhD Report' }
+              ],
+              links: [
+                { url: 'https://wcln.unife.it/', label: 'WCLN Lab Website' },
+                { url: 'https://scholar.google.com/citations?user=fforzano', label: 'Google Scholar Profile' }
+              ]
+            }
         },
         {
           id: 2,
@@ -541,11 +582,19 @@ export const translations = {
             'Development of advanced analytics dashboard',
             '60% performance optimization'
           ],
-          media: {
-            images: ['/images/fpc-platform.jpg', '/images/dashboard.jpg'],
-            documents: ['/docs/fpc-business-plan.pdf'],
-            links: ['https://fpcdidattica.it/', 'https://github.com/fpcdidattica']
-          }
+            media: {
+              images: [
+                { src: '/images/fpc-platform.jpg', alt: 'FPC DIDATTICA Platform' },
+                { src: '/images/dashboard.jpg', alt: 'Analytics Dashboard' }
+              ],
+              documents: [
+                { src: '/docs/fpc-business-plan.pdf', label: 'FPC Business Plan' }
+              ],
+              links: [
+                { url: 'https://fpcdidattica.it/', label: 'FPC DIDATTICA Website' },
+                { url: 'https://github.com/fpcdidattica', label: 'FPC DIDATTICA GitHub' }
+              ]
+            }
         },
         {
           id: 3,
@@ -563,11 +612,19 @@ export const translations = {
             'Academic merit scholarship',
             'Scientific article publication'
           ],
-          media: {
-            images: ['/images/graduation.jpg', '/images/thesis-defense.jpg'],
-            documents: ['/docs/master-thesis.pdf', '/docs/master-diploma.pdf'],
-            links: ['https://unife.it/ing/informazione']
-          }
+            media: {
+              images: [
+                { src: '/images/graduation.jpg', alt: 'Graduation Ceremony' },
+                { src: '/images/thesis-defense.jpg', alt: 'Thesis Defense' }
+              ],
+              documents: [
+                { src: '/docs/master-thesis.pdf', label: 'Master Thesis' },
+                { src: '/docs/master-diploma.pdf', label: 'Master Diploma' }
+              ],
+              links: [
+                { url: 'https://unife.it/ing/informazione', label: 'Engineering Department Unife' }
+              ]
+            }
         },
         {
           id: 4,
@@ -585,11 +642,18 @@ export const translations = {
             'Development of personalized teaching materials',
             'Preparation of students for university entrance tests'
           ],
-          media: {
-            images: ['/images/teaching.jpg', '/images/students.jpg'],
-            documents: ['/docs/teaching-certificates.pdf'],
-            links: ['https://fpcdidattica.it/insegnanti/federico-forzano']
-          }
+            media: {
+              images: [
+                { src: '/images/teaching.jpg', alt: 'Private Lesson' },
+                { src: '/images/students.jpg', alt: 'Students' }
+              ],
+              documents: [
+                { src: '/docs/teaching-certificates.pdf', label: 'Teaching Certificates' }
+              ],
+              links: [
+                { url: 'https://fpcdidattica.it/insegnanti/federico-forzano', label: 'FPC Teacher Profile' }
+              ]
+            }
         }
       ]
     },

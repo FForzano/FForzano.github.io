@@ -25,6 +25,7 @@ import ReactMarkdown from 'react-markdown'
 const Experience = () => {
   const { t } = useTranslation()
   const [selectedExperience, setSelectedExperience] = useState(null)
+  const [lightboxImage, setLightboxImage] = useState(null)
   // Track scroll position for modal
   const scrollPositionRef = React.useRef(0)
   useEffect(() => {
@@ -371,10 +372,35 @@ const Experience = () => {
                           </h5>
                           <div className="space-y-1">
                             {selectedExperience.media.images.map((image, i) => (
-                              <div key={i} className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer">
-                                {t('experience.detailsModal.mediaLabels.images')} {i + 1}
+                              <div key={i} className="flex items-center group">
+                                <img
+                                  src={image.src}
+                                  alt={image.alt}
+                                  className="w-16 h-16 object-cover rounded mr-2 border-2 border-transparent group-hover:border-primary-600 transition duration-150 cursor-pointer"
+                                  style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+                                  onClick={() => setLightboxImage(image.src)}
+                                />
+                                <span className="text-sm text-primary-600 dark:text-primary-400 group-hover:underline cursor-pointer" onClick={() => setLightboxImage(image.src)}>{image.alt}</span>
                               </div>
                             ))}
+
+                            {/* Lightbox Modal */}
+                            {lightboxImage && (
+                              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70" onClick={() => setLightboxImage(null)}>
+                                <div className="relative">
+                                  <img src={lightboxImage} alt="Anteprima" className="max-w-full max-h-[80vh] rounded shadow-lg" />
+                                  <button
+                                    onClick={() => setLightboxImage(null)}
+                                    className="absolute top-2 right-2 bg-white bg-opacity-80 rounded-full p-2 text-black hover:bg-opacity-100"
+                                    aria-label="Chiudi anteprima"
+                                  >
+                                    &times;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+// ...existing code...
+
                           </div>
                         </div>
                       )}
@@ -386,9 +412,15 @@ const Experience = () => {
                           </h5>
                           <div className="space-y-1">
                             {selectedExperience.media.documents.map((doc, i) => (
-                              <div key={i} className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer">
-                                {t('experience.detailsModal.mediaLabels.documents')} {i + 1}
-                              </div>
+                              <a
+                                key={i}
+                                href={doc.src}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block"
+                              >
+                                {doc.label}
+                              </a>
                             ))}
                           </div>
                         </div>
@@ -403,12 +435,12 @@ const Experience = () => {
                             {selectedExperience.media.links.map((link, i) => (
                               <a
                                 key={i}
-                                href={link}
+                                href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block"
                               >
-                                {t('experience.detailsModal.mediaLabels.links')} {i + 1}
+                                {link.label}
                               </a>
                             ))}
                           </div>
