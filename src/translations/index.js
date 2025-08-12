@@ -64,25 +64,60 @@ export const translations = {
         }
       },
       hobbiesTitle: 'Hobbies & Interessi',
-      hobbiesSubtitle: 'Quando non sono impegnato con la ricerca o lo sviluppo, mi dedico a queste passioni che alimentano la mia creatività e il mio benessere.',
-      hobbies: {
-        guitar: {
-          title: 'Chitarra',
-          description: 'La musica è la mia compagna di sempre. Suonare la chitarra mi permette di esprimere emozioni e trovare equilibrio tra logica e creatività.'
+      hobbiesSubtitle: 'Le passioni al di fuori del lavoro che impattano la mia vita tanto quanto il lavoro stesso.',
+      hobbies: [
+        {
+          title: 'Chitarra e Musica',
+          description: 'Suono la chitarra da oltre 10 anni, spaziando dal rock al blues al fingerpicking. La musica è la mia passione più grande e mi aiuta a esprimere creatività.',
+          icon: 'Music',
+          media: {
+            images: [
+              { src: '/images/guitar1.jpg', alt: 'Chitarra acustica' },
+              { src: '/images/guitar2.jpg', alt: 'Performance live' }
+            ],
+            documents: [],
+            links: []
+          }
         },
-        sailing: {
-          title: 'Vela - Deriva 470',
-          description: 'La vela mi insegna disciplina, strategia e rispetto per la natura. Navigo con una deriva 470, dove precisione e teamwork sono fondamentali.'
+        {
+          title: 'Vela',
+          description: 'La vela mi ha insegnato pazienza, lettura delle condizioni meteo e lavoro di squadra. Navigo principalmente in Adriatico con uscite regolari.',
+          icon: 'Waves',
+          media: {
+            images: [
+              { src: '/images/sailing1.jpg', alt: 'Barca a vela' }
+            ],
+            documents: [],
+            links: []
+          }
         },
-        technology: {
-          title: 'Tecnologia',
-          description: 'Esplorare nuove tecnologie, sperimentare con progetti personali e rimanere aggiornato sulle innovazioni del settore.'
+        {
+          title: 'Cucina',
+          description: 'Amo sperimentare in cucina, provando nuove ricette e tecniche culinarie. La cucina è un\'altra forma di creatività per me.',
+          icon: 'ChefHat',
+          media: {
+            images: [
+              { src: '/images/cooking1.jpg', alt: 'Preparazione di un piatto' },
+              { src: '/images/cooking2.jpg', alt: 'Cucina gourmet' }
+            ],
+            documents: [],
+            links: []
+          }
         },
-        research: {
-          title: 'Ricerca',
-          description: 'La curiosità scientifica mi spinge a esplorare nuovi campi, dalla fisica quantistica alle applicazioni pratiche dell\'ingegneria.'
+        {
+          title: 'Fotografia',
+          description: 'La fotografia è una mia grande passione. Mi piace catturare momenti e paesaggi, esplorando la bellezza del mondo attraverso l\'obiettivo.',
+          icon: 'Camera',
+          media: {
+            images: [
+              { src: '/images/photography1.jpg', alt: 'Paesaggio montano' },
+              { src: '/images/photography2.jpg', alt: 'Ritratto' }
+            ],
+            documents: [],
+            links: []
+          }
         }
-      },
+      ],
       educationTitle: 'Formazione Accademica',
       education: [
         {
