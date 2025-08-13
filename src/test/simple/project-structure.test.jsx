@@ -26,11 +26,11 @@ describe('Project Structure Tests', () => {
       'Hero.jsx',
       'About.jsx',
       'Skills.jsx',
-      'Projects.jsx',
       'Contact.jsx',
       'Footer.jsx',
       'LanguageSelector.jsx',
-      'StaticPDFDownload.jsx'
+      'StaticPDFDownload.jsx',
+      // Aggiungi qui altri componenti realmente presenti se necessario
     ]
     
     expectedComponents.forEach(component => {

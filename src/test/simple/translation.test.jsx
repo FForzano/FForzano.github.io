@@ -41,9 +41,11 @@ describe('Translation System', () => {
     expect(translations.en.about.title).toBe('About me')
   })
 
-  it('should have projects section translations', () => {
-    expect(translations.it.projects.title).toBe('I miei progetti')
-    expect(translations.en.projects.title).toBe('My projects')
+  it('should have publications and projects section translations', () => {
+    expect(translations.it.publicationsAndProjects).toBeDefined()
+    expect(translations.en.publicationsAndProjects).toBeDefined()
+    expect(translations.it.publicationsAndProjects.title).toBe('Pubblicazioni e Progetti')
+    expect(translations.en.publicationsAndProjects.title).toBe('Publications & Projects')
   })
 
   it('should have contact section translations', () => {
@@ -72,11 +74,13 @@ describe('Translation System', () => {
     expect(typeof translations.en.hero.downloadCV).toBe('string')
   })
 
-  it('should have research section translations', () => {
-    expect(translations.it.research).toBeDefined()
-    expect(translations.en.research).toBeDefined()
-    expect(translations.it.research.title).toBe('Ricerca e Pubblicazioni')
-    expect(translations.en.research.title).toBe('Research & Publications')
+  // La sezione research è ora inclusa in publicationsAndProjects
+  it('should have research area in publications and projects', () => {
+    expect(translations.it.publicationsAndProjects.areas).toBeDefined()
+    expect(translations.en.publicationsAndProjects.areas).toBeDefined()
+    // Verifica che esista almeno un'area di ricerca
+    expect(translations.it.publicationsAndProjects.areas.some(area => area.title.toLowerCase().includes('ricerca') || area.title.toLowerCase().includes('quantum'))).toBe(true)
+    expect(translations.en.publicationsAndProjects.areas.some(area => area.title.toLowerCase().includes('research') || area.title.toLowerCase().includes('quantum'))).toBe(true)
   })
 
   it('should have experience section translations', () => {
