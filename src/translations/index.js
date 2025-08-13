@@ -494,24 +494,45 @@ export const translations = {
       },
       hobbiesTitle: 'Hobbies & Interests',
       hobbiesSubtitle: 'When I\'m not busy with research or development, I dedicate myself to these passions that fuel my creativity and well-being.',
-      hobbies: {
-        guitar: {
-          title: 'Guitar',
-          description: 'Music is my lifelong companion. Playing guitar allows me to express emotions and find balance between logic and creativity.'
+      hobbies: [
+        {
+          title: 'Guitar & Music',
+          description: 'I have been playing guitar for over 10 years, from rock to blues to fingerpicking. Music is my greatest passion and helps me express creativity.',
+          icon: 'Music',
+          media: {
+            images: [
+              { src: '/images/guitar1.jpg', alt: 'Acoustic guitar' },
+              { src: '/images/guitar2.jpg', alt: 'Live performance' }
+            ],
+            documents: [],
+            links: []
+          }
         },
-        sailing: {
-          title: 'Sailing - 470 Dinghy',
-          description: 'Sailing teaches me discipline, strategy and respect for nature. I sail a 470 dinghy, where precision and teamwork are fundamental.'
+        {
+          title: 'Sailing',
+          description: 'Sailing has taught me patience, reading weather conditions, and teamwork. I mainly sail in the Adriatic with regular outings.',
+          icon: 'Waves',
+          media: {
+            images: [
+              { src: '/images/sailing1.jpg', alt: 'Sailboat' }
+            ],
+            documents: [],
+            links: []
+          }
         },
-        technology: {
-          title: 'Technology',
-          description: 'Exploring new technologies, experimenting with personal projects and staying updated on industry innovations.'
-        },
-        research: {
-          title: 'Research',
-          description: 'Scientific curiosity drives me to explore new fields, from quantum physics to practical engineering applications.'
+        {
+          title: 'Cooking',
+          description: 'I love experimenting in the kitchen, trying new recipes and culinary techniques. Cooking is another form of creativity for me.',
+          icon: 'ChefHat',
+          media: {
+            images: [
+              { src: '/images/cooking1.jpg', alt: 'Preparing a dish' }
+            ],
+            documents: [],
+            links: []
+          }
         }
-      },
+      ],
       educationTitle: 'Academic Education',
       education: [
         {
