@@ -300,10 +300,10 @@ export const translations = {
       ]
     },
 
-    // Research Section
-    research: {
-      title: 'Ricerca e Pubblicazioni',
-      subtitle: 'I miei contributi alla ricerca scientifica nel campo della quantum information science e delle tecnologie quantistiche.',
+    // Pubblicazioni e Progetti (unificata)
+    publicationsAndProjects: {
+      title: 'Pubblicazioni e Progetti',
+      subtitle: 'Una panoramica delle mie pubblicazioni scientifiche e dei progetti sviluppati, dalla ricerca accademica alle applicazioni pratiche.',
       areas: [
         {
           title: 'Quantum Information Science',
@@ -346,24 +346,7 @@ export const translations = {
   doi={10.1109/InfoCom2025.QuNAP.123456}
 }`
         }
-      ]
-    },
-
-    // Projects Section
-    projects: {
-      title: 'I miei progetti',
-      subtitle: 'Una selezione dei progetti su cui ho lavorato, che spaziano dalla ricerca accademica in quantum information science allo sviluppo di piattaforme web e strumenti didattici.',
-      categories: {
-        all: 'Tutti',
-        fullstack: 'Full Stack',
-        research: 'Ricerca',
-        education: 'Didattica'
-      },
-      featured: 'In Evidenza',
-      demo: 'Demo',
-      code: 'Codice',
-      callToAction: 'Vuoi vedere altri progetti o collaborare insieme?',
-      contactMe: 'Contattami',
+      ],
       projectsList: [
         {
           title: 'FPC DIDATTICA 4.0 S.R.L.',
@@ -693,10 +676,10 @@ export const translations = {
       ]
     },
 
-    // Research Section
-    research: {
-      title: 'Research & Publications',
-      subtitle: 'My contributions to scientific research in quantum information science and quantum technologies.',
+    // Pubblicazioni e Progetti (unificata)
+    publicationsAndProjects: {
+      title: 'Publications & Projects',
+      subtitle: 'An overview of my scientific publications and developed projects, from academic research to practical applications.',
       areas: [
         {
           title: 'Quantum Information Science',
@@ -736,24 +719,7 @@ export const translations = {
   doi={10.1109/InfoCom2025.QuNAP.123456}
 }`
         }
-      ]
-    },
-
-    // Projects Section
-    projects: {
-      title: 'My projects',
-      subtitle: 'A selection of projects I\'ve worked on, spanning from academic research in quantum information science to web platform development and educational tools.',
-      categories: {
-        all: 'All',
-        fullstack: 'Full Stack',
-        research: 'Research',
-        education: 'Education'
-      },
-      featured: 'Featured',
-      demo: 'Demo',
-      code: 'Code',
-      callToAction: 'Want to see more projects or collaborate together?',
-      contactMe: 'Contact me',
+      ],
       projectsList: [
         {
           title: 'FPC DIDATTICA 4.0 S.R.L.',

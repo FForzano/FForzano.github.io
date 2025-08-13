@@ -1,0 +1,259 @@
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+	FileText, 
+	ExternalLink, 
+	Calendar, 
+	Users, 
+	GraduationCap,
+	Microscope,
+	X,
+	ChevronDown,
+	ChevronUp,
+	Download,
+	Quote,
+	Link,
+	Zap
+} from 'lucide-react'
+import { useTranslation } from '../hooks/useTranslation'
+import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
+import useSwipe from '../hooks/useSwipe'
+
+const PublicationsAndProjects = () => {
+	const { t } = useTranslation()
+	const [selectedPaper, setSelectedPaper] = useState(null)
+	const [expandedAbstract, setExpandedAbstract] = useState(null)
+	const [selectedCategory, setSelectedCategory] = useState('all')
+
+	const areas = t('publicationsAndProjects.areas')
+	const publications = t('publicationsAndProjects.publications')
+	const projects = t('publicationsAndProjects.projectsList')
+
+	const { containerRef, animatedItems } = useStaticAnimation([...publications, ...projects])
+
+	// Publication Card
+	const PublicationCard = ({ publication, index }) => {
+		const isAnimated = animatedItems.has(index)
+		const isExpanded = expandedAbstract === publication.id
+		return (
+			<div
+				className={`card card-hover group h-full transition-all duration-700 ease-out transform ${
+					isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+				}`}
+				style={{
+					transitionDelay: isAnimated ? `${index * 100}ms` : '0ms',
+					willChange: 'transform, opacity'
+				}}
+			>
+				<div className="p-6">
+					{/* Header */}
+					<div className="flex items-start justify-between mb-4">
+						<div className="flex items-center space-x-3">
+							<div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-xl flex items-center justify-center">
+								<FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+							</div>
+							<div>
+								<span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full">
+									{publication.type}
+								</span>
+							</div>
+						</div>
+						<div className="flex items-center space-x-2 text-sm text-neutral-500 dark:text-neutral-400">
+							<Calendar className="w-4 h-4" />
+							<span>{publication.year}</span>
+						</div>
+					</div>
+					<h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-3 leading-tight font-display">
+						{publication.title}
+					</h3>
+					<div className="flex items-center space-x-2 mb-3">
+						<Users className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+						<p className="text-sm text-neutral-600 dark:text-neutral-400">
+							{publication.authors.map((author, i) => (
+								<span key={i} className={author.isMe ? 'font-semibold text-primary-600 dark:text-primary-400' : ''}>
+									{author.name}
+									{i < publication.authors.length - 1 && ', '}
+								</span>
+							))}
+						</p>
+					</div>
+					<div className="flex items-center space-x-2 mb-4">
+						<GraduationCap className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+						<p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+							{publication.venue}
+						</p>
+					</div>
+					<div className="mb-4">
+						<p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+							{isExpanded ? publication.abstract : `${publication.abstract.substring(0, 200)}...`}
+						</p>
+						<button
+							onClick={() => setExpandedAbstract(isExpanded ? null : publication.id)}
+							className="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mt-2 flex items-center space-x-1"
+						>
+							<span>{isExpanded ? 'Leggi meno' : 'Leggi tutto'}</span>
+							{isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+						</button>
+					</div>
+					<div className="flex flex-wrap gap-2 mb-4">
+						{publication.keywords.slice(0, 3).map((keyword, i) => (
+							<span key={i} className="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-1 rounded-full">
+								{keyword}
+							</span>
+						))}
+						{publication.keywords.length > 3 && (
+							<span className="text-xs text-neutral-500 dark:text-neutral-400 px-2 py-1">
+								+{publication.keywords.length - 3}
+							</span>
+						)}
+					</div>
+					<div className="flex items-center justify-between">
+						<div className="flex items-center space-x-2">
+							{publication.publisherUrl && (
+								<motion.a
+									href={publication.publisherUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-200 flex items-center space-x-1"
+								>
+									<Link className="w-3 h-3" />
+									<span>Publisher</span>
+								</motion.a>
+							)}
+							{publication.pdf && (
+								<motion.a
+									href={publication.pdf}
+									target="_blank"
+									rel="noopener noreferrer"
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									className="text-xs bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-200 flex items-center space-x-1"
+								>
+									<FileText className="w-3 h-3" />
+									<span>PDF</span>
+								</motion.a>
+							)}
+							{publication.bibtex && (
+								<motion.button
+									onClick={() => {
+										const blob = new Blob([publication.bibtex], { type: 'text/plain' })
+										const url = URL.createObjectURL(blob)
+										const a = document.createElement('a')
+										a.href = url
+										a.download = `${publication.title.replace(/\s+/g, '_').toLowerCase()}.bib`
+										document.body.appendChild(a)
+										a.click()
+										document.body.removeChild(a)
+										URL.revokeObjectURL(url)
+									}}
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									className="text-xs bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-200 flex items-center space-x-1"
+								>
+									<Quote className="w-3 h-3" />
+									<span>BibTeX</span>
+								</motion.button>
+							)}
+						</div>
+						<button
+							onClick={() => setSelectedPaper(publication)}
+							className="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+						>
+							Dettagli →
+						</button>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
+	// Project Card
+	const ProjectCard = ({ project, index }) => {
+		const isAnimated = animatedItems.has(index)
+		return (
+			<div
+				className={`card card-hover group h-full transition-all duration-600 transform ${
+					isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+				}`}
+				style={{
+					transitionDelay: `${index * 100}ms`
+				}}
+			>
+				<div className="p-6 flex flex-col h-full">
+					{/* Header */}
+					<div className="flex items-start justify-between mb-4">
+						<div className="flex items-center space-x-3">
+							<div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-lg flex items-center justify-center">
+								<Zap className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+							</div>
+						</div>
+					</div>
+					<h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-2 font-display">
+						{project.title}
+					</h3>
+					<p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 flex-1 line-clamp-3">
+						{project.description}
+					</p>
+				</div>
+			</div>
+		)
+	}
+
+	return (
+		<section id="publicationsandprojects" className="section-padding bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 min-h-screen py-20 section-container relative">
+			<div className="container-custom">
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.8 }}
+					className="text-center mb-20"
+				>
+					<h2 className="section-title">
+						{t('publicationsAndProjects.title')}
+					</h2>
+					<p className="section-subtitle">
+						{t('publicationsAndProjects.subtitle')}
+					</p>
+				</motion.div>
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.6, delay: 0.2 }}
+					className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+				>
+					{areas.map((area, index) => (
+						<div key={index} className="card p-6 text-center">
+							<div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+								<Microscope className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+							</div>
+							<h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2">
+								{area.title}
+							</h3>
+							<p className="text-sm text-neutral-600 dark:text-neutral-400">
+								{area.description}
+							</p>
+						</div>
+					))}
+				</motion.div>
+				{/* Publications */}
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16" ref={containerRef}>
+					{publications.map((publication, index) => (
+						<PublicationCard key={publication.id} publication={publication} index={index} />
+					))}
+				</div>
+				{/* Projects */}
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{projects.map((project, index) => (
+						<ProjectCard key={project.id || index} project={project} index={index} />
+					))}
+				</div>
+			</div>
+		</section>
+	)
+}
+
+export default PublicationsAndProjects

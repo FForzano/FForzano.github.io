@@ -23,8 +23,7 @@ const Navbar = () => {
     { name: t('nav.home'), href: '#home', icon: Home },
     { name: t('nav.about'), href: '#about', icon: User },
     { name: t('nav.experience'), href: '#experience', icon: Code },
-    { name: t('nav.research'), href: '#research', icon: BookOpen },
-    { name: t('nav.projects'), href: '#projects', icon: Briefcase },
+    { name: t('publicationsAndProjects.title'), href: '#publicationsandprojects', icon: BookOpen },
     { name: t('nav.hobbies'), href: '#hobbies', icon: Heart },
     { name: t('nav.contact'), href: '#contact', icon: Mail },
   ]

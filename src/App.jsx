@@ -7,8 +7,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Experience from './components/Experience'
-import Research from './components/Research'
-import Projects from './components/Projects'
+import PublicationsAndProjects from './components/PublicationsAndProjects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Hobbies from './components/Hobbies'
@@ -23,7 +22,7 @@ const AppContent = () => {
   const [showTransition, setShowTransition] = useState(false)
   const [transitionDirection, setTransitionDirection] = useState('down')
   
-  const sectionIds = ['home', 'about', 'experience', 'research', 'projects', 'hobbies', 'contact', 'footer']
+  const sectionIds = ['home', 'about', 'experience', 'publications-and-projects', 'hobbies', 'contact', 'footer']
 
   // Start performance monitoring in development
   useEffect(() => {
@@ -209,8 +208,9 @@ const AppContent = () => {
             <Hero />
             <About />
             <Experience />
-            <Research />
-            <Projects />
+            <section id="publications-and-projects" className="section-container relative">
+              <PublicationsAndProjects />
+            </section>
             <section id="hobbies" className="section-container relative">
               <Hobbies />
             </section>
