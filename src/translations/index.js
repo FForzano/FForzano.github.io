@@ -488,7 +488,7 @@ export const translations = {
       hobbies: [
         {
           title: 'Guitar & Music',
-          description: 'I have been playing guitar for over 10 years, from rock to blues to fingerpicking. Music is my greatest passion and helps me express creativity.',
+          description: 'I have been playing guitar since I was a child, took several years of classical and jazz lessons, and played in small groups of friends, from rock to blues. Over the years I have explored different aspects of music. Recently, I attended a lutherie course with the idea of building a Saint Vincent-style guitar as a surprise gift.',
           icon: 'Music',
           media: {
             images: [
