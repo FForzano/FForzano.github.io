@@ -266,7 +266,8 @@ export const translations = {
               ],
               links: [
                 { url: 'https://github.com/FForzano/libp2p', label: 'Progetti Reti P2P' },
-                { url: 'https://de.unife.it/it', label: 'Dipartimento Ingegneria Unife' }
+                { url: 'https://github.com/FForzano/DEDST-projects', label: 'Progetti TDSSD' },
+                { url: 'https://github.com/FForzano/CPM-modem', label: 'Progetto modulatore e demodulatore CPM' }
               ]
             }
         },
@@ -661,12 +662,12 @@ export const translations = {
           id: 3,
           type: 'education',
           logo: 'images/unife-logo.jpeg',
-          title: 'Master’s Degree in Electronic Engineering for ICT',
+          title: 'Master\'s Degree in Electronic Engineering for ICT',
           company: 'University of Ferrara',
           location: 'Ferrara, Italy',
           period: '2021 - 2023',
-          shortDescription: 'Master’s degree in electronic engineering for ICT with thesis "Analysis of quantum illumination systems"',
-          longDescription: 'In 2023, I obtained my master’s degree (summa cum laude) in electronic engineering for ICT at the University of Ferrara, with a thesis entitled "Analysis of quantum illumination systems".\n\nSome significant skills acquired include:\n\n- Use of information, estimation, and hypothesis testing theories for telecommunications and machine learning applications;\n- Implementation of neural networks;\n- Design of analog power and communication systems;\n- Implementation of peer-to-peer data exchange programs (GNutella, Kazaa, Napster, and Torrent).\n\nThroughout the course, I also continued to deepen aspects related to Quantum Information Science within the [QI Lab](https://qilab.unife.it), expanding on topics started during my bachelor’s thesis.',
+          shortDescription: 'Master\'s degree in electronic engineering for ICT with thesis "Analysis of quantum illumination systems"',
+          longDescription: 'In 2023, I obtained my master\'s degree (summa cum laude) in electronic engineering for ICT at the University of Ferrara, with a thesis entitled "Analysis of quantum illumination systems".\n\nSome significant skills acquired include:\n\n- Use of information, estimation, and hypothesis testing theories for telecommunications and machine learning applications;\n- Implementation of neural networks;\n- Design of analog power and communication systems;\n- Implementation of peer-to-peer data exchange programs (GNutella, Kazaa, Napster, and Torrent).\n\nThroughout the course, I also continued to deepen aspects related to Quantum Information Science within the [QI Lab](https://qilab.unife.it), expanding on topics started during my bachelor’s thesis.',
           skills: ['Python', 'Matlab', 'Information Theory', 'Decision and Estimation Theory', 'Deep Learning', 'VHDL', 'C++ and System C'],
           achievements: [
           ],
