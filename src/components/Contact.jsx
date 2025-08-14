@@ -6,7 +6,6 @@ import { useNoFlickerAnimation } from '../hooks/useOptimizedAnimation'
 
 const Contact = () => {
   const { t } = useTranslation()
-  
   // Hook per prevenire il flickering
   const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   const [formData, setFormData] = useState({
@@ -16,6 +15,7 @@ const Contact = () => {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -30,7 +30,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://formsubmit.co/f.forzano99@gmail.com', {
+  const response = await fetch('https://formsubmit.co/f5df7af27d69dd2f915edf7f486033f5', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,13 +40,16 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        alert('Messaggio inviato con successo!');
+        setSuccessMessage('Messaggio inviato con successo!');
         setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSuccessMessage(''), 6000);
       } else {
-        alert("Errore nell'invio. Riprova più tardi.");
+        setSuccessMessage("Errore nell'invio. Riprova più tardi.");
+        setTimeout(() => setSuccessMessage(''), 6000);
       }
     } catch (error) {
-      alert("Errore di rete. Riprova più tardi.");
+      setSuccessMessage("Errore di rete. Riprova più tardi.");
+      setTimeout(() => setSuccessMessage(''), 6000);
     }
     setIsSubmitting(false);
   }
@@ -248,6 +251,16 @@ const Contact = () => {
                 />
               </div>
 
+              {successMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="rounded-xl bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 px-4 py-3 text-center mb-2 shadow"
+                >
+                  {successMessage}
+                </motion.div>
+              )}
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
