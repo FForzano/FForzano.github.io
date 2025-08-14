@@ -26,22 +26,29 @@ const Contact = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simulazione invio form
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    console.log('Form submitted:', formData)
-    alert('Messaggio inviato con successo!')
-    
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    })
-    setIsSubmitting(false)
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://formsubmit.co/f.forzano99@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert('Messaggio inviato con successo!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        alert("Errore nell'invio. Riprova più tardi.");
+      }
+    } catch (error) {
+      alert("Errore di rete. Riprova più tardi.");
+    }
+    setIsSubmitting(false);
   }
 
   const contactInfo = [
