@@ -64,11 +64,13 @@ export const translations = {
         }
       },
       hobbiesTitle: 'Hobbies & Interessi',
-      hobbiesSubtitle: 'Le passioni al di fuori del lavoro che impattano la mia vita tanto quanto il lavoro stesso.',
+      hobbiesSubtitle: 'Le passioni al di fuori del lavoro impattano la mia vita tanto quanto il lavoro stesso.',
       hobbies: [
         {
           title: 'Chitarra e Musica',
-          description: 'Suono la chitarra da oltre 10 anni, spaziando dal rock al blues al fingerpicking. La musica è la mia passione più grande e mi aiuta a esprimere creatività.',
+          description: 'Suono la chitarra da quando ero bambino, ho fatto diversi anni di lezione di classica e jazz e ho suonato in piccoli gruppi tra amici, dal rock al blues. ' + 
+          'Negli anni ho sperimentato anche aspetti diversi inerenti alla musica. Durante le scuole superiori, ho frequentato un corso di mixing e registrazione in studio e tecnico luci live. In seguito ho partecipato ad alcuni piccoli eventi come aiuto fonico. ' +
+          'Recentemente ho seguito qualche lezione di liuteria, con l\'idea di costruire una chitarra tipo Saint Vincent per un regalo a sorpresa.',
           icon: 'Music',
           media: {
             images: [
@@ -359,30 +361,9 @@ export const translations = {
       ],
       projectsList: [
         {
-          title: 'FPC DIDATTICA 4.0 S.R.L.',
+          title: 'Formando PerCorsi',
           description: 'Piattaforma innovativa che collega insegnanti qualificati con famiglie in tutta Italia, garantendo qualità e regolarità nelle lezioni private.'
-        },
-        {
-          title: 'Quantum Illumination System Analysis',
-          description: 'Analisi e implementazione di sistemi di illuminazione quantistica per la tesi magistrale, con focus su stati non gaussiani.'
-        },
-        {
-          title: 'Quadrature Measurement Characterization',
-          description: 'Ricerca su caratterizzazione di misure quadrature per stati gaussiani fotone-variati presentata a IEEE InfoCom 2025.'
-        },
-        {
-          title: 'Laboratori Didattici Networking',
-          description: 'Sviluppo di esperienze didattiche interattive per l\'insegnamento di reti di telecomunicazione e Internet.'
-        },
-        {
-          title: 'EEG Signal Denoising',
-          description: 'Progetto di correlazione per tesi su denoising di segnali EEG per interfacce cervello-computer.'
-        },
-        {
-          title: 'Convolutional Autoencoders',
-          description: 'Implementazione di autoencoders convoluzionali per l\'analisi di segnali tempo-varianti in ambito di ricerca.'
-        }
-      ]
+        }      ]
     },
 
     // Contact Section
