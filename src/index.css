@@ -69,6 +69,8 @@
 
   .section-container {
     @apply relative z-10;
+    padding-bottom: 200px;
+    scroll-padding-bottom: 200px;
   }
 
   .card {
