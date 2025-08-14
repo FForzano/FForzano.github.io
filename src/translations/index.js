@@ -567,14 +567,14 @@ export const translations = {
 
     // Experience Section
     experience: {
-      title: 'Experience',
-      subtitle: 'A summary of my work and academic experiences, ranging from quantum research to software development and teaching.',
+      title: 'Professional Experiences',
+      subtitle: 'A summary of my work and academic experiences, ranging from research in quantum information science to software development and teaching.',
       resultsLabel: 'results',
       moreLabel: 'more',
       detailsModal: {
         description: 'Description',
         skills: 'Skills',
-        achievements: 'Key Results',
+        achievements: 'Main Results',
         materials: 'Materials',
         mediaLabels: {
           images: 'Images',
@@ -585,92 +585,101 @@ export const translations = {
       positions: [
         {
           id: 1,
-          type: 'work',
+          type: 'education',
+          logo: 'images/qilab-logo.png',
           title: 'PhD Student',
-          company: 'University of Ferrara - WCLN Laboratory',
+          company: 'Quantum Information Laboratory',
           location: 'Ferrara, Italy',
           period: '2023 - present',
           shortDescription: 'PhD student at QI Lab, University of Ferrara. Focus on quantum sensing and quantum systems.',
-          longDescription: 'Research in quantum information science and quantum sensing, focusing on quantum illumination systems and quadrature measurements. Development of theoretical models and numerical simulations for quantum systems.',
-          skills: ['Python', 'MATLAB', 'Quantum Computing', 'Signal Processing', 'Machine Learning', 'LaTeX'],
+          longDescription: `Since 2023, I have been pursuing a PhD at the [Quantum Information Laboratory (QI Lab)](https://wcln.unife.it) of the University of Ferrara.\nThe focus of my studies is quantum information science, particularly quantum sensing.\nMy activities include the theoretical study of quantum sensing systems, using non-Gaussian states of electromagnetic radiation.`,
+          skills: ['Quantum Mechanics', 'Python', 'MATLAB', 'Signal Processing', 'LaTeX'],
           achievements: [
-            'Publication at IEEE InfoCom 2025',
-            'Development of innovative algorithms for quantum sensing',
-            'Collaboration with international research centers',
-            'Presentations at scientific conferences'
+            {
+              main: 'Scientific paper writing',
+              sub: [
+                {
+                  reference: 'F. Forzano, A. Giani, S. Marano, M. Z. Win, A. Conti, "Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States," InfoCom, London, UK, May 2025.',
+                  pdf: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf'
+                }
+              ]
+            },
+            {
+              main: 'Thesis co-supervisor and tutor',
+              sub: [
+                {
+                  reference: 'A. Balotta, "Development of educational experiences for communication networks," B.S. Thesis, Dept. Eng., Univ. Ferrara, Ferrara, Italy, 2024. Supervisor: Prof. A. Conti; Co-supervisor: F. Forzano.'
+                },
+                {
+                  reference: 'A. Calò, "EEG signal denoising for brain-computer interfaces," B.S. Thesis, Dept. Eng., Univ. Ferrara, Ferrara, Italy, 2024. Supervisor: Prof. A. Conti; Co-supervisor: F. Forzano.'
+                }
+              ]
+            },
+            "Didactic labs on network management tools for computer science and electronic engineering students, as part of the 'Telecommunication Networks and Internet' course at the University of Ferrara.",
+            "Teaching assistant for the course 'Probability, Statistics and Signals'"
           ],
             media: {
               images: [
-                { src: '/images/wcln-lab.jpg', alt: 'WCLN Laboratory' },
-                { src: '/images/quantum-setup.jpg', alt: 'Quantum Setup' }
               ],
               documents: [
-                { src: '/docs/infocom2025-paper.pdf', label: 'InfoCom 2025 Paper' },
-                { src: '/docs/phd-report.pdf', label: 'PhD Report' }
+                { src: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf', label: 'Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States' },
               ],
               links: [
                 { url: 'https://wcln.unife.it/', label: 'WCLN Lab Website' },
-                { url: 'https://scholar.google.com/citations?user=fforzano', label: 'Google Scholar Profile' }
+                { url: 'https://qilab.unife.it/', label: 'QI Lab Website' }
               ]
             }
         },
         {
           id: 2,
           type: 'work',
-          title: 'Full Stack Developer',
+          logo: '/images/fpc-logo.png',
+          title: 'Co-founder and Board Member',
           company: 'FPC DIDATTICA 4.0 S.R.L.',
           location: 'Ferrara, Italy',
           period: '2021 - present',
-          shortDescription: 'Developing web platforms for private teaching and online lesson management.',
-          longDescription: 'Development of innovative web platforms for private teaching, focusing on interactive and personalized educational experiences. Design and implementation of scalable systems for online lesson management.',
-          skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
+          shortDescription: 'Co-founder and board member of FPC DIDATTICA 4.0 S.R.L., a startup for high-quality and legitimate private teaching.',
+          longDescription: 'In 2021, I co-founded *FPC DIDATTICA 4.0 S.R.L.*, a startup in the private education sector aimed at developing a web platform to promote private teaching with qualified and legitimate teachers.\n\nIn this context, I am part of the board of directors, co-founder, and actively involved in backend development, cloud infrastructure management, and defining technical objectives.\n\nFrom a technical perspective, I design and implement a REST backend using the PHP-Yii2 framework, integrating third-party APIs for payments, automatic electronic invoicing, and localization.',
+          skills: [
+            'PHP - Yii2', 'SQL', 'Docker', 'Git', 'Github'
+          ],
           achievements: [
-            'Platform launch with over 1000 active users',
-            'Implementation of automatic matching system',
-            'Development of advanced analytics dashboard',
-            '60% performance optimization'
+            'Design and development of the *Formando PerCorsi* platform',
           ],
             media: {
               images: [
-                { src: '/images/fpc-platform.jpg', alt: 'FPC DIDATTICA Platform' },
-                { src: '/images/dashboard.jpg', alt: 'Analytics Dashboard' }
               ],
               documents: [
-                { src: '/docs/fpc-business-plan.pdf', label: 'FPC Business Plan' }
               ],
               links: [
-                { url: 'https://fpcdidattica.it/', label: 'FPC DIDATTICA Website' },
-                { url: 'https://github.com/fpcdidattica', label: 'FPC DIDATTICA GitHub' }
+                { url: 'https://dev.formandopercorsi.com/', label: 'Formando PerCorsi' },
+                { url: 'https://www.linkedin.com/company/formando-percorsi/', label: 'LinkedIn' }
               ]
             }
         },
         {
           id: 3,
           type: 'education',
-          title: 'Master\'s Degree in Electronic Engineering for ICT',
+          logo: 'images/unife-logo.jpeg',
+          title: 'Master’s Degree in Electronic Engineering for ICT',
           company: 'University of Ferrara',
           location: 'Ferrara, Italy',
           period: '2021 - 2023',
-          shortDescription: 'Specialization in quantum communication and signal analysis. Thesis on quantum illumination.',
-          longDescription: 'Specialization in quantum communication systems and signal analysis. Master\'s thesis on "Analysis of quantum illumination systems" with grade 110/110 cum laude.',
-          skills: ['Quantum Information', 'Signal Processing', 'Communication Systems', 'MATLAB', 'Python', 'C++'],
+          shortDescription: 'Master’s degree in electronic engineering for ICT with thesis "Analysis of quantum illumination systems"',
+          longDescription: 'In 2023, I obtained my master’s degree (summa cum laude) in electronic engineering for ICT at the University of Ferrara, with a thesis entitled "Analysis of quantum illumination systems".\n\nSome significant skills acquired include:\n\n- Use of information, estimation, and hypothesis testing theories for telecommunications and machine learning applications;\n- Implementation of neural networks;\n- Design of analog power and communication systems;\n- Implementation of peer-to-peer data exchange programs (GNutella, Kazaa, Napster, and Torrent).\n\nThroughout the course, I also continued to deepen aspects related to Quantum Information Science within the [QI Lab](https://qilab.unife.it), expanding on topics started during my bachelor’s thesis.',
+          skills: ['Python', 'Matlab', 'Information Theory', 'Decision and Estimation Theory', 'Deep Learning', 'VHDL', 'C++ and System C'],
           achievements: [
-            'Grade: 110/110 cum laude',
-            'Thesis awarded by the Engineering Department',
-            'Academic merit scholarship',
-            'Scientific article publication'
           ],
             media: {
               images: [
-                { src: '/images/graduation.jpg', alt: 'Graduation Ceremony' },
-                { src: '/images/thesis-defense.jpg', alt: 'Thesis Defense' }
               ],
               documents: [
-                { src: '/docs/master-thesis.pdf', label: 'Master Thesis' },
-                { src: '/docs/master-diploma.pdf', label: 'Master Diploma' }
+                { src: '/thesis/AnalysisOfQuantumIlluminationSystems-FedericoForzano-MasterThesis.pdf', label: 'Master’s Thesis' },
+                { src: '/thesis/OnTheDesignOfQuantumCommunicationSystemsWithNonGaussianStates-FedericoForzano-BachelorThesis.pdf', label: 'Bachelor’s Thesis' }
               ],
               links: [
-                { url: 'https://unife.it/ing/informazione', label: 'Engineering Department Unife' }
+                { url: 'https://github.com/FForzano/libp2p', label: 'P2P Networks Projects' },
+                { url: 'https://de.unife.it/it', label: 'Engineering Department Unife' }
               ]
             }
         },
@@ -678,28 +687,27 @@ export const translations = {
           id: 4,
           type: 'work',
           title: 'Private Teacher',
-          company: 'Freelancer',
+          logo: 'images/fpc-logo.png',
+          company: 'Freelancer with Formando PerCorsi di Giovanni Govoni',
           location: 'Ferrara, Italy',
-          period: '2018 - present',
-          shortDescription: 'Private teaching in math, physics, computer science. Focus on high school and university students.',
-          longDescription: 'Private teaching in mathematics, physics and computer science, focusing on high school and university students. Development of innovative and personalized teaching methodologies.',
-          skills: ['Teaching', 'Mathematics', 'Physics', 'Computer Science', 'Python', 'Problem Solving'],
+          period: '2019 - 2023',
+          shortDescription: 'Private teacher of mathematics, physics, computer science for high school and university students.',
+          longDescription: 'Alongside my university studies, I gained work experience as a private teacher for high school and university students, in collaboration with [*Formando PerCorsi di Giovanni Govoni*](https://formandopercorsi.com).\n\nSubjects taught:\n\n- Mathematics (high school);\n- Physics (high school);\n- Computer science (C, C++, Java, Python);\n- Calculus 1 and 2;\n- Signal theory and wireless communications.\n\nThis activity allowed me to develop teaching skills, personalizing the learning path and approach for each student. I also improved my time and stress management skills.',
+          skills: ['Teaching', 'Study path organization', 'Time management'],
           achievements: [
-            'Over 500 hours of lessons delivered',
-            'Average 40% improvement in student grades',
+            'Over 50 students',
+            'More than 10 hours of lessons per week, alongside university studies',
             'Development of personalized teaching materials',
-            'Preparation of students for university entrance tests'
+            'Several students have chosen a STEM university path after graduation',
+            'Almost all students have successfully completed high school'
           ],
             media: {
               images: [
-                { src: '/images/teaching.jpg', alt: 'Private Lesson' },
-                { src: '/images/students.jpg', alt: 'Students' }
               ],
               documents: [
-                { src: '/docs/teaching-certificates.pdf', label: 'Teaching Certificates' }
               ],
               links: [
-                { url: 'https://fpcdidattica.it/insegnanti/federico-forzano', label: 'FPC Teacher Profile' }
+                { url: 'https://formandopercorsi.com', label: 'Formando PerCorsi di Giovanni Govoni' }
               ]
             }
         }
