@@ -21,6 +21,7 @@ import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
 import useSwipe from '../hooks/useSwipe'
 import ReactMarkdown from 'react-markdown'
+import '../assets/experience-logos.css'
 
 const Experience = () => {
   const { t } = useTranslation()
@@ -132,9 +133,14 @@ const Experience = () => {
           <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-2 font-display">
             {experience.title}
           </h3>
-          <p className="text-primary-600 dark:text-primary-400 font-medium mb-3">
-            {experience.company}
-          </p>
+          <div className="flex items-center mb-3">
+            {experience.logo && (
+              <img src={experience.logo} alt={experience.company + ' logo'} className="experience-logo" />
+            )}
+            <p className="text-primary-600 dark:text-primary-400 font-medium">
+              {experience.company}
+            </p>
+          </div>
           <div className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-3 flex-1">
             <ReactMarkdown>{experience.shortDescription}</ReactMarkdown>
           </div>
@@ -155,9 +161,7 @@ const Experience = () => {
 
         {/* View More */}
         <div className="flex items-center justify-between mt-auto">
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            {experience.achievements.length} {t('experience.resultsLabel')}
-          </span>
+          {/* Numero risultati rimosso su richiesta */}
           <ExternalLink className="w-4 h-4 text-primary-600 dark:text-primary-400" />
         </div>
       </div>
@@ -268,9 +272,14 @@ const Experience = () => {
                       <h3 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-1 font-display">
                         {selectedExperience.title}
                       </h3>
-                      <p className="text-primary-600 dark:text-primary-400 font-medium text-lg">
-                        {selectedExperience.company}
-                      </p>
+                      <div className="flex items-center mb-1">
+                        {selectedExperience.logo && (
+                          <img src={selectedExperience.logo} alt={selectedExperience.company + ' logo'} className="experience-logo-detail" />
+                        )}
+                        <p className="text-primary-600 dark:text-primary-400 font-medium text-lg">
+                          {selectedExperience.company}
+                        </p>
+                      </div>
                       <div className="flex items-center space-x-4 text-neutral-500 dark:text-neutral-400 text-sm mt-2">
                         <div className="flex items-center">
                           <Calendar className="w-4 h-4 mr-1" />
@@ -297,7 +306,15 @@ const Experience = () => {
                     {t('experience.detailsModal.description')}
                   </h4>
                   <div className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    <ReactMarkdown>{selectedExperience.longDescription}</ReactMarkdown>
+                    <ReactMarkdown
+                      components={{
+                        ul: ({node, ...props}) => <ul className="list-disc ml-6" {...props} />,
+                        ol: ({node, ...props}) => <ol className="list-decimal ml-6" {...props} />,
+                        li: ({node, ...props}) => <li className="mb-1" {...props} />
+                      }}
+                    >
+                      {selectedExperience.longDescription}
+                    </ReactMarkdown>
                   </div>
                 </div>
 
@@ -316,27 +333,28 @@ const Experience = () => {
                 </div>
 
                 {/* Achievements */}
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-3">
-                    {t('experience.detailsModal.achievements')}
-                  </h4>
-                  <ul className="space-y-2">
-                    {selectedExperience.achievements.map((achievement, i) => (
-                      typeof achievement === 'string' ? (
-                        <li key={i} className="flex items-start">
-                          <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
-                          <span className="text-neutral-600 dark:text-neutral-400">{achievement}</span>
-                        </li>
-                      ) : (
-                        <li key={i} className="flex flex-col items-start">
-                          <div className="flex items-start">
+                {selectedExperience.achievements && selectedExperience.achievements.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-3">
+                      {t('experience.detailsModal.achievements')}
+                    </h4>
+                    <ul className="space-y-2">
+                      {selectedExperience.achievements.map((achievement, i) => (
+                        typeof achievement === 'string' ? (
+                          <li key={i} className="flex items-start">
                             <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
-                            <span className="text-neutral-600 dark:text-neutral-400 font-medium">{achievement.main}</span>
-                          </div>
-                          <ul className="ml-7 mt-1 space-y-1">
-                            {achievement.sub && achievement.sub.map((sub, j) =>
-                              typeof sub === 'object' ? (
-                                <li key={j} className="flex items-center justify-between pl-2 py-2 px-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-primary-200 dark:border-primary-700 shadow-sm">
+                            <span className="text-neutral-600 dark:text-neutral-400"><ReactMarkdown>{achievement}</ReactMarkdown></span>
+                          </li>
+                        ) : (
+                          <li key={i} className="flex flex-col items-start">
+                            <div className="flex items-start">
+                              <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+                              <span className="text-neutral-600 dark:text-neutral-400 font-medium">{achievement.main}</span>
+                            </div>
+                            <ul className="ml-7 mt-1 space-y-1">
+                              {achievement.sub && achievement.sub.map((sub, j) =>
+                                typeof sub === 'object' ? (
+                                  <li key={j} className="flex items-center justify-between pl-2 py-2 px-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-primary-200 dark:border-primary-700 shadow-sm">
                                   <span className="text-neutral-700 dark:text-neutral-300 font-medium text-base"><ReactMarkdown>{sub.reference}</ReactMarkdown></span>
                                   {sub.pdf && (
                                     <a href={sub.pdf} target="_blank" rel="noopener noreferrer" className="ml-3">
@@ -356,6 +374,7 @@ const Experience = () => {
                     ))}
                   </ul>
                 </div>
+                )}
 
                 {/* Media */}
                 {selectedExperience.media && (

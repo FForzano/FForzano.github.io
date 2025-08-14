@@ -162,15 +162,16 @@ export const translations = {
         {
           id: 1,
           type: 'education',
+          logo: 'images/qilab-logo.png',
           title: 'Dottorato di Ricerca',
-          company: 'Università degli Studi di Ferrara - QI Laboratory',
+          company: 'Quantum Information Laboratory',
           location: 'Ferrara, Italia',
           period: '2023 - presente',
           shortDescription: 'Dottorando presso QI Lab, Università di Ferrara. Focus su quantum sensing e sistemi quantistici.',
           longDescription: `Dal 2023, sto svolgendo un dottorato di ricerca presso il [Quantum Information Laboratory (QI Lab)](https://wcln.unife.it) dell'Università degli studi di Ferrara. 
           Il focus dei miei studi sono le quantum information science e in particolare, il quantum sensing. 
           Le mie attività prevedono lo studio teorico di sistemi di sensing quantistico, usando stati non Gaussiani della radiazione elettromagnetico.`,
-          skills: ['Python', 'MATLAB', 'Signal Processing', 'LaTeX'],
+          skills: ['Quantum Mechanics', 'Python', 'MATLAB', 'Signal Processing', 'LaTeX'],
           achievements: [
             {
               main: 'Redazione di articoli scientifici',
@@ -211,60 +212,61 @@ export const translations = {
         {
           id: 2,
           type: 'work',
-          title: 'Sviluppatore Web',
+          logo: '/images/fpc-logo.png',
+          title: 'Socio Fondatore e Membro del C.d.A.',
           company: 'FPC DIDATTICA 4.0 S.R.L.',
           location: 'Ferrara, Italia',
           period: '2021 - presente',
-          shortDescription: 'Sviluppo piattaforma web per didattica privata e gestione lezioni online.',
-          longDescription: 'All\'interno di FPC DIDATTICA 4.0 S.R.L., mi occupo dello sviluppo del backend di una piattaforma web per la didattica privata e la gestione delle lezioni online. Utilizzo tecnologie moderne per garantire un\'esperienza utente fluida e interattiva.',
-          skills: ['React', 'Node.js', 'PHP', 'MySQL', 'JavaScript', 'CSS', 'Docker', 'AWS'],
+          shortDescription: 'Socio fondatore e membro del C.d.A. di FPC DIDATTICA 4.0 S.R.L., startup per la didattica privata di qualità e in regola.',
+          longDescription: 'Nel 2021, ho co-fondato *FPC DIDATTICA 4.0 S.R.L.*, una startup nel settore della didattica privata avente come obiettivo lo sviluppo di una piattaforma web per promuovere didattica privata con insegnanti qualificati e in regola.\n\n' +
+          'In tale contesto, sono parte del C.d.A., socio co-fondatore, mi occupo attivamente dello sviluppo del backend della piattaforma, della gestione dell\'infrastruttura cloud e della definizione degli obiettivi tecnici inerenti allo sviluppo.\n\n' +
+          'Dal punto di vista tecnico, mi occupo della progettazione e implementazione di un backend REST, utilizzando il framework PHP-Yii2 e integrando API terze per i pagamenti, la fatturazione elettronica automatica e la localizzazione.',
+          skills: [
+            'PHP - Yii2', 'SQL', 'Docker', 'Git', 'Github'
+          ],
           achievements: [
-            'Lancio di piattaforma con oltre 1000 utenti attivi',
-            'Implementazione di sistema di matching automatico',
-            'Sviluppo di dashboard analytics avanzata',
-            'Ottimizzazione delle performance del 60%'
+            'Design e sviluppo della piattaforma *Formando PerCorsi*',
           ],
             media: {
               images: [
-                { src: '/images/fpc-platform.jpg', alt: 'Piattaforma FPC DIDATTICA' },
-                { src: '/images/dashboard.jpg', alt: 'Dashboard Analytics' }
               ],
               documents: [
-                { src: '/docs/fpc-business-plan.pdf', label: 'Business Plan FPC' }
               ],
               links: [
-                { url: 'https://fpcdidattica.it/', label: 'Sito FPC DIDATTICA' },
-                { url: 'https://github.com/fpcdidattica', label: 'GitHub FPC DIDATTICA' }
+                { url: 'https://dev.formandopercorsi.com/', label: 'Formando PerCorsi' },
+                { url: 'https://www.linkedin.com/company/formando-percorsi/', label: 'LinkedIn' }
               ]
             }
         },
         {
           id: 3,
           type: 'education',
+          logo: 'images/unife-logo.jpeg',
           title: 'Laurea Magistrale in Ingegneria Elettronica per l\'ICT',
           company: 'Università degli Studi di Ferrara',
           location: 'Ferrara, Italia',
           period: '2021 - 2023',
-          shortDescription: 'Specializzazione in comunicazione quantistica e analisi segnali. Tesi su quantum illumination.',
-          longDescription: 'Specializzazione in sistemi di comunicazione quantistica e analisi di segnali. Tesi magistrale su "Analysis of quantum illumination systems" con voto 110/110 e lode.',
-          skills: ['Quantum Information', 'Signal Processing', 'Communication Systems', 'MATLAB', 'Python', 'C++'],
+          shortDescription: 'Laurea magistrale in ingegneria elettronica per l\'ICT con tesi "Analysis of quantum illumination systems"',
+          longDescription: 'Nel 2023, ho conseguito la laurea magistrale (summa cum laude) in ingegneria elettronica per l\'ICT presso l\'Università degli Studi di Ferrara, con una tesi dal titolo "Analysis of quantum illumination systems".\n\n' +
+          'Alcune competenze significative acquisite includono:\n\n' +
+          '- Utilizzo delle teorie dell\'informazione, della stima e del test delle ipotesi per applicazioni di telecomunicazioni e di machine learning;\n' +
+          '- Implementazione di reti neurali;\n' +
+          '- Progettazione di sistemi analogici di alimentazione e per le comunicazioni;\n' +
+          '- Implementazione di programmi di scambio dati peer-to-peer (GNutella, Kazaa, Napster e Torrent).\n\n' +
+          'Durante l\'intero percorso inoltre, ho continuato ad approfondire aspetti legati alle Quantum Information Science all\'interno del [QI Lab](https://qilab.unife.it), approfondendo le tempatiche iniziate a studiare per la tesi di laurea triennale.',
+          skills: ['Python', 'Matlab', 'Information Theory', 'Decision and Estimation Theory', 'Deep Learning', 'VHDL', 'C++ and System C'],
           achievements: [
-            'Voto: 110/110 con lode',
-            'Tesi premiata dal dipartimento di Ingegneria',
-            'Borsa di studio per merito accademico',
-            'Pubblicazione articolo scientifico'
           ],
             media: {
               images: [
-                { src: '/images/graduation.jpg', alt: 'Cerimonia di Laurea' },
-                { src: '/images/thesis-defense.jpg', alt: 'Discussione Tesi' }
               ],
               documents: [
-                { src: '/docs/master-thesis.pdf', label: 'Tesi Magistrale' },
-                { src: '/docs/master-diploma.pdf', label: 'Diploma Magistrale' }
+                { src: '/thesis/AnalysisOfQuantumIlluminationSystems-FedericoForzano-MasterThesis.pdf', label: 'Tesi Magistrale' },
+                { src: '/thesis/OnTheDesignOfQuantumCommunicationSystemsWithNonGaussianStates-FedericoForzano-BachelorThesis.pdf', label: 'Tesi Triennale' }
               ],
               links: [
-                { url: 'https://unife.it/ing/informazione', label: 'Dipartimento Ingegneria Unife' }
+                { url: 'https://github.com/FForzano/libp2p', label: 'Progetti Reti P2P' },
+                { url: 'https://de.unife.it/it', label: 'Dipartimento Ingegneria Unife' }
               ]
             }
         },
@@ -272,28 +274,35 @@ export const translations = {
           id: 4,
           type: 'work',
           title: 'Insegnante Privato',
-          company: 'Libero Professionista',
+          logo: 'images/fpc-logo.png',
+          company: 'Libero Professionista con Formando PerCorsi di Giovanni Govoni',
           location: 'Ferrara, Italia',
-          period: '2018 - presente',
-          shortDescription: 'Insegnamento privato in matematica, fisica, informatica. Focus su studenti superiori e universitari.',
+          period: '2019 - 2023',
+          shortDescription: 'Insegnante privato di matematica, fisica, informatica per studenti di superiori e università.',
           longDescription: 'Insegnamento privato in matematica, fisica e informatica, con focus su studenti delle scuole superiori e universitari. Sviluppo di metodologie didattiche innovative e personalizzate.',
-          skills: ['Didattica', 'Matematica', 'Fisica', 'Informatica', 'Python', 'Problem Solving'],
+          longDescription: 'In parallelo agli studi Universitari, ho avuto modo di acquisire esperienza lavorativa come insegnante privato per studenti delle scuole superiori e universitari, in collaborazione con [*Formando PerCorsi di Giovanni Govoni*](https://formandopercorsi.com).\n\n' + 
+          'Materie insegnate:\n\n' + 
+          '- Matematica (scuole superiori);\n' +
+          '- Fisica (scuole superiori);\n' +
+          '- Informatica (C, C++, Java, Python);\n' +
+          '- Analisi matematica 1 e 2;\n' +
+          '- Teoria dei segnali e comunicazioni wireless.\n\n' + 
+          'Quest\'attività, mi ha permesso di sviluppare competenze nella didattica, personalizzando i percorsi e l\'approccio usato da studente a studente. Inoltre, ho migliorato le mie capacità di gestione del tempo disponibile e dello stress.',
+          skills: ['Didattica', 'Organizzazione di percorsi di studio', 'Gestione del tempo'],
           achievements: [
-            'Oltre 500 ore di lezioni erogate',
-            'Miglioramento medio del 40% nei voti degli studenti',
+            'Oltre 50 studenti',
+            'Più di 10 ore di lezione a settimana, in parallelo agli studi universitari',
             'Sviluppo di materiali didattici personalizzati',
-            'Preparazione studenti per test di ammissione universitari'
+            'Diversi studenti hanno intrapreso un percorso universitario STEM dopo il diploma',
+            'La quasi totalità degli studenti ha completato con successo gli studi superiori'
           ],
             media: {
               images: [
-                { src: '/images/teaching.jpg', alt: 'Lezione privata' },
-                { src: '/images/students.jpg', alt: 'Studenti' }
               ],
               documents: [
-                { src: '/docs/teaching-certificates.pdf', label: 'Certificati Didattici' }
               ],
               links: [
-                { url: 'https://fpcdidattica.it/insegnanti/federico-forzano', label: 'Profilo Insegnante FPC' }
+                { url: 'https://formandopercorsi.com', label: 'Formando PerCorsi di Giovanni Govoni' }
               ]
             }
         }
