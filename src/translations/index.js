@@ -680,7 +680,8 @@ export const translations = {
               ],
               links: [
                 { url: 'https://github.com/FForzano/libp2p', label: 'P2P Networks Projects' },
-                { url: 'https://de.unife.it/it', label: 'Engineering Department Unife' }
+                { url: 'https://github.com/FForzano/DEDST-projects', label: 'DEDST Projects' },
+                { url: 'https://github.com/FForzano/CPM-modem', label: 'CPM modulator and demodulator implementation' }
               ]
             }
         },
