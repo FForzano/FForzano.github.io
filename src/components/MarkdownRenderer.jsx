@@ -2,8 +2,14 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import Carousel from './Carousel';
 
-const MarkdownRenderer = ({ content }) => {
+const MarkdownRenderer = ({ content, inline = false }) => {
   if (typeof content === 'string') {
+    if (inline) {
+      // For inline content, render without wrapping paragraph tags
+      return <ReactMarkdown components={{
+        p: ({ children }) => <span>{children}</span>
+      }}>{content}</ReactMarkdown>;
+    }
     return <ReactMarkdown>{content}</ReactMarkdown>;
   }
   if (Array.isArray(content)) {

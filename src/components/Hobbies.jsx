@@ -62,14 +62,22 @@ const Hobbies = () => {
   const swipeHandlers = useSwipe(hobbies.length, {
     threshold: 50,
     preventDefaultTouchmoveEvent: false,
-    trackMouse: true,
+    trackMouse: false, // Disable mouse tracking to avoid conflicts
     trackTouch: true,
     onSwipedUp: () => {},
     onSwipedDown: () => {},
+    onTap: () => {}, // Disable tap handling to avoid conflicts with clicks
   })
 
   const HobbyCard = ({ hobby, index }) => {
-    const Icon = LucideIcons[hobby.icon] || LucideIcons['Star']
+    // Better icon handling with fallback
+    const getIcon = () => {
+      if (!hobby.icon || typeof hobby.icon !== 'string') {
+        return LucideIcons['Star'];
+      }
+      return LucideIcons[hobby.icon] || LucideIcons['Star'];
+    };
+    const Icon = getIcon();
     // Funzione per estrarre solo la parte testuale (markdown) e troncarla, rimuovendo i link markdown ma lasciando grassetto/corsivo
     const stripMarkdownLinks = (str) => {
       // Rimuove i link markdown ma lascia il testo visibile, mantiene * e **
@@ -128,8 +136,8 @@ const Hobbies = () => {
               {hobby.title}
             </h3>
             {/* Description (max height, overflow fade) */}
-            <div className="relative mb-4 flex-1 max-h-32 overflow-hidden" style={{ WebkitMaskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)', maskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)' }}>
-              <MarkdownRenderer content={getShortText(hobby.description)} />
+            <div className="relative mb-4 flex-1 max-h-32 overflow-hidden text-neutral-600 dark:text-neutral-400" style={{ WebkitMaskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)', maskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)' }}>
+              <MarkdownRenderer content={getShortText(hobby.description)} inline={true} />
             </div>
             {/* Click indicator */}
             <div className="flex items-center justify-between mt-auto">
@@ -148,7 +156,14 @@ const Hobbies = () => {
   }
 
   const HobbyModal = ({ hobby, onClose, scrollPositionRef }) => {
-    const Icon = LucideIcons[hobby.icon] || LucideIcons['Star']
+    // Better icon handling with fallback
+    const getIcon = () => {
+      if (!hobby.icon || typeof hobby.icon !== 'string') {
+        return LucideIcons['Star'];
+      }
+      return LucideIcons[hobby.icon] || LucideIcons['Star'];
+    };
+    const Icon = getIcon();
   // (Gestione scroll spostata nel componente principale)
     // Prevent scroll chaining: only modal scrolls, never background
     const modalContentRef = React.useRef(null);
@@ -302,14 +317,17 @@ const Hobbies = () => {
         <div className="hidden md:block hobbies-container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {hobbies.map((hobby, index) => (
-              <HobbyCard key={hobby.key} hobby={hobby} index={index} />
+              <HobbyCard key={hobby.key || hobby.title || `hobby-${index}`} hobby={hobby} index={index} />
             ))}
           </div>
         </div>
 
         {/* Mobile Carousel */}
         <div className="block md:hidden" style={{overflow: 'visible'}}>
-          <div className="carousel-container" {...swipeHandlers.handlers}>
+          <div 
+            className="carousel-container" 
+            {...swipeHandlers.handlers}
+          >
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}
               style={{ 
@@ -318,7 +336,7 @@ const Hobbies = () => {
               }}
             >
               {hobbies.map((hobby, index) => (
-                <div key={hobby.key} className="carousel-item">
+                <div key={`${hobby.key || hobby.title || `hobby-${index}`}-mobile`} className="carousel-item">
                   <HobbyCard hobby={hobby} index={index} />
                 </div>
               ))}

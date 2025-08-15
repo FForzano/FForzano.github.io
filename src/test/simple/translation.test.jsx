@@ -87,7 +87,7 @@ describe('Translation System', () => {
     expect(translations.it.experience).toBeDefined()
     expect(translations.en.experience).toBeDefined()
     expect(translations.it.experience.title).toBe('Esperienze Professionali')
-    expect(translations.en.experience.title).toBe('Experience')
+    expect(translations.en.experience.title).toBe('Professional Experiences')
   })
 
   it('should have navigation all required sections', () => {

@@ -58,11 +58,12 @@ const Experience = () => {
   const swipeHandlers = useSwipe(experiences.length, {
     threshold: 50,
     preventDefaultTouchmoveEvent: false,
-    trackMouse: true,
+    trackMouse: false, // Disable mouse tracking to avoid conflicts
     trackTouch: true,
     // Abilita swipe verticale
     onSwipedUp: () => {},
     onSwipedDown: () => {},
+    onTap: () => {}, // Disable tap handling to avoid conflicts with clicks
   })
 
   // Hook per animazioni ottimizzate
@@ -343,7 +344,11 @@ const Experience = () => {
                         typeof achievement === 'string' ? (
                           <li key={i} className="flex items-start">
                             <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
-                            <span className="text-neutral-600 dark:text-neutral-400"><ReactMarkdown>{achievement}</ReactMarkdown></span>
+                            <span className="text-neutral-600 dark:text-neutral-400">
+                              <ReactMarkdown components={{
+                                p: ({ children }) => <span>{children}</span>
+                              }}>{achievement}</ReactMarkdown>
+                            </span>
                           </li>
                         ) : (
                           <li key={i} className="flex flex-col items-start">
@@ -355,7 +360,11 @@ const Experience = () => {
                               {achievement.sub && achievement.sub.map((sub, j) =>
                                 typeof sub === 'object' ? (
                                   <li key={j} className="flex items-center justify-between pl-2 py-2 px-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-primary-200 dark:border-primary-700 shadow-sm">
-                                  <span className="text-neutral-700 dark:text-neutral-300 font-medium text-base"><ReactMarkdown>{sub.reference}</ReactMarkdown></span>
+                                  <span className="text-neutral-700 dark:text-neutral-300 font-medium text-base">
+                                    <ReactMarkdown components={{
+                                      p: ({ children }) => <span>{children}</span>
+                                    }}>{sub.reference}</ReactMarkdown>
+                                  </span>
                                   {sub.pdf && (
                                     <a href={sub.pdf} target="_blank" rel="noopener noreferrer" className="ml-3">
                                       <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">

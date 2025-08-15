@@ -56,9 +56,11 @@ const About = () => {
           className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
           <h2 className="section-title">{t('about.title')}</h2>
-          <div className="section-subtitle">
+                    <div className="section-subtitle">
             <div style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-              <ReactMarkdown>{t('about.subtitle')}</ReactMarkdown>
+              <ReactMarkdown components={{
+                p: ({ children }) => <span>{children}</span>
+              }}>{t('about.subtitle')}</ReactMarkdown>
             </div>
           </div>
         </motion.div>
@@ -125,9 +127,11 @@ const About = () => {
                   <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                     {feature.title}
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <ReactMarkdown>{feature.description}</ReactMarkdown>
-                  </p>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <ReactMarkdown components={{
+                      p: ({ children }) => <span>{children}</span>
+                    }}>{feature.description}</ReactMarkdown>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>

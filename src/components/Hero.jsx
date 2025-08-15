@@ -83,14 +83,18 @@ const Hero = () => {
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-neutral-600 dark:text-neutral-300 mb-3 sm:mb-4 font-medium px-2 sm:px-4 md:px-0">
               {t('hero.title')}
             </p>
-            <p className="text-base sm:text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto leading-relaxed px-4 sm:px-6 md:px-0">
+            <div className="text-base sm:text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto leading-relaxed px-4 sm:px-6 md:px-0">
               {Array.isArray(t('hero.descriptions'))
                 ? t('hero.descriptions').map((desc, idx) => (
-                    <ReactMarkdown key={idx}>{desc}</ReactMarkdown>
+                    <ReactMarkdown key={idx} components={{
+                      p: ({ children }) => <span className="block mb-2">{children}</span>
+                    }}>{desc}</ReactMarkdown>
                   ))
-                : <ReactMarkdown>{t('hero.description')}</ReactMarkdown>
+                : <ReactMarkdown components={{
+                    p: ({ children }) => <span>{children}</span>
+                  }}>{t('hero.description')}</ReactMarkdown>
               }
-            </p>
+            </div>
           </motion.div>
 
           {/* Enhanced CTA Buttons */}

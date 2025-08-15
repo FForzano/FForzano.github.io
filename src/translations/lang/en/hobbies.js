@@ -3,6 +3,7 @@ const hobbies = {
   subtitle: 'Passions outside of work impact my life as much as work itself.',
   hobbies: [
     {
+      key: 'guitar-music',
       title: 'Guitar & Music',
       description: [
         'I have been playing guitar since I was a child, took several years of classical and jazz lessons, and played in small groups of friends, from rock to blues.',
@@ -31,6 +32,7 @@ const hobbies = {
       }
     },
     {
+      key: 'sailing',
       title: 'Sailing',
       description: [
         'For a few years now, I have discovered the fun of sailing a dinghy. Every summer I attend a sailing course with the **[Italian Naval League (LNI) of Ferrara](https://www.leganavale.it/ferrara).** During 2024, together with my girlfriend, we bought a second-hand 470 with which we regularly go out in Goro.',
@@ -59,6 +61,7 @@ const hobbies = {
       }
     },
     {
+      key: 'cooking',
       title: 'Cooking',
       description: [
         'I like to cook for myself and for some friends. I am not looking for sophisticated or particularly elaborate recipes, just the pleasure of preparing and eating a well-made dish.',

@@ -4,6 +4,7 @@ const hobbies = {
     subtitle: 'Le passioni al di fuori del lavoro impattano la mia vita tanto quanto il lavoro stesso.',
     hobbies: [
         {
+            key: 'guitar-music',
             title: 'Chitarra e Musica',
             description: [
                 'Suono la chitarra da quando ero bambino, ho fatto diversi anni di lezione di classica e jazz e ho suonato in piccoli gruppi tra amici, dal rock al blues.', 
@@ -33,6 +34,7 @@ const hobbies = {
             }
         },
         {
+            key: 'sailing',
             title: 'Vela',
             description: [
                 'Da qualche anno, ho scoperto il divertimento di navigare in una deriva a vela. Frequento ogni estate un corso su deriva con la **[lega navale italiana (LNI) di Ferrara](https://www.leganavale.it/ferrara).** ' +
@@ -62,6 +64,7 @@ const hobbies = {
             }
         },
         {
+            key: 'cooking',
             title: 'Cucina',
             description: [
                 'Mi piace cucinare per me e per alcuni amici. Non cerco ricette sofisticate o particolarmente elaborate ma solo il piacere di preparare e mangiare un piatto ben fatto.',
