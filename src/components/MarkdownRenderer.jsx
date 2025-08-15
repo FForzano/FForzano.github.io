@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import Carousel from './Carousel';
 
 const MarkdownRenderer = ({ content }) => {
   if (typeof content === 'string') {
@@ -22,20 +23,7 @@ const MarkdownRenderer = ({ content }) => {
         );
       }
       if (item.type === 'carousel' && Array.isArray(item.items)) {
-        // Simple horizontal scroll carousel for images/videos
-        return (
-          <div key={idx} className="flex space-x-4 overflow-x-auto my-4 pb-2">
-            {item.items.map((media, i) =>
-              media.type === 'image' ? (
-                <img key={i} src={media.src} alt={media.alt || ''} className="h-40 rounded shadow" />
-              ) : media.type === 'video' ? (
-                <video key={i} controls className="h-40 rounded shadow">
-                  <source src={media.src} type={media.mimeType || 'video/mp4'} />
-                </video>
-              ) : null
-            )}
-          </div>
-        );
+        return <Carousel key={idx} items={item.items} />;
       }
       return null;
     });

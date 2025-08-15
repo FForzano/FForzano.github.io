@@ -148,61 +148,65 @@ const Hobbies = () => {
             <MarkdownRenderer content={hobby.description} />
           </div>
 
-          {/* Media */}
+          {/* Media: mostra solo se almeno uno tra immagini, documenti o link è presente */}
           {hobby.media && (
-            <div className="border-t border-neutral-200 dark:border-neutral-700 pt-6">
-              <h4 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-4">
-                Media e Materiali
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {hobby.media.images?.length > 0 && (
-                  <div>
-                    <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
-                      <ImageIcon className="w-4 h-4 mr-1" />
-                      Immagini
-                    </h5>
-                    <div className="space-y-1">
-                      {hobby.media.images.map((image, i) => (
-                        <div key={i} className="flex items-center group">
-                          <img src={image.src} alt={image.alt} className="w-16 h-16 object-cover rounded mr-2 border-2 border-transparent group-hover:border-primary-600 transition duration-150" />
-                          <span>{image.alt}</span>
-                        </div>
-                      ))}
+            (Array.isArray(hobby.media.images) && hobby.media.images.length > 0 ||
+              Array.isArray(hobby.media.documents) && hobby.media.documents.length > 0 ||
+              Array.isArray(hobby.media.links) && hobby.media.links.length > 0) && (
+              <div className="border-t border-neutral-200 dark:border-neutral-700 pt-6">
+                <h4 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-4">
+                  Media e Materiali
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {hobby.media.images?.length > 0 && (
+                    <div>
+                      <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
+                        <ImageIcon className="w-4 h-4 mr-1" />
+                        Immagini
+                      </h5>
+                      <div className="space-y-1">
+                        {hobby.media.images.map((image, i) => (
+                          <div key={i} className="flex items-center group">
+                            <img src={image.src} alt={image.alt} className="w-16 h-16 object-cover rounded mr-2 border-2 border-transparent group-hover:border-primary-600 transition duration-150" />
+                            <span>{image.alt}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-                {hobby.media.documents?.length > 0 && (
-                  <div>
-                    <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
-                      <FileText className="w-4 h-4 mr-1" />
-                      Documenti
-                    </h5>
-                    <div className="space-y-1">
-                      {hobby.media.documents.map((doc, i) => (
-                        <a key={i} href={doc.src} target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block">
-                          {doc.label}
-                        </a>
-                      ))}
+                  )}
+                  {hobby.media.documents?.length > 0 && (
+                    <div>
+                      <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
+                        <FileText className="w-4 h-4 mr-1" />
+                        Documenti
+                      </h5>
+                      <div className="space-y-1">
+                        {hobby.media.documents.map((doc, i) => (
+                          <a key={i} href={doc.src} target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block">
+                            {doc.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-                {hobby.media.links?.length > 0 && (
-                  <div>
-                    <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
-                      <ExternalLink className="w-4 h-4 mr-1" />
-                      Link
-                    </h5>
-                    <div className="space-y-1">
-                      {hobby.media.links.map((link, i) => (
-                        <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block">
-                          {link.label}
-                        </a>
-                      ))}
+                  )}
+                  {hobby.media.links?.length > 0 && (
+                    <div>
+                      <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Link
+                      </h5>
+                      <div className="space-y-1">
+                        {hobby.media.links.map((link, i) => (
+                          <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block">
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
+            )
           )}
         </motion.div>
       </motion.div>

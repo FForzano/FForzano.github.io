@@ -4,17 +4,24 @@ const hobbies = {
     hobbies: [
         {
             title: 'Chitarra e Musica',
-            description: 'Suono la chitarra da quando ero bambino, ho fatto diversi anni di lezione di classica e jazz e ho suonato in piccoli gruppi tra amici, dal rock al blues. ' + 
-            'Negli anni ho sperimentato anche aspetti diversi inerenti alla musica. Durante le scuole superiori, ho frequentato un corso di mixing e registrazione in studio e tecnico luci live. In seguito ho partecipato ad alcuni piccoli eventi come aiuto fonico. ' +
-            'Recentemente ho seguito qualche lezione di liuteria, con l\'idea di costruire una chitarra tipo Saint Vincent per un regalo a sorpresa.',
+            description: [
+                'Suono la chitarra da quando ero bambino, ho fatto diversi anni di lezione di classica e jazz e ho suonato in piccoli gruppi tra amici, dal rock al blues.', 
+                {
+                type: 'carousel',
+                items: [
+                    { type: 'image', src: 'images/mbc-photo-1.jpg', alt: 'MBC live 1' },
+                    { type: 'image', src: 'images/mbc-photo-2.jpg', alt: 'MBC live 2' },
+                    { type: 'image', src: 'images/hotheels-photo-1.jpg', alt: 'Hot Heels live' }
+                ]
+                },                
+                'Negli anni ho sperimentato anche aspetti diversi inerenti alla musica. Durante le scuole superiori, ho frequentato un corso di mixing e registrazione in studio e tecnico luci live. In seguito ho partecipato ad alcuni piccoli eventi come aiuto fonico.',
+                'Recentemente ho seguito qualche lezione di liuteria, con l\'idea di costruire una chitarra tipo Saint Vincent per un regalo a sorpresa.'
+            ],
             icon: 'Music',
             media: {
-            images: [
-                { src: '/images/guitar1.jpg', alt: 'Chitarra acustica' },
-                { src: '/images/guitar2.jpg', alt: 'Performance live' }
-            ],
-            documents: [],
-            links: []
+                images: [],
+                documents: [],
+                links: []
             }
         },
         {
