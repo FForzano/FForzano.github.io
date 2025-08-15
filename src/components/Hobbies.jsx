@@ -26,7 +26,7 @@ const Hobbies = () => {
   const { t } = useTranslation()
   const [selectedHobby, setSelectedHobby] = useState(null)
   const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
-  const hobbies = t('about.hobbies')
+  const hobbies = t('hobbies.hobbies')
   const swipeHandlers = useSwipe(hobbies.length, {
     threshold: 50,
     preventDefaultTouchmoveEvent: false,
@@ -198,10 +198,10 @@ const Hobbies = () => {
       <div className="container-custom relative z-10" ref={sectionRef}>
         <div className="text-center mb-16">
           <h2 className="section-title">
-            {t('about.hobbiesTitle')}
+            {t('hobbies.title')}
           </h2>
           <p className="section-subtitle">
-            {t('about.hobbiesSubtitle')}
+            {t('hobbies.subtitle')}
           </p>
         </div>
 
