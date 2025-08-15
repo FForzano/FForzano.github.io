@@ -62,30 +62,39 @@ const hobbies = {
         },
         {
             title: 'Cucina',
-            description: 'Amo sperimentare in cucina, provando nuove ricette e tecniche culinarie. La cucina è un\'altra forma di creatività per me.',
+            description: [
+                'Mi piace cucinare per me e per alcuni amici. Non cerco ricette sofisticate o particolarmente elaborate ma solo il piacere di preparare e mangiare un piatto ben fatto.',
+                {
+                    type: 'carousel',
+                    items: [
+                        { type: 'image', src: 'images/pasta-broccoli-arriminati.jpg', alt: 'Pasta coi broccoli arriminati' },
+                        { type: 'image', src: 'images/brioches-tuppo.jpg', alt: 'Brioches col tuppo' },
+                        { type: 'image', src: 'images/pangoccioli.jpg', alt: 'Pangoccioli' },
+                        { type: 'image', src: 'images/panelle.jpg', alt: 'Panelle' }
+                    ]
+
+                }
+            ],
             icon: 'ChefHat',
             media: {
-            images: [
-                { src: '/images/cooking1.jpg', alt: 'Preparazione di un piatto' },
-                { src: '/images/cooking2.jpg', alt: 'Cucina gourmet' }
-            ],
+            images: [],
             documents: [],
             links: []
             }
         },
-        {
-            title: 'Fotografia',
-            description: 'La fotografia è una mia grande passione. Mi piace catturare momenti e paesaggi, esplorando la bellezza del mondo attraverso l\'obiettivo.',
-            icon: 'Camera',
-            media: {
-            images: [
-                { src: '/images/photography1.jpg', alt: 'Paesaggio montano' },
-                { src: '/images/photography2.jpg', alt: 'Ritratto' }
-            ],
-            documents: [],
-            links: []
-            }
-        }
+        // {
+        //     title: 'Fotografia',
+        //     description: 'La fotografia è una mia grande passione. Mi piace catturare momenti e paesaggi, esplorando la bellezza del mondo attraverso l\'obiettivo.',
+        //     icon: 'Camera',
+        //     media: {
+        //     images: [
+        //         { src: '/images/photography1.jpg', alt: 'Paesaggio montano' },
+        //         { src: '/images/photography2.jpg', alt: 'Ritratto' }
+        //     ],
+        //     documents: [],
+        //     links: []
+        //     }
+        // }
     ],
 }
 
