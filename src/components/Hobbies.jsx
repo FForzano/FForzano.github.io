@@ -179,8 +179,8 @@ const Hobbies = () => {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-start justify-between mb-6">
-            <div className="flex items-start space-x-4">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-neutral-100 dark:bg-neutral-800">
                 <Icon className="w-8 h-8 text-primary-600" />
               </div>
@@ -353,9 +353,6 @@ const Hobbies = () => {
               <div className="w-3 h-3 bg-primary-500 rounded-full animate-pulse" />
               <div className="h-px bg-gradient-to-r from-transparent via-secondary-500 to-transparent flex-1 max-w-32" />
             </div>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
-              "Come le onde del mare e le note di una melodia, ogni passione ha il suo ritmo e la sua armonia"
-            </p>
           </div>
         </div>
       </div>
