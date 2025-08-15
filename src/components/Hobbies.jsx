@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import MarkdownRenderer from './MarkdownRenderer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Music, 
@@ -38,6 +39,29 @@ const Hobbies = () => {
 
   const HobbyCard = ({ hobby, index }) => {
     const Icon = LucideIcons[hobby.icon] || LucideIcons['Star']
+    // Funzione per estrarre solo la parte testuale (markdown) e troncarla
+    const getShortText = (desc, maxChars = 180) => {
+      if (typeof desc === 'string') {
+        return desc.length > maxChars ? desc.slice(0, maxChars) + '…' : desc
+      }
+      if (Array.isArray(desc)) {
+        let chars = 0
+        let result = []
+        for (const item of desc) {
+          if (typeof item === 'string') {
+            if (chars + item.length > maxChars) {
+              result.push(item.slice(0, maxChars - chars) + '…')
+              break
+            } else {
+              result.push(item)
+              chars += item.length
+            }
+          }
+        }
+        return result.length ? result : '…'
+      }
+      return '…'
+    }
     return (
       <div
         className={`group relative cursor-pointer h-full transition-all duration-700 ease-out transform ${
@@ -62,10 +86,10 @@ const Hobbies = () => {
             <h3 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-4 font-display">
               {hobby.title}
             </h3>
-            {/* Description */}
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg mb-4 flex-1">
-              {hobby.description}
-            </p>
+            {/* Description (max height, overflow fade) */}
+            <div className="relative mb-4 flex-1 max-h-32 overflow-hidden" style={{ WebkitMaskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)', maskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)' }}>
+              <MarkdownRenderer content={getShortText(hobby.description)} />
+            </div>
             {/* Click indicator */}
             <div className="flex items-center justify-between mt-auto">
               <span className="text-sm text-neutral-500 dark:text-neutral-400">
@@ -119,11 +143,9 @@ const Hobbies = () => {
             </button>
           </div>
 
-          {/* Description */}
-          <div className="mb-6">
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              {hobby.description}
-            </p>
+          {/* Description avanzata */}
+          <div className="mb-6 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <MarkdownRenderer content={hobby.description} />
           </div>
 
           {/* Media */}
