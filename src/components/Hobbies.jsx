@@ -70,28 +70,38 @@ const Hobbies = () => {
 
   const HobbyCard = ({ hobby, index }) => {
     const Icon = LucideIcons[hobby.icon] || LucideIcons['Star']
-    // Funzione per estrarre solo la parte testuale (markdown) e troncarla
+    // Funzione per estrarre solo la parte testuale (markdown) e troncarla, rimuovendo i link markdown ma lasciando grassetto/corsivo
+    const stripMarkdownLinks = (str) => {
+      // Rimuove i link markdown ma lascia il testo visibile, mantiene * e **
+      // [testo](url) => testo
+      return str.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+    };
     const getShortText = (desc, maxChars = 180) => {
       if (typeof desc === 'string') {
-        return desc.length > maxChars ? desc.slice(0, maxChars) + '…' : desc
+        let clean = stripMarkdownLinks(desc);
+        if (clean.length > maxChars) {
+          clean = clean.slice(0, maxChars) + '…';
+        }
+        return clean;
       }
       if (Array.isArray(desc)) {
-        let chars = 0
-        let result = []
+        let chars = 0;
+        let result = [];
         for (const item of desc) {
           if (typeof item === 'string') {
-            if (chars + item.length > maxChars) {
-              result.push(item.slice(0, maxChars - chars) + '…')
-              break
+            let clean = stripMarkdownLinks(item);
+            if (chars + clean.length > maxChars) {
+              result.push(clean.slice(0, maxChars - chars) + '…');
+              break;
             } else {
-              result.push(item)
-              chars += item.length
+              result.push(clean);
+              chars += clean.length;
             }
           }
         }
-        return result.length ? result : '…'
+        return result.length ? result : '…';
       }
-      return '…'
+      return '…';
     }
     return (
       <div

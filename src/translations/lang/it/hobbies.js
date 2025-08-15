@@ -1,3 +1,5 @@
+import { label } from "happy-dom/lib/PropertySymbol.js";
+
 const hobbies = {
     title: 'Hobbies & Interessi',
     subtitle: 'Le passioni al di fuori del lavoro impattano la mia vita tanto quanto il lavoro stesso.',
@@ -72,14 +74,16 @@ const hobbies = {
                         { type: 'image', src: 'images/pangoccioli.jpg', alt: 'Pangoccioli' },
                         { type: 'image', src: 'images/panelle.jpg', alt: 'Panelle' }
                     ]
-
-                }
+                },
+                'Sto raccogliendo le ricette che mi piacciono (mie e non) in un sito Notion. Se vuoi darci un\'occhiata, lo trovi **[qui](https://zenith-cobbler-831.notion.site/24d7be2d9ff580498fafd41f7f96ed5c?v=24d7be2d9ff581ce8d9d000c986b018b/)**.',
             ],
             icon: 'ChefHat',
             media: {
             images: [],
             documents: [],
-            links: []
+            links: [
+                { label: 'Ricettario Fede & Lele', url: 'https://zenith-cobbler-831.notion.site/24d7be2d9ff580498fafd41f7f96ed5c?v=24d7be2d9ff581ce8d9d000c986b018b/' }
+            ]
             }
         },
         // {
