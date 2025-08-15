@@ -26,6 +26,37 @@ import useSwipe from '../hooks/useSwipe'
 const Hobbies = () => {
   const { t } = useTranslation()
   const [selectedHobby, setSelectedHobby] = useState(null)
+  // Ref globale per la posizione scroll, come in Experience.jsx
+  const scrollPositionRef = React.useRef(0)
+  // Blocca/ripristina scroll come in Experience.jsx
+  React.useEffect(() => {
+    if (selectedHobby) {
+      // Save scroll position and block scroll
+      scrollPositionRef.current = window.scrollY;
+      document.body.classList.add('modal-open');
+      document.body.style.top = `-${scrollPositionRef.current}px`;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      // Restore scroll position and unblock scroll
+      document.body.classList.remove('modal-open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, scrollPositionRef.current);
+        });
+      });
+    }
+    return () => {
+      document.body.classList.remove('modal-open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [selectedHobby]);
+
   const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   const hobbies = t('hobbies.hobbies')
   const swipeHandlers = useSwipe(hobbies.length, {
@@ -106,8 +137,31 @@ const Hobbies = () => {
     )
   }
 
-  const HobbyModal = ({ hobby, onClose }) => {
+  const HobbyModal = ({ hobby, onClose, scrollPositionRef }) => {
     const Icon = LucideIcons[hobby.icon] || LucideIcons['Star']
+  // (Gestione scroll spostata nel componente principale)
+    // Prevent scroll chaining: only modal scrolls, never background
+    const modalContentRef = React.useRef(null);
+    React.useEffect(() => {
+      const el = modalContentRef.current;
+      if (!el) return;
+      const stop = (e) => {
+        // Only stop if can't scroll further in that direction
+        const { scrollTop, scrollHeight, clientHeight } = el;
+        if (
+          (e.deltaY < 0 && scrollTop === 0) ||
+          (e.deltaY > 0 && scrollTop + clientHeight >= scrollHeight)
+        ) {
+          e.preventDefault();
+        }
+      };
+      el.addEventListener('wheel', stop, { passive: false });
+      el.addEventListener('touchmove', stop, { passive: false });
+      return () => {
+        el.removeEventListener('wheel', stop);
+        el.removeEventListener('touchmove', stop);
+      };
+    }, []);
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -117,10 +171,11 @@ const Hobbies = () => {
         onClick={onClose}
       >
         <motion.div
+          ref={modalContentRef}
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-white dark:bg-neutral-800 rounded-2xl p-8 max-w-4xl max-h-[80vh] overflow-y-auto shadow-large"
+          className="bg-white dark:bg-neutral-800 rounded-2xl p-8 max-w-4xl max-h-[80vh] min-h-[40vh] overflow-y-auto shadow-large"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
@@ -308,7 +363,7 @@ const Hobbies = () => {
       {/* Modal */}
       <AnimatePresence>
         {selectedHobby && (
-          <HobbyModal hobby={selectedHobby} onClose={() => setSelectedHobby(null)} />
+          <HobbyModal hobby={selectedHobby} onClose={() => setSelectedHobby(null)} scrollPositionRef={scrollPositionRef} />
         )}
       </AnimatePresence>
     </section>

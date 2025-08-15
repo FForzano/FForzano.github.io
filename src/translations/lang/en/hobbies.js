@@ -4,13 +4,28 @@ const hobbies = {
   hobbies: [
     {
       title: 'Guitar & Music',
-      description: 'I have been playing guitar since I was a child, took several years of classical and jazz lessons, and played in small groups of friends, from rock to blues. Over the years I have explored different aspects of music. During high school, I attended a mixing and studio recording course and worked as a live light technician. Later, I participated in some small events as a sound assistant. Recently, I attended a lutherie course with the idea of building a Saint Vincent-style guitar as a surprise gift.',
+      description: [
+        'I have been playing guitar since I was a child, took several years of classical and jazz lessons, and played in small groups of friends, from rock to blues.',
+        {
+          type: 'carousel',
+          items: [
+            { type: 'image', src: 'images/mbc-photo-1.jpg', alt: 'MBC live 1' },
+            { type: 'image', src: 'images/mbc-photo-2.jpg', alt: 'MBC live 2' },
+            { type: 'image', src: 'images/hotheels-photo-1.jpg', alt: 'Hot Heels live' }
+          ]
+        },
+        "Over the years, I've also explored different aspects of music. During high school, I attended a mixing and studio recording course and worked as a live light technician. Later, I participated in some small events as a sound assistant. Recently, I took a few lutherie lessons, with the idea of building a St. Vincent-style guitar as a surprise gift.",
+        {
+          type: 'carousel',
+          items: [
+            { type: 'image', src: 'images/stVincent-building.jpg', alt: 'Homemade St. Vincent in-Building' },
+            { type: 'image', src: 'images/cajon.jpg', alt: 'Homemade cajon' },
+          ]
+        },
+      ],
       icon: 'Music',
       media: {
-        images: [
-          { src: '/images/guitar1.jpg', alt: 'Acoustic guitar' },
-          { src: '/images/guitar2.jpg', alt: 'Live performance' }
-        ],
+        images: [],
         documents: [],
         links: []
       }
