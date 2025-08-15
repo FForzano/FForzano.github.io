@@ -33,14 +33,31 @@ const hobbies = {
         },
         {
             title: 'Vela',
-            description: 'La vela mi ha insegnato pazienza, lettura delle condizioni meteo e lavoro di squadra. Navigo principalmente in Adriatico con uscite regolari.',
+            description: [
+                'Da qualche anno, ho scoperto il divertimento di navigare in una deriva a vela. Frequento ogni estate un corso su deriva con la **[lega navale italiana (LNI) di Ferrara](https://www.leganavale.it/ferrara).** ' +
+                'Durante il 2024, assieme alla mia fidanzata, abbiamo comprato un 470 di seconda mano con cui usciamo regolarmente a Goro.',
+                {
+                    type: 'carousel',
+                    items: [
+                        { type: 'image', src: 'images/sail-470-1.jpg', alt: 'Sail 470 - 1' },
+                        { type: 'image', src: 'images/sail-group.jpg', alt: 'Sail with LNI Ferrara' },
+                        { type: 'image', src: 'images/sail-470-2.jpg', alt: 'Sail 470 - 2' },
+                    ]
+                },
+                'Per imparare alcuni dettagli di questa barca, ho tradotto la *Guida al 470* di Arthur Gurevitch.\n\n' +
+                'La versione modificabile e integrabile è disponibile su [![GitHub](https://img.shields.io/badge/GitHub-Manuale--470--ITA-181717?logo=github&style=flat-square)](https://github.com/FForzano/Manuale-470-ITA)\n' +
+                '\n**Ogni contributo, correzione o suggerimento è benvenuto!**' +
+                '\n\n[![Scarica la Guida 📥](https://img.shields.io/badge/Scarica%20PDF-Guida%20470-blue?logo=adobeacrobatreader&logoColor=white&style=for-the-badge)](https://github.com/FForzano/Manuale-470-ITA/releases/download/v1.0/Manuale-al-470-ITA.pdf)'
+            ],
             icon: 'Waves',
             media: {
-            images: [
-                { src: '/images/sailing1.jpg', alt: 'Barca a vela' }
-            ],
+            images: [],
             documents: [],
-            links: []
+            links: [
+                { label: 'Guida al 470 ITA', url: 'https://github.com/FForzano/Manuale-470-ITA/releases/download/v1.0/Manuale-al-470-ITA.pdf' },
+                { label: 'Guida al 470 ITA (Repository modificabile)', url: 'https://github.com/FForzano/Manuale-470-ITA' },
+                { label: 'Guida al 470 Originale (ENG)', url: 'https://github.com/FForzano/Manuale-470-ITA/blob/master/470-Manual-ENG.pdf' }
+            ]
             }
         },
         {
