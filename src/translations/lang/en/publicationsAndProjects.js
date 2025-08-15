@@ -1,5 +1,5 @@
 const publicationsAndProjects = {
-  title: 'Publications and Projects',
+  title: 'Publications & Projects',
   subtitle: 'An overview of my scientific publications and developed projects, from academic research to practical applications.',
   areas: [
     {

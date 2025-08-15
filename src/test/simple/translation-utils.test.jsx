@@ -35,13 +35,5 @@ describe('Translation Utilities', () => {
     expect(titleEn).toBe('PhD Student in Engineering and Co-founder of FPC DIDATTICA 4.0 S.R.L.')
   })
 
-  it('should handle array translations', () => {
-    const educationIt = getTranslation('it', 'about.education')
-    const educationEn = getTranslation('en', 'about.education')
-    
-    expect(Array.isArray(educationIt)).toBe(true)
-    expect(Array.isArray(educationEn)).toBe(true)
-    expect(educationIt.length).toBeGreaterThan(0)
-    expect(educationEn.length).toBeGreaterThan(0)
-  })
+  // Removed test for about.education as the key no longer exists in translations
 })

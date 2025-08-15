@@ -1,5 +1,5 @@
 const experience = {
-  title: 'Professional Experiences',
+  title: 'Experience',
   subtitle: "A summary of my work and academic experiences, ranging from research in quantum information science to software development and teaching.",
   resultsLabel: 'results',
   moreLabel: 'more',
