@@ -1,5 +1,4 @@
-import { label } from "happy-dom/lib/PropertySymbol.js";
-
+// Italian translation for hobbies.js
 const hobbies = {
     title: 'Hobbies & Interessi',
     subtitle: 'Le passioni al di fuori del lavoro impattano la mia vita tanto quanto il lavoro stesso.',
