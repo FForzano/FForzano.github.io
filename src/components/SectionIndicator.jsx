@@ -2,9 +2,23 @@ import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import SimpleCircularNavigation from './SimpleCircularNavigation'
 
-const SectionIndicator = ({ currentSection, totalSections, onSectionClick }) => {
+const SectionIndicator = ({ currentSection, totalSections, onSectionClick, isHidden = false }) => {
   const [isActivelyNavigating, setIsActivelyNavigating] = useState(false)
   const navigationTimeoutRef = useRef(null)
+  
+  // Detecta se siamo su mobile
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkIsMobile()
+    window.addEventListener('resize', checkIsMobile)
+    
+    return () => window.removeEventListener('resize', checkIsMobile)
+  }, [])
   
   // Gestisce lo stato di navigazione attiva
   useEffect(() => {
@@ -36,6 +50,11 @@ const SectionIndicator = ({ currentSection, totalSections, onSectionClick }) => 
     }, 2000)
   }
 
+  // Nascondi completamente su mobile quando una modale è aperta
+  if (isMobile && isHidden) {
+    return null
+  }
+
   return (
     <div className="fixed right-2 md:right-2 top-16 md:top-1/2 md:transform md:-translate-y-1/2 z-40">
       <motion.div
@@ -43,10 +62,12 @@ const SectionIndicator = ({ currentSection, totalSections, onSectionClick }) => 
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
         animate={{
-          opacity: isActivelyNavigating ? 1 : 0.3
+          opacity: (isActivelyNavigating ? 1 : 0.3),
+          scale: (isMobile && isHidden) ? 0 : 1
         }}
         style={{
           boxShadow: '0 4px 16px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+          pointerEvents: (isMobile && isHidden) ? 'none' : 'auto'
         }}
         onMouseEnter={handleIndicatorInteraction}
         onMouseLeave={() => {}} // Mantiene l'interazione attiva

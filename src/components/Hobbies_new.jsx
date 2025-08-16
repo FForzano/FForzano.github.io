@@ -272,37 +272,8 @@ const Hobbies = () => {
     return LucideIcons[iconName] || Music;
   }
 
-  // Funzione helper per estrarre una descrizione troncata dalla descrizione completa
-  const getTruncatedDescription = (description, maxLength = 150) => {
-    if (!description) return '';
-    
-    // Se è una stringa, la usiamo direttamente
-    if (typeof description === 'string') {
-      return description.length > maxLength 
-        ? description.substring(0, maxLength).trim() + '...'
-        : description;
-    }
-    
-    // Se è un array, estraiamo solo le stringhe e le concateniamo
-    if (Array.isArray(description)) {
-      const textContent = description
-        .filter(item => typeof item === 'string')
-        .join(' ')
-        .replace(/\*\*/g, '') // Rimuove markdown bold
-        .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Converte link markdown in testo
-        .trim();
-      
-      return textContent.length > maxLength 
-        ? textContent.substring(0, maxLength).trim() + '...'
-        : textContent;
-    }
-    
-    return '';
-  }
-
   const HobbyCard = ({ hobby, index, className = "" }) => {
     const Icon = getIcon(hobby.icon)
-    const truncatedDescription = getTruncatedDescription(hobby.description, 120)
     
     return (
       <div
@@ -332,7 +303,7 @@ const Hobbies = () => {
             {hobby.title}
           </h3>
           <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-3 flex-1 relative z-10">
-            {truncatedDescription}
+            {hobby.shortDescription}
           </p>
 
           {/* Skills/Tags */}

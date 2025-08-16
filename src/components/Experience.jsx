@@ -19,39 +19,54 @@ import {
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
+import { useModal } from '../contexts/ModalContext'
 import useSwipe from '../hooks/useSwipe'
 import ReactMarkdown from 'react-markdown'
 import '../assets/experience-logos.css'
 
 const Experience = () => {
   const { t } = useTranslation()
+  const { openModal, closeModal } = useModal()
   const [selectedExperience, setSelectedExperience] = useState(null)
   const [lightboxImage, setLightboxImage] = useState(null)
   // Track scroll position for modal
   const scrollPositionRef = React.useRef(0)
+  const wasModalOpenRef = React.useRef(false)
+  
   useEffect(() => {
-    if (selectedExperience) {
+    if (selectedExperience && !wasModalOpenRef.current) {
       // Save scroll position and block scroll
       scrollPositionRef.current = window.scrollY
       document.body.classList.add('modal-open');
       document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
-    } else {
+      // Notifica il ModalContext che una modale è aperta
+      openModal()
+      wasModalOpenRef.current = true
+    } else if (!selectedExperience && wasModalOpenRef.current) {
       // Restore scroll position and unblock scroll
       document.body.classList.remove('modal-open');
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
-      window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
+      // Usa setTimeout per assicurare che avvenga dopo il render
+      setTimeout(() => {
+        window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
+      }, 0);
+      // Notifica il ModalContext che la modale è chiusa
+      closeModal()
+      wasModalOpenRef.current = false
     }
     return () => {
-      document.body.classList.remove('modal-open');
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
+      if (wasModalOpenRef.current) {
+        document.body.classList.remove('modal-open');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+      }
     };
-  }, [selectedExperience]);
+  }, [selectedExperience]); // Rimuoviamo openModal e closeModal dalle dipendenze
 
   // Hook per il carosello mobile
   const experiences = t('experience.positions')
@@ -66,8 +81,9 @@ const Experience = () => {
     onTap: () => {}, // Disable tap handling to avoid conflicts with clicks
   })
 
-  // Hook per animazioni ottimizzate
-  const { containerRef, animatedItems } = useStaticAnimation(experiences)
+  // Hook per animazioni ottimizzate - separati per desktop e mobile
+  const { containerRef: desktopContainerRef, animatedItems: desktopAnimatedItems } = useStaticAnimation(experiences)
+  const { containerRef: mobileContainerRef, animatedItems: mobileAnimatedItems } = useStaticAnimation(experiences)
 
   const nextSlide = () => swipeHandlers.nextSlide()
   const prevSlide = () => swipeHandlers.prevSlide()
@@ -98,7 +114,8 @@ const Experience = () => {
     }
   }
 
-  const ExperienceCard = ({ experience, index }) => {
+  const ExperienceCard = ({ experience, index, isMobile = false }) => {
+    const animatedItems = isMobile ? mobileAnimatedItems : desktopAnimatedItems
     const isVisible = animatedItems.has(index)
     
     return (
@@ -190,16 +207,16 @@ const Experience = () => {
         {/* Experience Grid / Carousel */}
         
         {/* Desktop Grid */}
-        <div className="hidden md:block experience-container" ref={containerRef}>
+        <div className="hidden md:block experience-container" ref={desktopContainerRef}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {experiences.map((experience, index) => (
-              <ExperienceCard key={experience.id} experience={experience} index={index} />
+              <ExperienceCard key={experience.id} experience={experience} index={index} isMobile={false} />
             ))}
           </div>
         </div>
 
         {/* Mobile Carousel */}
-        <div className="block md:hidden" style={{overflow: 'visible'}}>
+        <div className="block md:hidden" style={{overflow: 'visible'}} ref={mobileContainerRef}>
           <div className="carousel-container" {...swipeHandlers.handlers}>
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}
@@ -210,7 +227,7 @@ const Experience = () => {
             >
               {experiences.map((experience, index) => (
                 <div key={experience.id} className="carousel-item">
-                  <ExperienceCard experience={experience} index={index} />
+                  <ExperienceCard experience={experience} index={index} isMobile={true} />
                 </div>
               ))}
             </div>
@@ -254,13 +271,24 @@ const Experience = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              style={{ 
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
               onClick={() => setSelectedExperience(null)}
             >
               <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.95, opacity: 0 }}
-                className="bg-white dark:bg-neutral-800 rounded-2xl p-8 max-w-4xl max-h-[80vh] overflow-y-auto shadow-large"
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                className="bg-white dark:bg-neutral-800 rounded-2xl p-8 max-w-4xl max-h-[85vh] overflow-y-auto shadow-large mx-auto my-auto"
+                style={{
+                  maxWidth: 'min(90vw, 1024px)',
+                  maxHeight: 'min(85vh, 800px)'
+                }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header */}

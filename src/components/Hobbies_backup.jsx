@@ -59,16 +59,18 @@ const HobbyModal = memo(({ hobby, onClose }) => {
       const isAtTop = scrollTop === 0;
       const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
       
-      // Solo se tocchiamo i bordi, permetti il touch normale dentro la modale
+      // Solo se tocchiamo i bordi
       if (isAtTop || isAtBottom) {
         const touch = e.touches[0];
         if (touch) {
+          // Permetti il touch normale dentro la modale
           return;
         }
       }
     };
     
     el.addEventListener('wheel', preventBackgroundScroll, { passive: false });
+    // Usa passive per touch per migliori performance
     el.addEventListener('touchmove', preventTouchBackgroundScroll, { passive: true });
     
     return () => {
@@ -216,27 +218,33 @@ const Hobbies = () => {
   const { t } = useTranslation()
   const { openModal, closeModal } = useModal()
   const [selectedHobby, setSelectedHobby] = useState(null)
+  // Ref globale per la posizione scroll, come in Experience.jsx
   const scrollPositionRef = React.useRef(0)
   const wasModalOpenRef = React.useRef(false)
   
   // Blocca/ripristina scroll come in Experience.jsx
   React.useEffect(() => {
     if (selectedHobby && !wasModalOpenRef.current) {
+      // Save scroll position and block scroll
       scrollPositionRef.current = window.scrollY;
       document.body.classList.add('modal-open');
       document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
+      // Notifica il ModalContext che una modale è aperta
       openModal()
       wasModalOpenRef.current = true
     } else if (!selectedHobby && wasModalOpenRef.current) {
+      // Restore scroll position and unblock scroll
       document.body.classList.remove('modal-open');
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
+      // Usa setTimeout per assicurare che avvenga dopo il render
       setTimeout(() => {
         window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
       }, 0);
+      // Notifica il ModalContext che la modale è chiusa
       closeModal()
       wasModalOpenRef.current = false
     }
@@ -248,65 +256,65 @@ const Hobbies = () => {
         document.body.style.width = '';
       }
     };
-  }, [selectedHobby]);
+  }, [selectedHobby]); // Rimuoviamo openModal e closeModal dalle dipendenze
 
   const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   const hobbies = t('hobbies.hobbies')
   const swipeHandlers = useSwipe(hobbies.length, {
     threshold: 50,
     preventDefaultTouchmoveEvent: false,
-    trackMouse: false,
+    trackMouse: false, // Disable mouse tracking to avoid conflicts
     trackTouch: true,
     onSwipedUp: () => {},
     onSwipedDown: () => {},
-    onTap: () => {},
+    onTap: () => {}, // Disable tap handling to avoid conflicts with clicks
   })
 
-  const nextSlide = () => swipeHandlers.nextSlide()
-  const prevSlide = () => swipeHandlers.prevSlide()
-
-  const getIcon = (iconName) => {
-    if (!iconName || typeof iconName !== 'string') {
-      return Music;
+  const HobbyCard = ({ hobby, index }) => {
+    // Better icon handling with fallback
+    const getIcon = () => {
+      if (!hobby.icon || typeof hobby.icon !== 'string') {
+        return LucideIcons['Star'];
+      }
+      return LucideIcons[hobby.icon] || LucideIcons['Star'];
+    };
+    const Icon = getIcon();
+    // Funzione per estrarre solo la parte testuale (markdown) e troncarla, rimuovendo i link markdown ma lasciando grassetto/corsivo
+    const stripMarkdownLinks = (str) => {
+      // Rimuove i link markdown ma lascia il testo visibile, mantiene * e **
+      // [testo](url) => testo
+      return str.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+    };
+    const getShortText = (desc, maxChars = 180) => {
+      if (typeof desc === 'string') {
+        let clean = stripMarkdownLinks(desc);
+        if (clean.length > maxChars) {
+          clean = clean.slice(0, maxChars) + '…';
+        }
+        return clean;
+      }
+      if (Array.isArray(desc)) {
+        let chars = 0;
+        let result = [];
+        for (const item of desc) {
+          if (typeof item === 'string') {
+            let clean = stripMarkdownLinks(item);
+            if (chars + clean.length > maxChars) {
+              result.push(clean.slice(0, maxChars - chars) + '…');
+              break;
+            } else {
+              result.push(clean);
+              chars += clean.length;
+            }
+          }
+        }
+        return result.length ? result : '…';
+      }
+      return '…';
     }
-    return LucideIcons[iconName] || Music;
-  }
-
-  // Funzione helper per estrarre una descrizione troncata dalla descrizione completa
-  const getTruncatedDescription = (description, maxLength = 150) => {
-    if (!description) return '';
-    
-    // Se è una stringa, la usiamo direttamente
-    if (typeof description === 'string') {
-      return description.length > maxLength 
-        ? description.substring(0, maxLength).trim() + '...'
-        : description;
-    }
-    
-    // Se è un array, estraiamo solo le stringhe e le concateniamo
-    if (Array.isArray(description)) {
-      const textContent = description
-        .filter(item => typeof item === 'string')
-        .join(' ')
-        .replace(/\*\*/g, '') // Rimuove markdown bold
-        .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Converte link markdown in testo
-        .trim();
-      
-      return textContent.length > maxLength 
-        ? textContent.substring(0, maxLength).trim() + '...'
-        : textContent;
-    }
-    
-    return '';
-  }
-
-  const HobbyCard = ({ hobby, index, className = "" }) => {
-    const Icon = getIcon(hobby.icon)
-    const truncatedDescription = getTruncatedDescription(hobby.description, 120)
-    
     return (
       <div
-        className={`card card-hover cursor-pointer h-full group ${className} transition-all duration-700 ease-out transform ${
+        className={`group relative cursor-pointer h-full transition-all duration-700 ease-out transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
         style={{
@@ -315,54 +323,206 @@ const Hobbies = () => {
         }}
         onClick={() => setSelectedHobby(hobby)}
       >
-        <div className="p-6 flex flex-col h-full relative overflow-hidden">
-          {/* Header */}
-          <div className="flex items-start justify-between mb-4 relative z-10">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg group-hover:shadow-xl transition-all duration-300">
-              <Icon className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-sm">
-              <Calendar className="w-4 h-4 mr-1" />
-              {hobby.period}
-            </div>
-          </div>
-
+        <div className="relative overflow-hidden card card-hover h-full hover:scale-105 transition-transform duration-300">
+          {/* Gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-secondary-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
           {/* Content */}
-          <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-3 font-display relative z-10">
-            {hobby.title}
-          </h3>
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-3 flex-1 relative z-10">
-            {truncatedDescription}
-          </p>
-
-          {/* Skills/Tags */}
-          {hobby.tags && (
-            <div className="flex flex-wrap gap-2 mb-4 relative z-10">
-              {hobby.tags.slice(0, 3).map((tag, i) => (
-                <span key={i} className="skill-badge text-xs">
-                  {tag}
-                </span>
-              ))}
-              {hobby.tags.length > 3 && (
-                <span className="text-xs text-neutral-500 dark:text-neutral-400 px-2 py-1">
-                  +{hobby.tags.length - 3} altri
-                </span>
-              )}
+          <div className="relative p-8 flex flex-col h-full">
+            {/* Icon */}
+            <div className="w-20 h-20 bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-soft">
+              <Icon className="w-10 h-10 text-primary-600 dark:text-primary-400" />
             </div>
-          )}
-
-          {/* View More */}
-          <div className="flex items-center justify-between mt-auto relative z-10">
-            <span className="text-sm text-primary-600 dark:text-primary-400 font-medium">
-              Scopri di più
-            </span>
-            <ExternalLink className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+            {/* Title */}
+            <h3 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-4 font-display">
+              {hobby.title}
+            </h3>
+            {/* Description (max height, overflow fade) */}
+            <div className="relative mb-4 flex-1 max-h-32 overflow-hidden text-neutral-600 dark:text-neutral-400" style={{ WebkitMaskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)', maskImage: 'linear-gradient(180deg, #000 70%, transparent 100%)' }}>
+              <MarkdownRenderer content={getShortText(hobby.description)} inline={true} />
+            </div>
+            {/* Click indicator */}
+            <div className="flex items-center justify-between mt-auto">
+              <span className="text-sm text-neutral-500 dark:text-neutral-400">
+                Clicca per saperne di più
+              </span>
+              <ExternalLink className="w-4 h-4 text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform" />
+            </div>
           </div>
           {/* Decorative elements */}
           <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary-500/10 to-transparent rounded-full blur-xl group-hover:from-primary-500/20 transition-all duration-300" />
           <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-tr from-secondary-500/5 to-transparent rounded-full blur-xl group-hover:from-secondary-500/10 transition-all duration-300" />
         </div>
       </div>
+    )
+  }
+
+  const HobbyModal = ({ hobby, onClose, scrollPositionRef }) => {
+    // Better icon handling with fallback
+    const getIcon = () => {
+      if (!hobby.icon || typeof hobby.icon !== 'string') {
+        return LucideIcons['Star'];
+      }
+      return LucideIcons[hobby.icon] || LucideIcons['Star'];
+    };
+    const Icon = getIcon();
+  // (Gestione scroll spostata nel componente principale)
+    // Prevent scroll chaining: only modal scrolls, never background
+    const modalContentRef = React.useRef(null);
+    React.useEffect(() => {
+      const el = modalContentRef.current;
+      if (!el) return;
+      
+      const preventBackgroundScroll = (e) => {
+        // Permetti lo scroll all'interno della modale
+        const { scrollTop, scrollHeight, clientHeight } = el;
+        const isAtTop = scrollTop === 0;
+        const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+        
+        // Previeni lo scroll del background solo se siamo ai bordi
+        if ((e.deltaY < 0 && isAtTop) || (e.deltaY > 0 && isAtBottom)) {
+          e.preventDefault();
+        }
+      };
+      
+      // Gestione touch più delicata
+      const preventTouchBackgroundScroll = (e) => {
+        const { scrollTop, scrollHeight, clientHeight } = el;
+        const isAtTop = scrollTop === 0;
+        const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+        
+        // Solo se tocchiamo i bordi
+        if (isAtTop || isAtBottom) {
+          const touch = e.touches[0];
+          if (touch) {
+            // Permetti il touch normale dentro la modale
+            return;
+          }
+        }
+      };
+      
+      el.addEventListener('wheel', preventBackgroundScroll, { passive: false });
+      // Usa passive per touch per migliori performance
+      el.addEventListener('touchmove', preventTouchBackgroundScroll, { passive: true });
+      
+      return () => {
+        el.removeEventListener('wheel', preventBackgroundScroll);
+        el.removeEventListener('touchmove', preventTouchBackgroundScroll);
+      };
+    }, []);
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0
+        }}
+        onClick={onClose}
+      >
+        <motion.div
+          ref={modalContentRef}
+          initial={{ scale: 0.95, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.95, opacity: 0, y: 20 }}
+          className="bg-white dark:bg-neutral-800 rounded-2xl p-8 min-h-[40vh] overflow-y-auto shadow-large mx-auto my-auto"
+          style={{
+            maxWidth: 'min(90vw, 1024px)',
+            maxHeight: 'min(85vh, 800px)'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-neutral-100 dark:bg-neutral-800">
+                <Icon className="w-8 h-8 text-primary-600" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-2 font-display">
+                  {hobby.title}
+                </h3>
+              </div>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Description avanzata */}
+          <div className="mb-6 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <MarkdownRenderer content={hobby.description} />
+          </div>
+
+          {/* Media: mostra solo se almeno uno tra immagini, documenti o link è presente */}
+          {hobby.media && (
+            (Array.isArray(hobby.media.images) && hobby.media.images.length > 0 ||
+              Array.isArray(hobby.media.documents) && hobby.media.documents.length > 0 ||
+              Array.isArray(hobby.media.links) && hobby.media.links.length > 0) && (
+              <div className="border-t border-neutral-200 dark:border-neutral-700 pt-6">
+                <h4 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-4">
+                  Media e Materiali
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {hobby.media.images?.length > 0 && (
+                    <div>
+                      <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
+                        <ImageIcon className="w-4 h-4 mr-1" />
+                        Immagini
+                      </h5>
+                      <div className="space-y-1">
+                        {hobby.media.images.map((image, i) => (
+                          <div key={i} className="flex items-center group">
+                            <img src={image.src} alt={image.alt} className="w-16 h-16 object-cover rounded mr-2 border-2 border-transparent group-hover:border-primary-600 transition duration-150" />
+                            <span>{image.alt}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {hobby.media.documents?.length > 0 && (
+                    <div>
+                      <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
+                        <FileText className="w-4 h-4 mr-1" />
+                        Documenti
+                      </h5>
+                      <div className="space-y-1">
+                        {hobby.media.documents.map((doc, i) => (
+                          <a key={i} href={doc.src} target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block">
+                            {doc.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {hobby.media.links?.length > 0 && (
+                    <div>
+                      <h5 className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 flex items-center">
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Link
+                      </h5>
+                      <div className="space-y-1">
+                        {hobby.media.links.map((link, i) => (
+                          <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 dark:text-primary-400 hover:underline cursor-pointer block">
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )
+          )}
+        </motion.div>
+      </motion.div>
     )
   }
 
@@ -388,16 +548,19 @@ const Hobbies = () => {
         
         {/* Desktop Grid */}
         <div className="hidden md:block hobbies-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {hobbies.map((hobby, index) => (
-              <HobbyCard key={hobby.id} hobby={hobby} index={index} />
+              <HobbyCard key={hobby.key || hobby.title || `hobby-${index}`} hobby={hobby} index={index} />
             ))}
           </div>
         </div>
 
         {/* Mobile Carousel */}
-        <div className="block md:hidden">
-          <div className="carousel-container" {...swipeHandlers.handlers}>
+        <div className="block md:hidden" style={{overflow: 'visible'}}>
+          <div 
+            className="carousel-container" 
+            {...swipeHandlers.handlers}
+          >
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}
               style={{ 
@@ -406,7 +569,7 @@ const Hobbies = () => {
               }}
             >
               {hobbies.map((hobby, index) => (
-                <div key={hobby.id} className="carousel-item">
+                <div key={`${hobby.key || hobby.title || `hobby-${index}`}-mobile`} className="carousel-item">
                   <HobbyCard hobby={hobby} index={index} />
                 </div>
               ))}

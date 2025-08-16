@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { LanguageProvider } from './contexts/LanguageContext'
 import { ThemeProvider } from './contexts/ThemeContext'
+import { ModalProvider, useModal } from './contexts/ModalContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -21,6 +22,7 @@ const AppContent = () => {
   const [isScrolling, setIsScrolling] = useState(false)
   const [showTransition, setShowTransition] = useState(false)
   const [transitionDirection, setTransitionDirection] = useState('down')
+  const { isModalOpen } = useModal()
   
   const sectionIds = ['home', 'about', 'experience', 'publications-and-projects', 'hobbies', 'contact', 'footer']
 
@@ -182,11 +184,12 @@ const AppContent = () => {
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 text-neutral-900 dark:text-neutral-100 transition-all duration-500">
       <Navbar />
       
-      {/* Section Indicator */}
+      {/* Section Indicator - nascondi su mobile quando una modale è aperta */}
       <SectionIndicator 
         currentSection={currentSection}
         totalSections={sectionIds.length}
         onSectionClick={goToSection}
+        isHidden={isModalOpen}
       />
       
       {/* Section Transition */}
@@ -229,9 +232,11 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <Router>
-          <AppContent />
-        </Router>
+        <ModalProvider>
+          <Router>
+            <AppContent />
+          </Router>
+        </ModalProvider>
       </LanguageProvider>
     </ThemeProvider>
   )
