@@ -7,6 +7,7 @@ const useSwipe = (itemsCount, options = {}) => {
     delta = 10,
     trackMouse = false,
     trackTouch = true,
+    enableHorizontalScroll = true, // Nuovo parametro per abilitare scroll orizzontale
     rotationAngle = 0,
     onSwiped = () => {},
     onSwipedLeft = () => {},
@@ -161,6 +162,52 @@ const useSwipe = (itemsCount, options = {}) => {
       setCurrentIndex(prev => prev - 1)
     }
   }
+
+  // useEffect per gestire wheel event
+  useEffect(() => {
+    if (!enableHorizontalScroll || !elementRef.current) return
+
+    const element = elementRef.current
+    console.log('Setting up wheel listener on element:', element)
+    
+    const wheelHandler = (e) => {
+      console.log('Wheel event received:', { 
+        deltaX: e.deltaX, 
+        deltaY: e.deltaY, 
+        shiftKey: e.shiftKey,
+        currentIndex,
+        itemsCount 
+      })
+      
+      // Rileva scroll orizzontale o shift+scroll verticale
+      const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey
+      
+      if (isHorizontalScroll) {
+        console.log('Horizontal scroll detected!')
+        e.preventDefault()
+        e.stopPropagation()
+        
+        const scrollDirection = e.deltaX > 0 || (e.shiftKey && e.deltaY > 0) ? 1 : -1
+        console.log('Scroll direction:', scrollDirection)
+        
+        if (scrollDirection > 0 && currentIndex < itemsCount - 1) {
+          console.log('Moving to next slide')
+          setCurrentIndex(prev => prev + 1)
+        } else if (scrollDirection < 0 && currentIndex > 0) {
+          console.log('Moving to prev slide')
+          setCurrentIndex(prev => prev - 1)
+        }
+      }
+    }
+    
+    element.addEventListener('wheel', wheelHandler, { passive: false })
+    console.log('Wheel listener added')
+
+    return () => {
+      console.log('Removing wheel listener')
+      element.removeEventListener('wheel', wheelHandler)
+    }
+  }, [enableHorizontalScroll, currentIndex, itemsCount])
 
   // Handlers for container
   const handlers = {

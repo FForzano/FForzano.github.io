@@ -258,6 +258,7 @@ const Hobbies = () => {
     preventDefaultTouchmoveEvent: false,
     trackMouse: false,
     trackTouch: true,
+    enableHorizontalScroll: true, // Abilita lo scroll orizzontale
     onSwipedUp: () => {},
     onSwipedDown: () => {},
     onTap: () => {},
@@ -397,7 +398,40 @@ const Hobbies = () => {
         </div>
 
         {/* Mobile Carousel */}
-        <div className="block md:hidden">
+        <div 
+          className="block md:hidden"
+          onWheel={(e) => {
+            console.log('Wheel event on Hobbies:', { 
+              deltaX: e.deltaX, 
+              deltaY: e.deltaY, 
+              shiftKey: e.shiftKey,
+              currentIndex: swipeHandlers.currentIndex,
+              canGoNext: swipeHandlers.canGoNext,
+              canGoPrev: swipeHandlers.canGoPrev
+            })
+            
+            // Rileva scroll orizzontale con criteri più permissivi
+            const hasHorizontalDelta = Math.abs(e.deltaX) > 0
+            const isShiftScroll = e.shiftKey && Math.abs(e.deltaY) > 0
+            const isHorizontalScroll = hasHorizontalDelta || isShiftScroll
+            
+            if (isHorizontalScroll) {
+              e.preventDefault()
+              e.stopPropagation()
+              
+              const scrollDirection = e.deltaX > 0 || (e.shiftKey && e.deltaY > 0) ? 1 : -1
+              console.log('Horizontal scroll detected, direction:', scrollDirection)
+              
+              if (scrollDirection > 0 && swipeHandlers.canGoNext) {
+                console.log('Going to next slide')
+                nextSlide()
+              } else if (scrollDirection < 0 && swipeHandlers.canGoPrev) {
+                console.log('Going to prev slide')
+                prevSlide()
+              }
+            }
+          }}
+        >
           <div className="carousel-container" {...swipeHandlers.handlers}>
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}

@@ -196,14 +196,14 @@
   /* Carosello con supporto touch */
   .carousel-container {
     position: relative;
-    overflow: hidden;
-    touch-action: pan-x;
+    overflow: visible; /* Cambiato da hidden per permettere scroll verticale */
+    touch-action: manipulation; /* Cambiato da pan-x per permettere scroll verticale + orizzontale */
   }
 
   .carousel-track {
     display: flex;
     transition: transform 0.3s ease-out;
-    touch-action: pan-x;
+    touch-action: manipulation; /* Cambiato da pan-x */
     will-change: transform;
   }
 
@@ -215,7 +215,7 @@
     min-width: 100%;
     flex-shrink: 0;
     padding: 0 1rem;
-    touch-action: pan-x;
+    touch-action: manipulation; /* Cambiato da pan-x */
   }
 
   .carousel-item-grid {
@@ -427,11 +427,14 @@ input:focus, textarea:focus, select:focus {
 
 /* Carousel Styles for Mobile */
 .carousel-container {
-  @apply relative overflow-hidden;
+  @apply relative;
+  overflow: visible; /* Permette scroll verticale */
+  touch-action: manipulation; /* Permette sia scroll orizzontale che verticale */
 }
 
 .carousel-track {
   @apply flex transition-transform duration-300 ease-out;
+  touch-action: manipulation; /* Permette sia scroll orizzontale che verticale */
 }
 
 .carousel-track.dragging {
@@ -440,6 +443,7 @@ input:focus, textarea:focus, select:focus {
 
 .carousel-item {
   @apply flex-shrink-0 w-full px-2;
+  touch-action: manipulation; /* Permette sia scroll orizzontale che verticale */
 }
 
 .carousel-controls {
