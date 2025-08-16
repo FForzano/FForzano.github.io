@@ -41,8 +41,8 @@ const Experience = () => {
       document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
-      // Notifica il ModalContext che una modale è aperta
-      openModal()
+      // Notifica il ModalContext che una modale è aperta con callback di chiusura
+      openModal(() => setSelectedExperience(null))
       wasModalOpenRef.current = true
     } else if (!selectedExperience && wasModalOpenRef.current) {
       // Restore scroll position and unblock scroll

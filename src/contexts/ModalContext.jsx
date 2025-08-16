@@ -15,6 +15,7 @@ export const ModalProvider = ({ children }) => {
   const modalCountRef = useRef(0)
   const historyStateRef = useRef(null)
   const isHandlingPopStateRef = useRef(false)
+  const forceCloseCallbackRef = useRef(null)
 
   // Gestione del back button del browser
   useEffect(() => {
@@ -23,19 +24,24 @@ export const ModalProvider = ({ children }) => {
       if (isHandlingPopStateRef.current) return
       
       // Se abbiamo una modale aperta, chiudila invece di navigare
-      if (isModalOpen && modalCountRef.current > 0) {
+      if (modalCountRef.current > 0) {
+        e.preventDefault()
         isHandlingPopStateRef.current = true
-        setIsModalOpen(false)
-        modalCountRef.current = 0
         
-        // Ripristina la history senza causare un nuovo popstate
+        // Forza la chiusura del modal tramite callback
+        if (forceCloseCallbackRef.current) {
+          forceCloseCallbackRef.current()
+        }
+        
+        // Chiudi il modal immediatamente senza manipolare la history
+        modalCountRef.current = 0
+        setIsModalOpen(false)
+        
+        // Reset dopo un breve delay
         setTimeout(() => {
-          if (historyStateRef.current) {
-            window.history.pushState(historyStateRef.current, '', window.location.href)
-            historyStateRef.current = null
-          }
+          historyStateRef.current = null
           isHandlingPopStateRef.current = false
-        }, 10)
+        }, 50)
       }
     }
 
@@ -44,12 +50,15 @@ export const ModalProvider = ({ children }) => {
     return () => {
       window.removeEventListener('popstate', handlePopState)
     }
-  }, [isModalOpen])
+  }, [])
 
-  const openModal = useCallback(() => {
+  const openModal = useCallback((forceCloseCallback) => {
     if (modalCountRef.current === 0) {
       // Salva lo stato corrente della history
       historyStateRef.current = window.history.state
+      
+      // Registra il callback per la chiusura forzata
+      forceCloseCallbackRef.current = forceCloseCallback
       
       modalCountRef.current = 1
       setIsModalOpen(true)
@@ -63,6 +72,9 @@ export const ModalProvider = ({ children }) => {
     if (modalCountRef.current > 0) {
       modalCountRef.current = 0
       setIsModalOpen(false)
+      
+      // Pulisci il callback
+      forceCloseCallbackRef.current = null
       
       // Solo se non stiamo già gestendo un popstate, naviga indietro
       if (!isHandlingPopStateRef.current && historyStateRef.current !== null) {

@@ -227,7 +227,8 @@ const Hobbies = () => {
       document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
-      openModal()
+      // Notifica il ModalContext che una modale è aperta con callback di chiusura
+      openModal(() => setSelectedHobby(null))
       wasModalOpenRef.current = true
     } else if (!selectedHobby && wasModalOpenRef.current) {
       document.body.classList.remove('modal-open');

@@ -62,6 +62,11 @@ const AppContent = () => {
     let lastScrollTime = 0
     
     const handleWheel = (e) => {
+      // Non gestire lo scroll se un modal è aperto
+      if (isModalOpen) {
+        return
+      }
+      
       const now = Date.now()
       
       // Throttle scroll events
@@ -118,11 +123,16 @@ const AppContent = () => {
     return () => {
       window.removeEventListener('wheel', handleWheel)
     }
-  }, [currentSection, isScrolling, sectionIds])
+  }, [currentSection, isScrolling, sectionIds, isModalOpen])
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Non gestire la navigazione da tastiera se un modal è aperto
+      if (isModalOpen) {
+        return
+      }
+      
       if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isScrolling) {
         e.preventDefault()
         
@@ -137,12 +147,13 @@ const AppContent = () => {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentSection, isScrolling, sectionIds])
+  }, [currentSection, isScrolling, sectionIds, isModalOpen])
 
   // Track current section based on scroll position (for manual scrolling)
   useEffect(() => {
     const handleScroll = () => {
-      if (isScrolling) return
+      // Non aggiornare la sezione corrente se un modal è aperto
+      if (isScrolling || isModalOpen) return
 
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
@@ -178,7 +189,7 @@ const AppContent = () => {
       window.removeEventListener('scroll', debouncedHandleScroll)
       clearTimeout(scrollTimeout)
     }
-  }, [isScrolling, sectionIds, currentSection])
+  }, [isScrolling, sectionIds, currentSection, isModalOpen])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 text-neutral-900 dark:text-neutral-100 transition-all duration-500">
