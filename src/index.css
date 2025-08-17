@@ -429,21 +429,32 @@ input:focus, textarea:focus, select:focus {
 .carousel-container {
   @apply relative;
   overflow: visible; /* Permette scroll verticale */
-  touch-action: manipulation; /* Permette sia scroll orizzontale che verticale */
+  touch-action: manipulation; /* Permette tutti i tipi di touch */
 }
 
 .carousel-track {
   @apply flex transition-transform duration-300 ease-out;
-  touch-action: manipulation; /* Permette sia scroll orizzontale che verticale */
+  touch-action: manipulation; /* Permette tutti i tipi di touch */
 }
 
 .carousel-track.dragging {
   @apply transition-none;
+  touch-action: pan-x; /* Solo durante il drag, limita a pan orizzontale */
+}
+
+/* Durante il drag, disabilita pointer events sui contenuti */
+.carousel-track.dragging .carousel-item * {
+  pointer-events: none;
+}
+
+/* Ma riabilita sui pulsanti anche durante il drag */
+.carousel-track.dragging .carousel-item button {
+  pointer-events: auto;
 }
 
 .carousel-item {
   @apply flex-shrink-0 w-full px-2;
-  touch-action: manipulation; /* Permette sia scroll orizzontale che verticale */
+  touch-action: manipulation; /* Permette tutti i tipi di touch */
 }
 
 .carousel-controls {

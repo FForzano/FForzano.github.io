@@ -1,31 +1,30 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 
-const useSwipe = (itemsCount, options = {}) => {
-  const {
-    threshold = 50,
-    preventDefaultTouchmoveEvent = false,
-    delta = 10,
-    trackMouse = false,
-    trackTouch = true,
-    enableHorizontalScroll = true, // Nuovo parametro per abilitare scroll orizzontale
-    rotationAngle = 0,
-    onSwiped = () => {},
-    onSwipedLeft = () => {},
-    onSwipedRight = () => {},
-    onSwipedUp = () => {},
-    onSwipedDown = () => {},
-    onSwipeStart = () => {},
-    onTap = () => {},
-  } = options
-
+const useSwipe = ({
+  onSwipedLeft = () => {},
+  onSwipedRight = () => {},
+  onSwipedUp = () => {},
+  onSwipedDown = () => {},
+  onSwipeStart = () => {},
+  onSwipeEnd = () => {},
+  onSwiped = () => {},
+  onTap = () => {},
+  preventDefaultTouchmoveEvent = false,
+  trackMouse = false,
+  trackTouch = true,
+  minSwipeDistance = 50,
+  delta = 10,
+  itemsCount = 0,
+  enableHorizontalScroll = false
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [touchStart, setTouchStart] = useState({ x: null, y: null })
-  const [touchEnd, setTouchEnd] = useState({ x: null, y: null })
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState(0)
   const elementRef = useRef(null)
 
-  const minSwipeDistance = threshold
+  // Touch tracking
+  const touchStartRef = useRef({ x: 0, y: 0 })
+  const lastTouchRef = useRef({ x: 0, y: 0 })
 
   // Calculate position based on current index and drag offset
   const getTranslateX = () => {
@@ -36,70 +35,103 @@ const useSwipe = (itemsCount, options = {}) => {
 
   const onTouchStart = (e) => {
     if (!trackTouch) return
+    console.log('Touch start:', e.targetTouches[0])
     setTouchEnd({ x: null, y: null })
     setTouchStart({
       x: e.targetTouches[0].clientX,
       y: e.targetTouches[0].clientY
     })
-    setIsDragging(true)
+    setIsDragging(false) // Non è ancora dragging, potrebbe essere tap o scroll
     onSwipeStart(e)
   }
 
   const onTouchMove = (e) => {
-    if (!trackTouch || !isDragging) return
+    if (!trackTouch) return
     const currentTouch = {
       x: e.targetTouches[0].clientX,
       y: e.targetTouches[0].clientY
     }
+    console.log('Touch move:', { currentTouch, touchStart, isDragging })
     if (touchStart.x !== null && touchStart.y !== null) {
       const diffX = currentTouch.x - touchStart.x
       const diffY = currentTouch.y - touchStart.y
-      // Scegli la direzione dominante
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        setDragOffset(diffX)
-      } else {
-        setDragOffset(diffY)
+      console.log('Touch diff:', { diffX, diffY, absDiffX: Math.abs(diffX), absDiffY: Math.abs(diffY) })
+      
+      const isHorizontalMove = Math.abs(diffX) > Math.abs(diffY)
+      const threshold = 5 // Soglia ridotta per iniziare il drag
+      
+      if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
+        if (isHorizontalMove && Math.abs(diffX) > threshold) {
+          // È un movimento orizzontale, inizia il drag del carousel
+          if (!isDragging) {
+            setIsDragging(true)
+            console.log('Started horizontal drag with diffX:', diffX)
+          }
+          setDragOffset(diffX)
+          console.log('Setting drag offset:', diffX)
+          if (preventDefaultTouchmoveEvent) {
+            e.preventDefault()
+            e.stopPropagation()
+          }
+        } else if (!isHorizontalMove && Math.abs(diffY) > threshold) {
+          // È un movimento verticale, lascia che il browser gestisca lo scroll
+          console.log('Vertical scroll detected, diffY:', diffY)
+          // Non preventDefault per permettere scroll verticale
+        }
       }
-    }
-    if (preventDefaultTouchmoveEvent) {
-      e.preventDefault()
     }
   }
 
   const onTouchEnd = (e) => {
-    if (!trackTouch || !touchStart.x || !isDragging) return
+    if (!trackTouch || !touchStart.x) return
     const currentTouch = {
       x: e.changedTouches[0].clientX,
       y: e.changedTouches[0].clientY
     }
+    console.log('Touch end:', { currentTouch, touchStart, wasDragging: isDragging, currentIndex })
     setTouchEnd(currentTouch)
-    setIsDragging(false)
-    setDragOffset(0)
-    const distanceX = touchStart.x - currentTouch.x
-    const distanceY = touchStart.y - currentTouch.y
-    // Swipe orizzontale
-    const isLeftSwipe = distanceX > minSwipeDistance
-    const isRightSwipe = distanceX < -minSwipeDistance
+    
+    if (isDragging) {
+      // Era un drag, gestisci lo swipe
+      console.log('Processing drag end...')
+      setIsDragging(false)
+      setDragOffset(0)
+      
+      const distanceX = touchStart.x - currentTouch.x
+      const distanceY = touchStart.y - currentTouch.y
+      console.log('Touch distances:', { distanceX, distanceY, minSwipeDistance, itemsCount, currentIndex })
+      // Swipe orizzontale
+      const isLeftSwipe = distanceX > minSwipeDistance
+      const isRightSwipe = distanceX < -minSwipeDistance
     // Swipe verticale
-    const isUpSwipe = distanceY > minSwipeDistance
-    const isDownSwipe = distanceY < -minSwipeDistance
-    if (isLeftSwipe && currentIndex < itemsCount - 1) {
-      setCurrentIndex(prev => prev + 1)
-      onSwipedLeft()
-      onSwiped('left')
-    } else if (isRightSwipe && currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1)
-      onSwipedRight()
-      onSwiped('right')
-    } else if (isUpSwipe) {
-      onSwipedUp()
-      onSwiped('up')
-    } else if (isDownSwipe) {
-      onSwipedDown()
-      onSwiped('down')
-    } else if (Math.abs(distanceX) < delta && Math.abs(distanceY) < delta) {
-      onTap()
+      const isUpSwipe = distanceY > minSwipeDistance
+      const isDownSwipe = distanceY < -minSwipeDistance
+      console.log('Swipe detection:', { isLeftSwipe, isRightSwipe, isUpSwipe, isDownSwipe })
+      if (isLeftSwipe && currentIndex < itemsCount - 1) {
+        console.log('Executing left swipe -> next slide')
+        setCurrentIndex(prev => prev + 1)
+        onSwipedLeft()
+        onSwiped('left')
+      } else if (isRightSwipe && currentIndex > 0) {
+        console.log('Executing right swipe -> prev slide')
+        setCurrentIndex(prev => prev - 1)
+        onSwipedRight()
+        onSwiped('right')
+      } else if (isUpSwipe) {
+        onSwipedUp()
+        onSwiped('up')
+      } else if (isDownSwipe) {
+        onSwipedDown()
+        onSwiped('down')
+      } else if (Math.abs(distanceX) < delta && Math.abs(distanceY) < delta) {
+        onTap()
+      }
+    } else {
+      // Non era un drag, potrebbe essere un tap - lascia che l'evento si propaghi normalmente
+      console.log('Touch end without drag - allowing tap to propagate')
     }
+    
+    onSwipeEnd(e)
   }
 
   const onMouseDown = (e) => {

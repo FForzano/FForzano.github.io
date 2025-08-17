@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import '../modal.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -20,7 +20,7 @@ import {
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
 import { useModal } from '../contexts/ModalContext'
-import useSwipe from '../hooks/useSwipe'
+import useSimpleSwipe from '../hooks/useSimpleSwipe'
 import ReactMarkdown from 'react-markdown'
 import '../assets/experience-logos.css'
 
@@ -68,18 +68,18 @@ const Experience = () => {
     };
   }, [selectedExperience]); // Rimuoviamo openModal e closeModal dalle dipendenze
 
-  // Hook per il carosello mobile
+    // Hook per il carosello mobile semplificato
   const experiences = t('experience.positions')
-  const swipeHandlers = useSwipe(experiences.length, {
-    threshold: 50,
-    preventDefaultTouchmoveEvent: false,
-    trackMouse: false, // Disable mouse tracking to avoid conflicts
-    trackTouch: true,
-    enableHorizontalScroll: true, // Abilita lo scroll orizzontale
-    // Abilita swipe verticale
-    onSwipedUp: () => {},
-    onSwipedDown: () => {},
-    onTap: () => {}, // Disable tap handling to avoid conflicts with clicks
+  
+  // Stabilizza la funzione onTap per evitare re-render
+  const handleCarouselTap = useCallback(() => {
+    console.log('Tap on carousel')
+  }, [])
+  
+  const swipeHandlers = useSimpleSwipe({
+    itemsCount: experiences.length,
+    enableHorizontalScroll: true,
+    onTap: handleCarouselTap
   })
 
   // Hook per animazioni ottimizzate - separati per desktop e mobile
@@ -253,7 +253,10 @@ const Experience = () => {
             }
           }}
         >
-          <div className="carousel-container" {...swipeHandlers.handlers}>
+          <div 
+            className="carousel-container"
+            ref={swipeHandlers.elementRef}
+          >
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}
               style={{ 

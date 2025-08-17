@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useCallback } from 'react'
 import MarkdownRenderer from './MarkdownRenderer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -22,7 +22,7 @@ import * as LucideIcons from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useNoFlickerAnimation } from '../hooks/useOptimizedAnimation'
 import { useModal } from '../contexts/ModalContext'
-import useSwipe from '../hooks/useSwipe'
+import useSimpleSwipe from '../hooks/useSimpleSwipe'
 
 // Componente modale separato per evitare ricreazioni
 const HobbyModal = memo(({ hobby, onClose }) => {
@@ -253,15 +253,16 @@ const Hobbies = () => {
 
   const { ref: sectionRef, isVisible } = useNoFlickerAnimation()
   const hobbies = t('hobbies.hobbies')
-  const swipeHandlers = useSwipe(hobbies.length, {
-    threshold: 50,
-    preventDefaultTouchmoveEvent: false,
-    trackMouse: false,
-    trackTouch: true,
-    enableHorizontalScroll: true, // Abilita lo scroll orizzontale
-    onSwipedUp: () => {},
-    onSwipedDown: () => {},
-    onTap: () => {},
+  
+  // Stabilizza la funzione onTap per evitare re-render
+  const handleCarouselTap = useCallback(() => {
+    console.log('Tap on hobbies carousel')
+  }, [])
+  
+  const swipeHandlers = useSimpleSwipe({
+    itemsCount: hobbies.length,
+    enableHorizontalScroll: true,
+    onTap: handleCarouselTap
   })
 
   const nextSlide = () => swipeHandlers.nextSlide()
@@ -432,7 +433,10 @@ const Hobbies = () => {
             }
           }}
         >
-          <div className="carousel-container" {...swipeHandlers.handlers}>
+          <div 
+            className="carousel-container"
+            ref={swipeHandlers.elementRef}
+          >
             <div 
               className={`carousel-track ${swipeHandlers.isDragging ? 'dragging' : ''}`}
               style={{ 
