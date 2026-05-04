@@ -1,6 +1,6 @@
 const contact = {
-  title: "Let's get in touch",
-  subtitle: 'Have a project in mind or just want to say hello? Don\'t hesitate to contact me. I\'m always open to new opportunities!',
+  title: "Contact Me",
+  subtitle: 'Use the form below to contact me.',
   info: 'Contact information',
   followMe: 'Follow me on social',
   sendMessage: 'Send a message',

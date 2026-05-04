@@ -1,7 +1,7 @@
 // Contact Section
 const contact = {
-    title: 'Mettiamoci in contatto',
-    subtitle: 'Hai un progetto in mente o vuoi semplicemente dire ciao? Non esitare a contattarmi. Sono sempre aperto a nuove opportunità!',
+    title: 'Contattami',
+    subtitle: 'Usa il modulo sottostante per contattarmi.',
     info: 'Informazioni di contatto',
     followMe: 'Seguimi sui social',
     sendMessage: 'Invia un messaggio',
