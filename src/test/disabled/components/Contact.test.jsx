@@ -8,7 +8,7 @@ describe('Contact Component', () => {
   it('should render contact section title', () => {
     renderWithLanguage(<Contact />)
     
-    expect(screen.getByText('Mettiamoci in contatto')).toBeInTheDocument()
+    expect(screen.getByText('Contattami')).toBeInTheDocument()
   })
 
   it('should render contact form', () => {
@@ -74,7 +74,7 @@ describe('Contact Component', () => {
   it('should translate content when language changes', () => {
     renderWithLanguage(<Contact />, { initialLanguage: 'en' })
     
-    expect(screen.getByText("Let's get in touch")).toBeInTheDocument()
+    expect(screen.getByText("Contact Me")).toBeInTheDocument()
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/subject/i)).toBeInTheDocument()
