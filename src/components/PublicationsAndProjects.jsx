@@ -13,7 +13,8 @@ import {
 	Download,
 	Quote,
 	Link,
-	Zap
+	Zap,
+	Github
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
@@ -196,6 +197,37 @@ const PublicationsAndProjects = () => {
 					<p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 flex-1 line-clamp-3">
 						{project.description}
 					</p>
+					{project.tech && (
+						<div className="flex flex-wrap gap-2 mb-4">
+							{project.tech.map((tech, i) => (
+								<span key={i} className="skill-badge text-xs">
+									{tech}
+								</span>
+							))}
+						</div>
+					)}
+					{project.links && (
+						<div className="flex flex-wrap items-center gap-2">
+							{project.links.map((link, i) => (
+								<motion.a
+									key={i}
+									href={link.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									className={`text-xs text-white px-3 py-1 rounded-full transition-all duration-200 flex items-center space-x-1 bg-gradient-to-r ${
+										i === 0
+											? 'from-neutral-700 to-neutral-900 hover:from-neutral-800 hover:to-black'
+											: 'from-slate-500 to-slate-700 hover:from-slate-600 hover:to-slate-800'
+									}`}
+								>
+									<Github className="w-3 h-3" />
+									<span>{link.label}</span>
+								</motion.a>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 		)

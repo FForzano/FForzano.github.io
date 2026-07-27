@@ -49,6 +49,16 @@ doi={10.1109/InfoCom2025.QuNAP.123456}
         {
             title: 'Formando PerCorsi',
             description: 'Piattaforma innovativa che collega insegnanti qualificati con famiglie in tutta Italia, garantendo qualità e regolarità nelle lezioni private.'
+        },
+        {
+            id: 'xgsail',
+            title: 'XGSail',
+            description: 'Piattaforma open source di analisi dati per la vela: un\'app self-hosted FastAPI + React che trasforma i dati GPS e vento in analisi di sessione (VMG, manovre, polari). Include XGSail-E1, un tracker hardware companion basato su ESP32 costruito attorno a un protocollo di comunicazione agnostico rispetto all\'hardware.',
+            tech: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'ESP32'],
+            links: [
+                { label: 'Software', url: 'https://github.com/FForzano/xgsail' },
+                { label: 'Firmware', url: 'https://github.com/FForzano/xgsail-e1' }
+            ]
         }
     ]
 };
