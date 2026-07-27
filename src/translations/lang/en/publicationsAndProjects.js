@@ -41,6 +41,16 @@ const publicationsAndProjects = {
     {
       title: 'Formando PerCorsi',
       description: 'Innovative platform that connects qualified teachers with families throughout Italy, ensuring quality and compliance in private lessons.'
+    },
+    {
+      id: 'xgsail',
+      title: 'XGSail',
+      description: 'Open-source sailing analytics platform: a self-hosted FastAPI + React app that turns GPS/wind sensor data into session insights (VMG, maneuvers, polars). Includes XGSail-E1, a companion ESP32-based hardware tracker built around a hardware-agnostic device protocol.',
+      tech: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'ESP32'],
+      links: [
+        { label: 'Software', url: 'https://github.com/FForzano/xgsail' },
+        { label: 'Firmware', url: 'https://github.com/FForzano/xgsail-e1' }
+      ]
     }
   ]
 };
