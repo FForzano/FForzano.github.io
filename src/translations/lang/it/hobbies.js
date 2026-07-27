@@ -59,7 +59,8 @@ const hobbies = {
             links: [
                 { label: 'Guida al 470 ITA', url: 'https://github.com/FForzano/Manuale-470-ITA/releases/download/v1.0/Manuale-al-470-ITA.pdf' },
                 { label: 'Guida al 470 ITA (Repository modificabile)', url: 'https://github.com/FForzano/Manuale-470-ITA' },
-                { label: 'Guida al 470 Originale (ENG)', url: 'https://github.com/FForzano/Manuale-470-ITA/blob/master/470-Manual-ENG.pdf' }
+                { label: 'Guida al 470 Originale (ENG)', url: 'https://github.com/FForzano/Manuale-470-ITA/blob/master/470-Manual-ENG.pdf' },
+                { label: 'XGSail — piattaforma di analisi dati per la vela', url: 'https://xgsail.com' }
             ]
             }
         },

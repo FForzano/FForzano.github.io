@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import '../modal.css'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-	FileText, 
-	ExternalLink, 
-	Calendar, 
-	Users, 
+import {
+	FileText,
+	ExternalLink,
+	Calendar,
+	Users,
 	GraduationCap,
 	Microscope,
 	X,
@@ -18,19 +19,84 @@ import {
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
+import { useModal } from '../contexts/ModalContext'
 import useSwipe from '../hooks/useSwipe'
+import '../assets/experience-logos.css'
 
 const PublicationsAndProjects = () => {
 	const { t } = useTranslation()
+	const { openModal, closeModal } = useModal()
 	const [selectedPaper, setSelectedPaper] = useState(null)
 	const [expandedAbstract, setExpandedAbstract] = useState(null)
 	const [selectedCategory, setSelectedCategory] = useState('all')
+	const [selectedProject, setSelectedProject] = useState(null)
 
 	const areas = t('publicationsAndProjects.areas')
 	const publications = t('publicationsAndProjects.publications')
 	const projects = t('publicationsAndProjects.projectsList')
 
 	const { containerRef, animatedItems } = useStaticAnimation([...publications, ...projects])
+
+	// Scroll-lock + back-button-closes-modal for the project details modal
+	const scrollPositionRef = React.useRef(0)
+	const wasModalOpenRef = React.useRef(false)
+	useEffect(() => {
+		if (selectedProject && !wasModalOpenRef.current) {
+			scrollPositionRef.current = window.scrollY
+			document.body.classList.add('modal-open')
+			document.body.style.top = `-${scrollPositionRef.current}px`
+			document.body.style.position = 'fixed'
+			document.body.style.width = '100%'
+			openModal(() => setSelectedProject(null))
+			wasModalOpenRef.current = true
+		} else if (!selectedProject && wasModalOpenRef.current) {
+			document.body.classList.remove('modal-open')
+			document.body.style.position = ''
+			document.body.style.top = ''
+			document.body.style.width = ''
+			setTimeout(() => {
+				window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
+			}, 0)
+			closeModal()
+			wasModalOpenRef.current = false
+		}
+		return () => {
+			if (wasModalOpenRef.current) {
+				document.body.classList.remove('modal-open')
+				document.body.style.position = ''
+				document.body.style.top = ''
+				document.body.style.width = ''
+			}
+		}
+	}, [selectedProject])
+
+	// Renders a project's link pills (GitHub repo vs live site), shared between card and modal
+	const ProjectLinks = ({ links }) => (
+		<div className="flex flex-wrap items-center gap-2">
+			{links.map((link, i) => {
+				const isGithub = link.url.includes('github.com')
+				return (
+					<motion.a
+						key={i}
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						onClick={(e) => e.stopPropagation()}
+						className={`text-xs text-white px-3 py-1 rounded-full transition-all duration-200 flex items-center space-x-1 bg-gradient-to-r ${
+							isGithub
+								? 'from-neutral-700 to-neutral-900 hover:from-neutral-800 hover:to-black'
+								: 'from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600'
+						}`}
+					>
+						{isGithub ? <Github className="w-3 h-3" /> : <ExternalLink className="w-3 h-3" />}
+						<span>{link.label}</span>
+					</motion.a>
+				)
+			})}
+		</div>
+	)
 
 	// Publication Card
 	const PublicationCard = ({ publication, index }) => {
@@ -175,19 +241,24 @@ const PublicationsAndProjects = () => {
 		const isAnimated = animatedItems.has(index)
 		return (
 			<div
-				className={`card card-hover group h-full transition-all duration-600 transform ${
+				className={`card card-hover group h-full transition-all duration-600 transform cursor-pointer ${
 					isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
 				}`}
 				style={{
 					transitionDelay: `${index * 100}ms`
 				}}
+				onClick={() => setSelectedProject(project)}
 			>
 				<div className="p-6 flex flex-col h-full">
 					{/* Header */}
 					<div className="flex items-start justify-between mb-4">
 						<div className="flex items-center space-x-3">
-							<div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-lg flex items-center justify-center">
-								<Zap className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+							<div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-lg flex items-center justify-center overflow-hidden">
+								{project.logo ? (
+									<img src={project.logo} alt={project.title + ' logo'} className="w-full h-full object-contain p-1" />
+								) : (
+									<Zap className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+								)}
 							</div>
 						</div>
 					</div>
@@ -206,32 +277,77 @@ const PublicationsAndProjects = () => {
 							))}
 						</div>
 					)}
-					{project.links && (
-						<div className="flex flex-wrap items-center gap-2">
-							{project.links.map((link, i) => (
-								<motion.a
-									key={i}
-									href={link.url}
-									target="_blank"
-									rel="noopener noreferrer"
-									whileHover={{ scale: 1.05 }}
-									whileTap={{ scale: 0.95 }}
-									className={`text-xs text-white px-3 py-1 rounded-full transition-all duration-200 flex items-center space-x-1 bg-gradient-to-r ${
-										i === 0
-											? 'from-neutral-700 to-neutral-900 hover:from-neutral-800 hover:to-black'
-											: 'from-slate-500 to-slate-700 hover:from-slate-600 hover:to-slate-800'
-									}`}
-								>
-									<Github className="w-3 h-3" />
-									<span>{link.label}</span>
-								</motion.a>
-							))}
-						</div>
-					)}
+					{project.links && <ProjectLinks links={project.links} />}
 				</div>
 			</div>
 		)
 	}
+
+	// Project details modal
+	const ProjectModal = () => (
+		<AnimatePresence>
+			{selectedProject && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+					style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+					onClick={() => setSelectedProject(null)}
+				>
+					<motion.div
+						initial={{ scale: 0.95, opacity: 0, y: 20 }}
+						animate={{ scale: 1, opacity: 1, y: 0 }}
+						exit={{ scale: 0.95, opacity: 0, y: 20 }}
+						className="bg-white dark:bg-neutral-800 rounded-2xl p-8 max-w-4xl max-h-[85vh] overflow-y-auto shadow-large mx-auto my-auto"
+						style={{ maxWidth: 'min(90vw, 1024px)', maxHeight: 'min(85vh, 800px)' }}
+						onClick={(e) => e.stopPropagation()}
+					>
+						{/* Header */}
+						<div className="flex items-start justify-between mb-6">
+							<div className="flex items-start space-x-4">
+								<div className="w-16 h-16 bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/50 dark:to-secondary-900/50 rounded-xl flex items-center justify-center overflow-hidden">
+									{selectedProject.logo ? (
+										<img src={selectedProject.logo} alt={selectedProject.title + ' logo'} className="w-full h-full object-contain p-2" />
+									) : (
+										<Zap className="w-7 h-7 text-primary-600 dark:text-primary-400" />
+									)}
+								</div>
+								<h3 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 font-display mt-2">
+									{selectedProject.title}
+								</h3>
+							</div>
+							<button
+								onClick={() => setSelectedProject(null)}
+								className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+							>
+								<X className="w-6 h-6" />
+							</button>
+						</div>
+
+						{/* Description */}
+						<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">
+							{selectedProject.description}
+						</p>
+
+						{/* Tech */}
+						{selectedProject.tech && (
+							<div className="flex flex-wrap gap-2 mb-6">
+								{selectedProject.tech.map((tech, i) => (
+									<span key={i} className="skill-badge">
+										{tech}
+									</span>
+								))}
+							</div>
+						)}
+
+						{/* Links */}
+						{selectedProject.links && <ProjectLinks links={selectedProject.links} />}
+					</motion.div>
+				</motion.div>
+			)}
+		</AnimatePresence>
+	)
 
 	return (
 		<section id="publicationsandprojects" className="section-padding bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 min-h-screen py-20 section-container relative">
@@ -284,6 +400,7 @@ const PublicationsAndProjects = () => {
 					))}
 				</div>
 			</div>
+			<ProjectModal />
 		</section>
 	)
 }
