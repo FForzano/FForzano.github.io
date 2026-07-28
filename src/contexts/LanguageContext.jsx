@@ -11,12 +11,19 @@ export const useLanguage = () => {
 }
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('it')
+  const [language, setLanguage] = useState('en')
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('portfolio-language')
     if (savedLanguage && ['it', 'en'].includes(savedLanguage)) {
       setLanguage(savedLanguage)
+      return
+    }
+
+    // No saved preference: default to English, but honor an Italian browser/OS language
+    const browserLanguage = (navigator.language || navigator.userLanguage || '').toLowerCase()
+    if (browserLanguage.startsWith('it')) {
+      setLanguage('it')
     }
   }, [])
 

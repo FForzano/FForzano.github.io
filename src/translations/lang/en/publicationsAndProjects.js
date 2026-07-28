@@ -40,7 +40,7 @@ const publicationsAndProjects = {
   projectsList: [
     {
       title: 'Formando PerCorsi',
-      description: "Formando PerCorsi is a private-tutoring startup I co-founded in 2021, connecting qualified, vetted teachers with families across Italy for compliant, high-quality private lessons. As co-founder and board member, I designed and built the platform's backend, a REST API on PHP/Yii2, and integrated payment processing, automated e-invoicing, and localization, while also managing the cloud infrastructure.",
+      description: "Formando PerCorsi is a platform for private tutoring across Italy: it matches vetted, qualified teachers with families and handles everything around the lesson itself, from scheduling to payments, automated e-invoicing, and multi-language support. I co-founded the company in 2021 and lead its technical development.",
       logo: '/images/fpc-logo.png',
       tech: ['PHP - Yii2', 'SQL', 'Docker'],
       links: [

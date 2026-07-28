@@ -48,7 +48,7 @@ doi={10.1109/INFOCOMWKSHPS65812.2025.11152888}
     projectsList: [
         {
             title: 'Formando PerCorsi',
-            description: 'Formando PerCorsi è una startup nel settore delle lezioni private che ho co-fondato nel 2021, per collegare insegnanti qualificati e verificati con famiglie in tutta Italia, garantendo lezioni private di qualità e a norma. Come co-founder e membro del board, ho progettato e sviluppato il backend della piattaforma, una REST API in PHP/Yii2, integrando i pagamenti, la fatturazione elettronica automatica e la localizzazione, oltre a gestire l\'infrastruttura cloud.',
+            description: 'Formando PerCorsi è una piattaforma per le lezioni private in tutta Italia: mette in contatto insegnanti qualificati e verificati con le famiglie e gestisce tutto ciò che ruota attorno alla lezione stessa, dalla programmazione ai pagamenti, fino alla fatturazione elettronica automatica e al supporto multilingua. Ho co-fondato l\'azienda nel 2021 e ne guido lo sviluppo tecnico.',
             logo: '/images/fpc-logo.png',
             tech: ['PHP - Yii2', 'SQL', 'Docker'],
             links: [
