@@ -193,30 +193,12 @@
     @apply space-y-4 sm:space-y-6 lg:space-y-8;
   }
 
-  /* Carosello con supporto touch */
-  .carousel-container {
-    position: relative;
-    overflow: visible; /* Cambiato da hidden per permettere scroll verticale */
-    touch-action: manipulation; /* Cambiato da pan-x per permettere scroll verticale + orizzontale */
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.3s ease-out;
-    touch-action: manipulation; /* Cambiato da pan-x */
-    will-change: transform;
-  }
-
-  .carousel-track.dragging {
-    transition: none;
-  }
-
-  .carousel-item {
-    min-width: 100%;
-    flex-shrink: 0;
-    padding: 0 1rem;
-    touch-action: manipulation; /* Cambiato da pan-x */
-  }
+  /* .carousel-container / .carousel-track / .carousel-track.dragging /
+     .carousel-item live in the unlayered block below (they always win the
+     cascade over @layer components regardless of source order, per the CSS
+     Cascade Layers spec, so keeping them duplicated here was actively
+     misleading — the touch-action bug this repo hit came from editing the
+     wrong one of the two). */
 
   .carousel-item-grid {
     min-width: 100%;
@@ -426,20 +408,30 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Carousel Styles for Mobile */
+/* touch-action: pan-y on all of these: let the browser handle native
+   vertical panning (so the page can still scroll through the carousel),
+   but never native horizontal panning, so useSimpleSwipe.js's JS-driven
+   drag has exclusive control of the horizontal gesture. `manipulation`
+   (idle) and `pan-x` (previously only on `.dragging`) both explicitly
+   grant the browser native horizontal panning, which raced the JS drag
+   and caused the first touch of a drag to stall partway through — the
+   browser's native pan can win that race regardless of when JS calls
+   preventDefault(). See useModalScrollLock-style comment history in git
+   blame for the two earlier (wrong) attempts at this value. */
 .carousel-container {
   @apply relative;
-  overflow: visible; /* Permette scroll verticale */
-  touch-action: manipulation; /* Permette tutti i tipi di touch */
+  overflow: visible;
+  touch-action: pan-y;
 }
 
 .carousel-track {
   @apply flex transition-transform duration-300 ease-out;
-  touch-action: manipulation; /* Permette tutti i tipi di touch */
+  touch-action: pan-y;
 }
 
 .carousel-track.dragging {
   @apply transition-none;
-  touch-action: pan-x; /* Solo durante il drag, limita a pan orizzontale */
+  touch-action: pan-y;
 }
 
 /* Durante il drag, disabilita pointer events sui contenuti */
@@ -454,7 +446,7 @@ input:focus, textarea:focus, select:focus {
 
 .carousel-item {
   @apply flex-shrink-0 w-full px-2;
-  touch-action: manipulation; /* Permette tutti i tipi di touch */
+  touch-action: pan-y;
 }
 
 .carousel-controls {
