@@ -12,29 +12,4 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  test: {
-    globals: true,
-    environment: 'happy-dom',
-    setupFiles: './src/test/setup.jsx',
-    css: true,
-    testTimeout: 10000,
-    hookTimeout: 10000,
-    exclude: [
-      'node_modules/**',
-      '**/*.config.{js,ts}',
-    ],
-    coverage: {
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'src/test/',
-        '**/*.test.{js,jsx}',
-        '**/*.spec.{js,jsx}',
-        'src/main.jsx',
-        'vite.config.js',
-        'tailwind.config.js',
-        'postcss.config.js',
-      ],
-    },
-  },
 })

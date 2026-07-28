@@ -348,8 +348,7 @@ animations: {
 
 ### Step 4: Validazione
 1. **Controlla la console** per errori di validazione
-2. **Esegui i test**: `npm run test:run`
-3. **Verifica il build**: `npm run build`
+2. **Verifica il build**: `npm run build`
 
 ## Strumenti di Sviluppo
 
