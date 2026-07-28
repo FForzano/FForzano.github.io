@@ -90,17 +90,22 @@ const useSimpleSwipe = ({
     const deltaX = touch.clientX - touchStartRef.current.x
     const deltaY = touch.clientY - touchStartRef.current.y
 
-    // Determina se è un movimento orizzontale predominante
+    // Appena il gesto pende orizzontale, anche di pochissimo, blocca lo
+    // scroll di default: aspettare la soglia di 10px per farlo lascerebbe
+    // al browser una finestra per iniziare un pan nativo (che poi vince la
+    // gara su un secondo preventDefault tardivo). touch-action: pan-y in
+    // index.css è la difesa primaria; questo è un rinforzo a costo zero.
+    if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+      e.preventDefault()
+    }
+
+    // La soglia dei 10px resta solo per decidere quando attivare lo stato
+    // visivo di drag, per non scattare su micro-movimenti/tremolii.
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
       if (!isDraggingRef.current) {
         isDraggingRef.current = true
         setIsDragging(true)
       }
-      // Un drag orizzontale confermato non deve anche far scrollare
-      // verticalmente la pagina: senza preventDefault il browser prova a
-      // fare entrambe le cose insieme, ed è quello che rendeva lo swipe
-      // dei caroselli "scattoso"/poco fluido su mobile.
-      e.preventDefault()
       setDragOffset(deltaX)
     }
 
