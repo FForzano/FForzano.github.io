@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const useSimpleSwipe = ({
   itemsCount = 0,
@@ -15,7 +15,6 @@ const useSimpleSwipe = ({
   const itemsCountRef = useRef(itemsCount)
   const onTapRef = useRef(onTap)
   const isDraggingRef = useRef(false)
-  const touchTimeoutRef = useRef(null)
 
   // Touch tracking
   const touchStartRef = useRef({ x: 0, y: 0 })
@@ -50,40 +49,27 @@ const useSimpleSwipe = ({
   // Touch handlers stabilizzati con useRef
   const handleTouchStart = useRef((e) => {
     const now = Date.now()
-    
+
     // Verifica che l'evento provenga dal nostro container o dai suoi figli
     if (!elementRef.current || !elementRef.current.contains(e.target)) {
-      console.log('🚫 Touch Start ignored - outside our container')
       return
     }
-    
-    console.log('🟢 Touch Start CALLED:', { 
-      isDragging: isDraggingRef.current, 
-      target: e.target.tagName,
-      touchesLength: e.touches.length,
-      touchId: e.touches[0].identifier,
-      activeTouchId: activeTouch.current,
-      timeSinceLastStart: now - lastTouchStartTime.current
-    })
-    
+
     // Se stiamo già draggando, ignora qualsiasi nuovo touch start
     if (isDraggingRef.current) {
-      console.log('� Touch Start ignored - already dragging')
       return
     }
-    
+
     // Se c'è già un touch attivo, ignora
     if (activeTouch.current !== null) {
-      console.log('🔶 Touch Start ignored - already have active touch:', activeTouch.current)
       return
     }
-    
+
     // Debounce: ignora touch start troppo ravvicinati (< 50ms)
     if (now - lastTouchStartTime.current < 50) {
-      console.log('🟡 Touch Start DEBOUNCED - too soon after last start')
       return
     }
-    
+
     lastTouchStartTime.current = now
     const touch = e.touches[0]
     activeTouch.current = touch.identifier
@@ -92,39 +78,32 @@ const useSimpleSwipe = ({
     setDragOffset(0)
     isDraggingRef.current = false
     setIsDragging(false)
-    
-    console.log('🟢 Touch Start ACCEPTED:', { x: touch.clientX, y: touch.clientY, touchId: touch.identifier })
   })
 
   const handleTouchMove = useRef((e) => {
     // Trova il touch che stiamo trackando
     const touch = Array.from(e.touches).find(t => t.identifier === activeTouch.current)
     if (!touch) {
-      console.log('🔄 Touch Move ignored - not our active touch')
       return
     }
-    
+
     const deltaX = touch.clientX - touchStartRef.current.x
     const deltaY = touch.clientY - touchStartRef.current.y
-    
-    console.log('🔄 Touch Move:', { 
-      deltaX, 
-      deltaY, 
-      isDragging: isDraggingRef.current,
-      touchId: touch.identifier,
-      target: e.target.tagName
-    })
-    
+
     // Determina se è un movimento orizzontale predominante
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
       if (!isDraggingRef.current) {
         isDraggingRef.current = true
         setIsDragging(true)
-        console.log('🔄 Started horizontal drag:', { deltaX })
       }
+      // Un drag orizzontale confermato non deve anche far scrollare
+      // verticalmente la pagina: senza preventDefault il browser prova a
+      // fare entrambe le cose insieme, ed è quello che rendeva lo swipe
+      // dei caroselli "scattoso"/poco fluido su mobile.
+      e.preventDefault()
       setDragOffset(deltaX)
     }
-    
+
     lastTouchRef.current = { x: touch.clientX, y: touch.clientY }
   })
 
@@ -132,63 +111,46 @@ const useSimpleSwipe = ({
     // Trova il touch che si è concluso
     const touch = Array.from(e.changedTouches).find(t => t.identifier === activeTouch.current)
     if (!touch) {
-      console.log('🔴 Touch End ignored - not our active touch')
       return
     }
-    
-    console.log('🔴 Touch End CALLED:', { 
-      isDragging: isDraggingRef.current,
-      changedTouchesLength: e.changedTouches.length,
-      touchId: touch.identifier,
-      target: e.target.tagName
-    })
-    
+
     const deltaX = lastTouchRef.current.x - touchStartRef.current.x
     const deltaY = lastTouchRef.current.y - touchStartRef.current.y
     const wasDragging = isDraggingRef.current
-    
-    console.log('🔴 Touch End PROCESSING:', { deltaX, deltaY, wasDragging })
-    
+
     if (wasDragging) {
       // Era un drag - determina se cambiare slide
       const threshold = elementRef.current ? elementRef.current.offsetWidth * 0.3 : 100
-      
+
       if (Math.abs(deltaX) > threshold) {
         if (deltaX > 0 && currentIndexRef.current > 0) {
           // Swipe destro - slide precedente
           setCurrentIndex(prev => prev - 1)
-          console.log('➡️ Swipe right -> prev slide')
         } else if (deltaX < 0 && currentIndexRef.current < itemsCountRef.current - 1) {
           // Swipe sinistro - slide successiva
           setCurrentIndex(prev => prev + 1)
-          console.log('⬅️ Swipe left -> next slide')
         }
       }
     } else if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
       // Era un tap
       onTapRef.current()
-      console.log('👆 Tap detected')
     }
-    
+
     // Reset state
     activeTouch.current = null
     isDraggingRef.current = false
     setIsDragging(false)
     setDragOffset(0)
     lastTouchStartTime.current = 0 // Reset debounce timestamp
-    console.log('🔴 Touch End COMPLETED - state reset')
   })
 
   const handleTouchCancel = useRef((e) => {
     // Verifica se il touch cancellato è il nostro
     const touch = Array.from(e.changedTouches).find(t => t.identifier === activeTouch.current)
     if (!touch) {
-      console.log('🚫 Touch Cancel ignored - not our active touch')
       return
     }
-    
-    console.log('🚫 Touch Cancel CALLED - resetting state')
-    
+
     // Reset completo dello state
     activeTouch.current = null
     isDraggingRef.current = false
@@ -201,11 +163,8 @@ const useSimpleSwipe = ({
   useEffect(() => {
     const element = elementRef.current
     if (!element) {
-      console.log('🚫 No element for touch listeners')
       return
     }
-
-    console.log('📱 ATTACHING touch listeners to element:', element.className)
 
     // Usa le funzioni .current che non cambiano mai
     const startHandler = handleTouchStart.current
@@ -218,33 +177,29 @@ const useSimpleSwipe = ({
     element.addEventListener('touchend', endHandler, { passive: false, capture: true })
     element.addEventListener('touchcancel', cancelHandler, { passive: false, capture: true })
 
-    console.log('📱 Touch listeners added to element - STABLE (including cancel)')
-
     return () => {
-      console.log('🗑️ REMOVING touch listeners from element:', element.className)
       element.removeEventListener('touchstart', startHandler)
       element.removeEventListener('touchmove', moveHandler)
       element.removeEventListener('touchend', endHandler)
       element.removeEventListener('touchcancel', cancelHandler)
-      console.log('🗑️ Touch listeners removed - STABLE')
     }
   }, []) // NESSUNA DIPENDENZA - solo mount/unmount
 
   // Wheel support per desktop
   useEffect(() => {
     if (!enableHorizontalScroll) return
-    
+
     const element = elementRef.current
     if (!element) return
 
     const handleWheel = (e) => {
       const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey
-      
+
       if (isHorizontalScroll) {
         e.preventDefault()
-        
+
         const direction = e.deltaX > 0 || (e.shiftKey && e.deltaY > 0) ? 1 : -1
-        
+
         if (direction > 0 && currentIndex < itemsCount - 1) {
           setCurrentIndex(prev => prev + 1)
         } else if (direction < 0 && currentIndex > 0) {
