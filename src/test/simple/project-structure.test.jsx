@@ -25,7 +25,6 @@ describe('Project Structure Tests', () => {
       'Navbar.jsx',
       'Hero.jsx',
       'About.jsx',
-      'Skills.jsx',
       'Contact.jsx',
       'Footer.jsx',
       'LanguageSelector.jsx',
@@ -55,7 +54,6 @@ describe('Project Structure Tests', () => {
     const expectedDocs = [
       'README.md',
       'docs/README.md',
-      'docs/TESTING_GUIDE.md',
       'docs/INTERNATIONALIZATION.md',
       'docs/CV_GENERATION.md',
       'docs/DOCKER.md',

@@ -48,8 +48,9 @@ doi={10.1109/InfoCom2025.QuNAP.123456}
     projectsList: [
         {
             title: 'Formando PerCorsi',
-            description: 'Piattaforma innovativa che collega insegnanti qualificati con famiglie in tutta Italia, garantendo qualità e regolarità nelle lezioni private.',
+            description: 'Formando PerCorsi è una startup nel settore delle lezioni private che ho co-fondato nel 2021, per collegare insegnanti qualificati e verificati con famiglie in tutta Italia, garantendo lezioni private di qualità e a norma. Come co-founder e membro del board, ho progettato e sviluppato il backend della piattaforma, una REST API in PHP/Yii2, integrando i pagamenti, la fatturazione elettronica automatica e la localizzazione, oltre a gestire l\'infrastruttura cloud.',
             logo: '/images/fpc-logo.png',
+            tech: ['PHP - Yii2', 'SQL', 'Docker'],
             links: [
                 { label: 'Sito', url: 'https://formandopercorsi.com' }
             ]
@@ -57,13 +58,23 @@ doi={10.1109/InfoCom2025.QuNAP.123456}
         {
             id: 'xgsail',
             title: 'XGSail',
-            description: 'Piattaforma open source di analisi dati per la vela: un\'app self-hosted FastAPI + React che trasforma i dati GPS e vento in analisi di sessione (VMG, manovre, polari). Include XGSail-E1, un tracker hardware companion basato su ESP32 costruito attorno a un protocollo di comunicazione agnostico rispetto all\'hardware.',
+            description: 'XGSail trasforma i dati grezzi di GPS e sensori del vento raccolti su una deriva in analisi utili della sessione (VMG, rilevamento manovre, diagrammi polari) attraverso una piattaforma self-hosted FastAPI + React che ho progettato e sviluppato da zero. Si abbina a XGSail-E1, un tracker hardware companion basato su ESP32, tramite un protocollo di comunicazione aperto e agnostico rispetto all\'hardware, così qualsiasi sensore può integrarsi senza dover forkare il software.',
             logo: '/images/xgsail-logo.png',
             tech: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'ESP32'],
             links: [
                 { label: 'Sito', url: 'https://xgsail.com' },
                 { label: 'Software', url: 'https://github.com/FForzano/xgsail' },
                 { label: 'Firmware', url: 'https://github.com/FForzano/xgsail-e1' }
+            ]
+        },
+        {
+            id: 'sailing-guide-470',
+            title: 'Guida al 470 (ITA)',
+            description: 'Traduzione italiana completa della guida alla deriva 470 di Arthur Gurevitch, con indicazioni su regolaggi, attrezzatura e tecnica di regata per la classe. Pubblicata e versionata liberamente su GitHub come risorsa modificabile e contribuibile dalla community, con PDF scaricabile gratuitamente.',
+            links: [
+                { label: 'PDF', url: 'https://github.com/FForzano/Manuale-470-ITA/releases/download/v1.0/Manuale-al-470-ITA.pdf' },
+                { label: 'Repository', url: 'https://github.com/FForzano/Manuale-470-ITA' },
+                { label: 'Originale (ENG)', url: 'https://github.com/FForzano/Manuale-470-ITA/blob/master/470-Manual-ENG.pdf' }
             ]
         }
     ]

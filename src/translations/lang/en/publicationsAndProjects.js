@@ -40,8 +40,9 @@ const publicationsAndProjects = {
   projectsList: [
     {
       title: 'Formando PerCorsi',
-      description: 'Innovative platform that connects qualified teachers with families throughout Italy, ensuring quality and compliance in private lessons.',
+      description: "Formando PerCorsi is a private-tutoring startup I co-founded in 2021, connecting qualified, vetted teachers with families across Italy for compliant, high-quality private lessons. As co-founder and board member, I designed and built the platform's backend, a REST API on PHP/Yii2, and integrated payment processing, automated e-invoicing, and localization, while also managing the cloud infrastructure.",
       logo: '/images/fpc-logo.png',
+      tech: ['PHP - Yii2', 'SQL', 'Docker'],
       links: [
         { label: 'Site', url: 'https://formandopercorsi.com' }
       ]
@@ -49,13 +50,23 @@ const publicationsAndProjects = {
     {
       id: 'xgsail',
       title: 'XGSail',
-      description: 'Open-source sailing analytics platform: a self-hosted FastAPI + React app that turns GPS/wind sensor data into session insights (VMG, maneuvers, polars). Includes XGSail-E1, a companion ESP32-based hardware tracker built around a hardware-agnostic device protocol.',
+      description: 'XGSail turns raw GPS and wind sensor data from a sailing dinghy into actionable session analysis (VMG, maneuver detection, polar diagrams) through a self-hosted FastAPI + React platform I designed and built from scratch. It pairs with XGSail-E1, a companion ESP32-based hardware tracker, over an open, hardware-agnostic device protocol, so any sensor can plug in without forking the software.',
       logo: '/images/xgsail-logo.png',
       tech: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'ESP32'],
       links: [
         { label: 'Site', url: 'https://xgsail.com' },
         { label: 'Software', url: 'https://github.com/FForzano/xgsail' },
         { label: 'Firmware', url: 'https://github.com/FForzano/xgsail-e1' }
+      ]
+    },
+    {
+      id: 'sailing-guide-470',
+      title: '470 Sailing Guide (ITA)',
+      description: "A complete Italian translation of Arthur Gurevitch's guide to the 470 dinghy, covering tuning, rigging, and racing technique for the class. Published and versioned openly on GitHub as an editable, community-contributable resource, with a free downloadable PDF.",
+      links: [
+        { label: 'PDF', url: 'https://github.com/FForzano/Manuale-470-ITA/releases/download/v1.0/Manuale-al-470-ITA.pdf' },
+        { label: 'Repository', url: 'https://github.com/FForzano/Manuale-470-ITA' },
+        { label: 'Original (ENG)', url: 'https://github.com/FForzano/Manuale-470-ITA/blob/master/470-Manual-ENG.pdf' }
       ]
     }
   ]

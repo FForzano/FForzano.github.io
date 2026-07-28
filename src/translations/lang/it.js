@@ -25,6 +25,7 @@ const it = {
       loading: 'Caricamento...',
       error: 'Errore',
       success: 'Successo',
+      close: 'Chiudi',
       theme: {
         toggleDark: 'Attiva tema scuro',
         toggleLight: 'Attiva tema chiaro'

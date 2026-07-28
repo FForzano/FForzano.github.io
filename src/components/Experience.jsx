@@ -363,6 +363,7 @@ const Experience = () => {
                   <button
                     onClick={() => setSelectedExperience(null)}
                     className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                    aria-label={t('common.close')}
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -487,7 +488,7 @@ const Experience = () => {
                                   <button
                                     onClick={() => setLightboxImage(null)}
                                     className="absolute top-2 right-2 bg-white bg-opacity-80 rounded-full p-2 text-black hover:bg-opacity-100"
-                                    aria-label="Chiudi anteprima"
+                                    aria-label={t('common.close')}
                                   >
                                     &times;
                                   </button>

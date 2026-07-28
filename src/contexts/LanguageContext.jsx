@@ -20,6 +20,10 @@ export const LanguageProvider = ({ children }) => {
     }
   }, [])
 
+  useEffect(() => {
+    document.documentElement.lang = language
+  }, [language])
+
   const toggleLanguage = () => {
     const newLanguage = language === 'it' ? 'en' : 'it'
     setLanguage(newLanguage)

@@ -232,7 +232,6 @@ Il portfolio è completamente funzionale e testato:
 - [ ] Integrazione con CMS headless
 - [ ] Analytics e tracking
 - [ ] PWA (Progressive Web App)
-- [ ] Modalità scura
 
 ## 📄 Licenza
 

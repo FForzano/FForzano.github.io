@@ -21,7 +21,6 @@ export default defineConfig({
     hookTimeout: 10000,
     exclude: [
       'node_modules/**',
-      'src/test/disabled/**',
       '**/*.config.{js,ts}',
     ],
     coverage: {
@@ -29,7 +28,6 @@ export default defineConfig({
       exclude: [
         'node_modules/',
         'src/test/',
-        'src/test/disabled/',
         '**/*.test.{js,jsx}',
         '**/*.spec.{js,jsx}',
         'src/main.jsx',
