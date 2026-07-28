@@ -177,10 +177,10 @@ const useSimpleSwipe = ({
     const endHandler = handleTouchEnd.current
     const cancelHandler = handleTouchCancel.current
 
-    element.addEventListener('touchstart', startHandler, { passive: false, capture: true })
-    element.addEventListener('touchmove', moveHandler, { passive: false, capture: true })
-    element.addEventListener('touchend', endHandler, { passive: false, capture: true })
-    element.addEventListener('touchcancel', cancelHandler, { passive: false, capture: true })
+    element.addEventListener('touchstart', startHandler, { passive: false, capture: false })
+    element.addEventListener('touchmove', moveHandler, { passive: false, capture: false })
+    element.addEventListener('touchend', endHandler, { passive: false, capture: false })
+    element.addEventListener('touchcancel', cancelHandler, { passive: false, capture: false })
 
     return () => {
       element.removeEventListener('touchstart', startHandler)
