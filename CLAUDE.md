@@ -62,7 +62,20 @@ Verify changes with `npm run build` and a visual check instead.
   scroll-lock, a carousel), factor it into a shared component/hook
   instead of copy-pasting — this is exactly the kind of drift that left
   `Hobbies_backup.jsx`/`Hobbies_new.jsx` and an orphaned `Skills.jsx`
-  behind (since removed).
+  behind (since removed), and that turned one scroll-restore bug into
+  three near-identical copies of it across `PublicationsAndProjects.jsx`,
+  `Experience.jsx`, and `Hobbies.jsx` before it was consolidated into
+  `useModalScrollLock`.
+- **Always propose refactors you notice, on the spot — this is a
+  standing rule, not a one-time cleanup.** If while working on something
+  else you find logic or styling duplicated across components, a hook
+  or util that's copy-pasted instead of shared, or a component that
+  could be modularized but isn't, don't leave it as found and don't
+  silently fix it either. Flag it to the developer — even though it's
+  scope beyond the immediate task — and propose the refactor/modularize
+  path explicitly; if they agree, do it. The default is to surface the
+  improvement every time it's noticed, not to defer it because it
+  wasn't what was asked.
 - **CSS: Tailwind utilities first.** Reach for a dedicated `.css` file
   (like `modal.css` or `assets/experience-logos.css`) only for the rare
   thing Tailwind can't express cleanly (body scroll-lock, a specific

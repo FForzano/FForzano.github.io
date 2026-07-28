@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 const ArrowLeft = (props) => (
   <svg viewBox="0 0 24 24" fill="none" width={28} height={28} {...props}><path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -14,7 +14,23 @@ const Carousel = ({ items }) => {
   const prev = () => { setCurrent((c) => (c === 0 ? items.length - 1 : c - 1)); setDragDelta(0); };
   const next = () => { setCurrent((c) => (c === items.length - 1 ? 0 : c + 1)); setDragDelta(0); };
 
-  // Touch/mouse swipe support
+  // Touch swipe support: navigate on a horizontal swipe past a small
+  // threshold, ignoring mostly-vertical gestures so page scroll still works.
+  const touchStartRef = useRef(null);
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+  const handleTouchEnd = (e) => {
+    if (!touchStartRef.current) return;
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartRef.current.x;
+    const deltaY = touch.clientY - touchStartRef.current.y;
+    touchStartRef.current = null;
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX < 0) next(); else prev();
+    }
+  };
 
   return (
   <div className="flex flex-col items-center justify-center w-full mt-4 mb-4">
@@ -30,7 +46,12 @@ const Carousel = ({ items }) => {
         >
           <ArrowLeft className="text-primary-600 dark:text-primary-400" />
         </button>
-        <div className="w-full flex justify-center items-center transition-all duration-500" style={{ perspective: '1200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div
+          className="w-full flex justify-center items-center transition-all duration-500"
+          style={{ perspective: '1200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {items[current].type === 'image' ? (
             <img
               src={items[current].src}

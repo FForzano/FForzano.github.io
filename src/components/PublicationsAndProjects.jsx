@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import '../modal.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -19,13 +19,11 @@ import {
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
-import { useModal } from '../contexts/ModalContext'
-import useSwipe from '../hooks/useSwipe'
+import useModalScrollLock from '../hooks/useModalScrollLock'
 import '../assets/experience-logos.css'
 
 const PublicationsAndProjects = () => {
 	const { t } = useTranslation()
-	const { openModal, closeModal } = useModal()
 	const [selectedPaper, setSelectedPaper] = useState(null)
 	const [expandedAbstract, setExpandedAbstract] = useState(null)
 	const [selectedCategory, setSelectedCategory] = useState('all')
@@ -37,38 +35,7 @@ const PublicationsAndProjects = () => {
 
 	const { containerRef, animatedItems } = useStaticAnimation([...publications, ...projects])
 
-	// Scroll-lock + back-button-closes-modal for the project details modal
-	const scrollPositionRef = React.useRef(0)
-	const wasModalOpenRef = React.useRef(false)
-	useEffect(() => {
-		if (selectedProject && !wasModalOpenRef.current) {
-			scrollPositionRef.current = window.scrollY
-			document.body.classList.add('modal-open')
-			document.body.style.top = `-${scrollPositionRef.current}px`
-			document.body.style.position = 'fixed'
-			document.body.style.width = '100%'
-			openModal(() => setSelectedProject(null))
-			wasModalOpenRef.current = true
-		} else if (!selectedProject && wasModalOpenRef.current) {
-			document.body.classList.remove('modal-open')
-			document.body.style.position = ''
-			document.body.style.top = ''
-			document.body.style.width = ''
-			setTimeout(() => {
-				window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
-			}, 0)
-			closeModal()
-			wasModalOpenRef.current = false
-		}
-		return () => {
-			if (wasModalOpenRef.current) {
-				document.body.classList.remove('modal-open')
-				document.body.style.position = ''
-				document.body.style.top = ''
-				document.body.style.width = ''
-			}
-		}
-	}, [selectedProject])
+	useModalScrollLock(Boolean(selectedProject), () => setSelectedProject(null))
 
 	// Renders a project's link pills (GitHub repo vs live site), shared between card and modal
 	const ProjectLinks = ({ links }) => (

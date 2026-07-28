@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import '../modal.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -19,62 +19,23 @@ import {
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 import { useStaticAnimation } from '../hooks/useOptimizedAnimation'
-import { useModal } from '../contexts/ModalContext'
+import useModalScrollLock from '../hooks/useModalScrollLock'
 import useSimpleSwipe from '../hooks/useSimpleSwipe'
 import ReactMarkdown from 'react-markdown'
 import '../assets/experience-logos.css'
 
 const Experience = () => {
   const { t } = useTranslation()
-  const { openModal, closeModal } = useModal()
   const [selectedExperience, setSelectedExperience] = useState(null)
   const [lightboxImage, setLightboxImage] = useState(null)
-  // Track scroll position for modal
-  const scrollPositionRef = React.useRef(0)
-  const wasModalOpenRef = React.useRef(false)
-  
-  useEffect(() => {
-    if (selectedExperience && !wasModalOpenRef.current) {
-      // Save scroll position and block scroll
-      scrollPositionRef.current = window.scrollY
-      document.body.classList.add('modal-open');
-      document.body.style.top = `-${scrollPositionRef.current}px`;
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      // Notifica il ModalContext che una modale è aperta con callback di chiusura
-      openModal(() => setSelectedExperience(null))
-      wasModalOpenRef.current = true
-    } else if (!selectedExperience && wasModalOpenRef.current) {
-      // Restore scroll position and unblock scroll
-      document.body.classList.remove('modal-open');
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      // Usa setTimeout per assicurare che avvenga dopo il render
-      setTimeout(() => {
-        window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
-      }, 0);
-      // Notifica il ModalContext che la modale è chiusa
-      closeModal()
-      wasModalOpenRef.current = false
-    }
-    return () => {
-      if (wasModalOpenRef.current) {
-        document.body.classList.remove('modal-open');
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-      }
-    };
-  }, [selectedExperience]); // Rimuoviamo openModal e closeModal dalle dipendenze
+
+  useModalScrollLock(Boolean(selectedExperience), () => setSelectedExperience(null))
 
     // Hook per il carosello mobile semplificato
   const experiences = t('experience.positions')
   
   // Stabilizza la funzione onTap per evitare re-render
-  const handleCarouselTap = useCallback(() => {
-    console.log('Tap on carousel')
-  }, [])
+  const handleCarouselTap = useCallback(() => {}, [])
   
   const swipeHandlers = useSimpleSwipe({
     itemsCount: experiences.length,
@@ -217,43 +178,17 @@ const Experience = () => {
         </div>
 
         {/* Mobile Carousel */}
-        <div 
-          className="block md:hidden" 
-          style={{overflow: 'visible'}} 
+        {/* Wheel/trackpad horizontal scroll is handled internally by
+            useSimpleSwipe (enableHorizontalScroll: true) on elementRef below;
+            a second onWheel handler here used to double-fire on every
+            gesture (native listener + React's bubbled synthetic event),
+            skipping two slides per tick instead of one. */}
+        <div
+          className="block md:hidden"
+          style={{overflow: 'visible'}}
           ref={mobileContainerRef}
-          onWheel={(e) => {
-            console.log('Wheel event on Experience:', { 
-              deltaX: e.deltaX, 
-              deltaY: e.deltaY, 
-              shiftKey: e.shiftKey,
-              currentIndex: swipeHandlers.currentIndex,
-              canGoNext: swipeHandlers.canGoNext,
-              canGoPrev: swipeHandlers.canGoPrev
-            })
-            
-            // Rileva scroll orizzontale con criteri più permissivi
-            const hasHorizontalDelta = Math.abs(e.deltaX) > 0
-            const isShiftScroll = e.shiftKey && Math.abs(e.deltaY) > 0
-            const isHorizontalScroll = hasHorizontalDelta || isShiftScroll
-            
-            if (isHorizontalScroll) {
-              e.preventDefault()
-              e.stopPropagation()
-              
-              const scrollDirection = e.deltaX > 0 || (e.shiftKey && e.deltaY > 0) ? 1 : -1
-              console.log('Horizontal scroll detected, direction:', scrollDirection)
-              
-              if (scrollDirection > 0 && swipeHandlers.canGoNext) {
-                console.log('Going to next slide')
-                nextSlide()
-              } else if (scrollDirection < 0 && swipeHandlers.canGoPrev) {
-                console.log('Going to prev slide')
-                prevSlide()
-              }
-            }
-          }}
         >
-          <div 
+          <div
             className="carousel-container"
             ref={swipeHandlers.elementRef}
           >
