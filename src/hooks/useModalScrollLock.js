@@ -6,12 +6,17 @@ import { useModal } from '../contexts/ModalContext'
 // it into ModalContext so the browser back button closes it, and restores
 // the exact scroll position on close.
 //
-// The restore uses a direct scrollTop assignment inside requestAnimationFrame
-// rather than window.scrollTo(): scrollTop is instant and immune to the
-// global `scroll-behavior: smooth` on <html> (index.css), while scrollTo's
-// `behavior: 'auto'` override is not reliably respected in every browser —
-// that mismatch is what caused the page to flash to the top and animate
-// back down instead of staying put when a modal closed.
+// The restore uses `behavior: 'instant'`, not 'auto': per the CSSOM View
+// spec, 'auto' means "defer to the element's `scroll-behavior` CSS
+// property" (smooth, here — see index.css), it does not mean "instant".
+// Every scrolling API (scrollTo, and even a plain `scrollTop = x`
+// assignment) is subject to that same CSS property except an explicit
+// 'instant', which is the only value that reliably bypasses it. That
+// mismatch — plus a setTimeout(fn, 0) delay that let the browser paint the
+// frozen-at-top state at least once first — is what caused the page to
+// flash to the top and animate back down instead of staying put when a
+// modal closed. requestAnimationFrame runs the restore before the next
+// paint, avoiding the flash.
 const useModalScrollLock = (isOpen, onForceClose) => {
   const { openModal, closeModal } = useModal()
   const scrollPositionRef = useRef(0)
@@ -32,8 +37,7 @@ const useModalScrollLock = (isOpen, onForceClose) => {
       document.body.style.top = ''
       document.body.style.width = ''
       requestAnimationFrame(() => {
-        document.documentElement.scrollTop = scrollPositionRef.current
-        document.body.scrollTop = scrollPositionRef.current
+        window.scrollTo({ top: scrollPositionRef.current, left: 0, behavior: 'instant' })
       })
       closeModal()
       wasOpenRef.current = false
