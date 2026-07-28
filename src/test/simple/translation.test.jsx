@@ -49,8 +49,8 @@ describe('Translation System', () => {
   })
 
   it('should have contact section translations', () => {
-    expect(translations.it.contact.title).toBe('Mettiamoci in contatto')
-    expect(translations.en.contact.title).toBe('Let\'s get in touch')
+    expect(translations.it.contact.title).toBe('Contattami')
+    expect(translations.en.contact.title).toBe('Contact Me')
   })
 
   it('should have footer translations', () => {
