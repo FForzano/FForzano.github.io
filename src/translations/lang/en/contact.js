@@ -15,7 +15,10 @@ const contact = {
     messagePlaceholder: 'Write your message here...',
     sending: 'Sending...',
     send: 'Send message',
-    required: ' *'
+    required: ' *',
+    sentSuccess: 'Message sent successfully!',
+    sendErrorServer: 'Error sending message. Please try again later.',
+    sendErrorNetwork: 'Network error. Please try again later.'
   },
   contactInfo: {
     email: 'Email',

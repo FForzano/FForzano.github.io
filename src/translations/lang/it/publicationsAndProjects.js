@@ -32,24 +32,25 @@ const publicationsAndProjects = {
             type: 'Workshop Paper',
             abstract: 'Quantum systems for sensing, communication, control, and computing are pivotal for applications involving quantum networks. Such systems can perform quadrature measurements to extract information of interest inherent in the quantum states. Therefore, the design of quantum states is crucial to achieving high accuracy of the quadrature measurement. The widely used Gaussian states lack some relevant non-classical properties, thus calling for the design of quantum systems using non-Gaussian states. This paper characterizes the quadrature measurement accuracy for the photon-varied Gaussian states (PVGSs), which are a class of non Gaussian states that can be generated using current technologies and possess relevant nonclassical properties. First, we derive the wavefunctions of singlemode PVGSs. Then, we characterize the quadrature measurement accuracy and compare it with that for Gaussian states. The findings of this paper provide insights into the design of enhanced quantum systems and networks using single-mode PVGSs.',
             keywords: ['Quantum Information', 'Quadrature Measurement', 'Gaussian States', 'Quantum Sensing', 'Photonic Systems'],
-            doi: '10.1109/InfoCom2025.QuNAP.123456', // Esempio - da aggiornare quando disponibile
+            doi: '10.1109/INFOCOMWKSHPS65812.2025.11152888',
             pdf: '/papers/ForGiaMarWinCon25-QMC-PVGSs.pdf', // Path al PDF
-            publisherUrl: 'https://ieeexplore.ieee.org/document/12345678', // URL del publisher
+            publisherUrl: 'https://doi.org/10.1109/INFOCOMWKSHPS65812.2025.11152888',
             bibtex: `@inproceedings{ForGiaMarWinCon:25,
 title={Quadrature Measurement Characterization for Single-Mode Photon-Varied Gaussian States},
 author={Forzano, Federico and Giani, Andrea and Marano, Stefano and Win, Moe Z. and Conti, Andrea},
 booktitle={IEEE International Conference on Computer Communications (INFOCOM) 2025 - QuNAP Workshop},
 year={2025},
 organization={IEEE},
-doi={10.1109/InfoCom2025.QuNAP.123456}
+doi={10.1109/INFOCOMWKSHPS65812.2025.11152888}
 }`
         }
     ],
     projectsList: [
         {
             title: 'Formando PerCorsi',
-            description: 'Piattaforma innovativa che collega insegnanti qualificati con famiglie in tutta Italia, garantendo qualità e regolarità nelle lezioni private.',
+            description: 'Formando PerCorsi è una piattaforma per le lezioni private in tutta Italia: mette in contatto insegnanti qualificati e verificati con le famiglie e gestisce tutto ciò che ruota attorno alla lezione stessa, dalla programmazione ai pagamenti, fino alla fatturazione elettronica automatica e al supporto multilingua. Ho co-fondato l\'azienda nel 2021 e ne guido lo sviluppo tecnico.',
             logo: '/images/fpc-logo.png',
+            tech: ['PHP - Yii2', 'SQL', 'Docker'],
             links: [
                 { label: 'Sito', url: 'https://formandopercorsi.com' }
             ]
@@ -57,13 +58,23 @@ doi={10.1109/InfoCom2025.QuNAP.123456}
         {
             id: 'xgsail',
             title: 'XGSail',
-            description: 'Piattaforma open source di analisi dati per la vela: un\'app self-hosted FastAPI + React che trasforma i dati GPS e vento in analisi di sessione (VMG, manovre, polari). Include XGSail-E1, un tracker hardware companion basato su ESP32 costruito attorno a un protocollo di comunicazione agnostico rispetto all\'hardware.',
+            description: 'XGSail trasforma i dati grezzi di GPS e sensori del vento raccolti su una deriva in analisi utili della sessione (VMG, rilevamento manovre, diagrammi polari) attraverso una piattaforma self-hosted FastAPI + React che ho progettato e sviluppato da zero. Si abbina a XGSail-E1, un tracker hardware companion basato su ESP32, tramite un protocollo di comunicazione aperto e agnostico rispetto all\'hardware, così qualsiasi sensore può integrarsi senza dover forkare il software.',
             logo: '/images/xgsail-logo.png',
             tech: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'ESP32'],
             links: [
                 { label: 'Sito', url: 'https://xgsail.com' },
                 { label: 'Software', url: 'https://github.com/FForzano/xgsail' },
                 { label: 'Firmware', url: 'https://github.com/FForzano/xgsail-e1' }
+            ]
+        },
+        {
+            id: 'sailing-guide-470',
+            title: 'Guida al 470 (ITA)',
+            description: 'Traduzione italiana completa della guida alla deriva 470 di Arthur Gurevitch, con indicazioni su regolaggi, attrezzatura e tecnica di regata per la classe. Pubblicata e versionata liberamente su GitHub come risorsa modificabile e contribuibile dalla community, con PDF scaricabile gratuitamente.',
+            links: [
+                { label: 'PDF', url: 'https://github.com/FForzano/Manuale-470-ITA/releases/download/v1.0/Manuale-al-470-ITA.pdf' },
+                { label: 'Repository', url: 'https://github.com/FForzano/Manuale-470-ITA' },
+                { label: 'Originale (ENG)', url: 'https://github.com/FForzano/Manuale-470-ITA/blob/master/470-Manual-ENG.pdf' }
             ]
         }
     ]

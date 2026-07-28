@@ -158,11 +158,6 @@ La documentazione completa del progetto è organizzata nella directory [docs/](.
 ### 💻 Sviluppo e Features
 - **[CV_GENERATION.md](./docs/CV_GENERATION.md)** - Sistema di generazione CV
 - **[INTERNATIONALIZATION.md](./docs/INTERNATIONALIZATION.md)** - Sistema di internazionalizzazione
-- **[PROJECT_COMPLETE.md](./docs/PROJECT_COMPLETE.md)** - Panoramica completa del progetto
-
-### 🧪 Testing e Qualità
-- **[TESTING.md](./docs/TESTING.md)** - Configurazione testing
-- **[TESTING_FINAL.md](./docs/TESTING_FINAL.md)** - Testing finale e validazione
 
 **📑 Indice completo:** [docs/README.md](./docs/README.md)
 
@@ -232,7 +227,6 @@ Il portfolio è completamente funzionale e testato:
 - [ ] Integrazione con CMS headless
 - [ ] Analytics e tracking
 - [ ] PWA (Progressive Web App)
-- [ ] Modalità scura
 
 ## 📄 Licenza
 

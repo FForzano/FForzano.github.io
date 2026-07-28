@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fforzano.github.io/sitemap.xml

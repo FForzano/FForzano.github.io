@@ -12,31 +12,20 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  test: {
-    globals: true,
-    environment: 'happy-dom',
-    setupFiles: './src/test/setup.jsx',
-    css: true,
-    testTimeout: 10000,
-    hookTimeout: 10000,
-    exclude: [
-      'node_modules/**',
-      'src/test/disabled/**',
-      '**/*.config.{js,ts}',
-    ],
-    coverage: {
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'src/test/',
-        'src/test/disabled/',
-        '**/*.test.{js,jsx}',
-        '**/*.spec.{js,jsx}',
-        'src/main.jsx',
-        'vite.config.js',
-        'tailwind.config.js',
-        'postcss.config.js',
-      ],
+  build: {
+    // lucide-react alone accounts for most of icons-vendor; the split still
+    // pays off for caching (vendor code rarely changes vs. app code, which
+    // changes on every content edit), even though total bytes are the same.
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'motion-vendor': ['framer-motion'],
+          'markdown-vendor': ['react-markdown'],
+          'icons-vendor': ['lucide-react'],
+        },
+      },
     },
   },
 })

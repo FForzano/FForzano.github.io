@@ -22,6 +22,7 @@ const en = {
     loading: 'Loading...',
     error: 'Error',
     success: 'Success',
+    close: 'Close',
     theme: {
       toggleDark: 'Switch to dark mode',
       toggleLight: 'Switch to light mode'

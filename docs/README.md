@@ -28,11 +28,6 @@
 - Configurazione Docker Compose
 - Best practices per containers
 
-#### 📝 [DEPLOY.md](./DEPLOY.md)
-**Quick deployment guide**
-- Comandi rapidi per il deploy
-- Configurazione base
-
 #### 🔧 [GITHUB_SETUP.md](./GITHUB_SETUP.md)
 **Configurazione GitHub**
 - Setup repository
@@ -53,21 +48,6 @@
 - Gestione traduzioni
 - Aggiunta nuove lingue
 
-#### 🎯 [PROJECT_COMPLETE.md](./PROJECT_COMPLETE.md)
-**Panoramica completa del progetto**
-- Architettura generale
-- Funzionalità implementate
-- Tecnologie utilizzate
-
-### 🧪 Testing e Qualità
-
-#### ✅ [TESTING_GUIDE.md](./TESTING_GUIDE.md)
-**Guida completa al testing**
-- Configurazione ambiente di test
-- Test suite funzionante (33/33 passing)
-- Test disabilitati e troubleshooting
-- Best practices e debugging
-
 ## Struttura del Progetto
 
 ```
@@ -78,9 +58,7 @@ docs/
 ├── DOCKER.md                          # 🐳 Containerizzazione
 ├── GITHUB_SETUP.md                    # 🔧 Setup GitHub
 ├── CV_GENERATION.md                   # 📄 Sistema CV
-├── INTERNATIONALIZATION.md            # 🌍 Internazionalizzazione
-├── PROJECT_COMPLETE.md                # 🎯 Panoramica progetto
-└── TESTING_GUIDE.md                   # ✅ Guida testing completa
+└── INTERNATIONALIZATION.md            # 🌍 Internazionalizzazione
 ```
 
 ## Quick Links
@@ -88,7 +66,6 @@ docs/
 ### Per Sviluppatori
 - **Personalizzare la barchetta**: [GUIDA_COMPLETA_BARCHETTA.md](./GUIDA_COMPLETA_BARCHETTA.md)
 - **Setup ambiente**: [DOCKER.md](./DOCKER.md)
-- **Testing**: [TESTING_GUIDE.md](./TESTING_GUIDE.md)
 
 ### Per Deployment
 - **Deploy production**: [DEPLOYMENT.md](./DEPLOYMENT.md)
@@ -97,7 +74,6 @@ docs/
 ### Per Funzionalità
 - **Sistema CV**: [CV_GENERATION.md](./CV_GENERATION.md)
 - **Multilingue**: [INTERNATIONALIZATION.md](./INTERNATIONALIZATION.md)
-- **Panoramica**: [PROJECT_COMPLETE.md](./PROJECT_COMPLETE.md)
 
 ## Contribuzione
 

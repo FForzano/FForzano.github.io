@@ -320,6 +320,7 @@ const PublicationsAndProjects = () => {
 							<button
 								onClick={() => setSelectedProject(null)}
 								className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+								aria-label={t('common.close')}
 							>
 								<X className="w-6 h-6" />
 							</button>

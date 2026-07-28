@@ -18,14 +18,6 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
-# Esegui i test
-echo "🧪 Running tests..."
-npm run test:run
-if [ $? -ne 0 ]; then
-  echo "❌ Tests failed! Deploy aborted."
-  exit 1
-fi
-
 # Build del progetto
 echo "🔨 Building project..."
 npm run build

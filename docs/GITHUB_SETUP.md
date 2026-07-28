@@ -56,7 +56,6 @@ git checkout main
 ./deploy.sh
 
 # Oppure esegui i comandi singolarmente
-npm run test:run
 npm run build
 npm run deploy
 ```
@@ -95,7 +94,6 @@ export default defineConfig({
 ### 8. Monitoraggio
 
 - **GitHub Actions**: Vedi lo stato dei deploy in tempo reale
-- **Test automatici**: Ogni deploy esegue i test automaticamente
 - **Build status**: Badge disponibili per README
 
 ### 9. Comandi Utili
@@ -103,10 +101,6 @@ export default defineConfig({
 ```bash
 # Sviluppo locale
 npm run dev
-
-# Test
-npm run test:run
-npm run test:coverage
 
 # Build e preview
 npm run build

@@ -40,15 +40,15 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        setSuccessMessage('Messaggio inviato con successo!');
+        setSuccessMessage(t('contact.form.sentSuccess'));
         setFormData({ name: '', email: '', subject: '', message: '' });
         setTimeout(() => setSuccessMessage(''), 6000);
       } else {
-        setSuccessMessage("Errore nell'invio. Riprova più tardi.");
+        setSuccessMessage(t('contact.form.sendErrorServer'));
         setTimeout(() => setSuccessMessage(''), 6000);
       }
     } catch (error) {
-      setSuccessMessage("Errore di rete. Riprova più tardi.");
+      setSuccessMessage(t('contact.form.sendErrorNetwork'));
       setTimeout(() => setSuccessMessage(''), 6000);
     }
     setIsSubmitting(false);
@@ -71,7 +71,7 @@ const Contact = () => {
       icon: MapPin,
       title: t('contact.contactInfo.location'),
       value: 'Ferrara, Italia',
-      href: '#'
+      href: 'https://www.google.com/maps/search/?api=1&query=Ferrara,+Italia'
     }
   ]
 
@@ -129,6 +129,8 @@ const Contact = () => {
                 <motion.a
                   key={item.title}
                   href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
